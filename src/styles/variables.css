@@ -1,7 +1,21 @@
 :root {
   --color-text-primary: #2f3975;
   --color-primary: #a469ff;
+  --color-secondary: #00baff;
+
   --color-bg-main: #ffffff;
+  --color-bg-primary: #dec7ff;
+  --color-bg-primary-light: #efe4ff;
+  --color-bg-secondary: #e4f1ff;
+  --color-bg-grey: #edf1f7;
+
+  --bg-gradient:
+    linear-gradient(0deg, var(--color-bg-primary), var(--color-bg-primary)),
+    radial-gradient(
+      97.8% 266.16% at 98.68% 1.74%,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
 
   --space: 4px;
   --space8: calc(var(--space) * 2);
