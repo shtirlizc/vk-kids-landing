@@ -1,2 +1,38 @@
 .swiper-nav {
+  --size: 62px;
+
+  border: none;
+  font-family: var(--font-primary), sans-serif;
+  font-size: 0;
+  padding: 0;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  cursor: pointer;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 23px;
+  transition: background-color var(--transition);
+
+  &:hover {
+    background-color: var(--color-secondary);
+  }
+
+  &.small {
+    --size: 48px;
+
+    background-size: 18px;
+  }
+
+  &.prev {
+    background-image: url("../../assets/images/prev.svg");
+  }
+  &.next {
+    background-image: url("../../assets/images/next.svg");
+  }
 }
