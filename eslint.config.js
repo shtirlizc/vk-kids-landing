@@ -1,4 +1,5 @@
 import js from "@eslint/js";
+import tsParser from "@typescript-eslint/parser";
 import astro from "eslint-plugin-astro";
 import globals from "globals";
 
@@ -17,4 +18,12 @@ export default [
     },
   },
   ...astro.configs["flat/recommended"],
+  {
+    files: ["**/*.astro"],
+    languageOptions: {
+      parserOptions: {
+        parser: tsParser,
+      },
+    },
+  },
 ];
