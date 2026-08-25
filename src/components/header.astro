@@ -1,6 +1,7 @@
 ---
 import Logos from "./logos.astro";
 import Container from "./container.astro";
+import OpenIcon from "../assets/images/open-icon.svg";
 import CloseIcon from "../assets/images/close-icon.svg";
 
 const nav = [
@@ -26,11 +27,17 @@ const nav = [
         <Logos />
       </div>
 
-      <button class="header__burger">
-        <CloseIcon />
+      <button
+        class="header__burger"
+        type="button"
+        aria-label="Открыть меню"
+        aria-expanded="false"
+      >
+        <OpenIcon class="header__burger-icon" />
+        <CloseIcon class="header__burger-morph-target" aria-hidden="true" />
       </button>
 
-      <nav>
+      <nav aria-hidden="true">
         <ul>
           {
             nav.map(({ href, label }) => (
@@ -79,6 +86,13 @@ const nav = [
       background-color: var(--color-bg-main);
       z-index: 1;
 
+      & .header__burger-morph-target {
+        position: absolute;
+        width: 0;
+        height: 0;
+        visibility: hidden;
+      }
+
       /* desktop */
       @media (width >= 960px) {
         display: none;
@@ -91,6 +105,7 @@ const nav = [
       align-items: center;
 
       nav {
+        display: none;
         position: fixed;
         top: 0;
         left: 0;
@@ -108,7 +123,13 @@ const nav = [
 
         /* desktop */
         @media (width >= 960px) {
-          /* media query rules */
+          display: block;
+          position: static;
+          padding-top: 0;
+          width: auto;
+          height: auto;
+          background: none;
+          backdrop-filter: none;
         }
 
         ul {
@@ -152,3 +173,93 @@ const nav = [
     }
   }
 </style>
+
+<script>
+  import { gsap } from "gsap";
+  import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
+
+  gsap.registerPlugin(MorphSVGPlugin);
+
+  document.querySelectorAll(".header__burger").forEach((button) => {
+    const iconPath = button.querySelector(".header__burger-icon path");
+    const targetPath = button.querySelector(
+      ".header__burger-morph-target path",
+    );
+    const menu = button.parentElement?.querySelector("nav");
+    const menuItems = menu?.querySelectorAll("li");
+
+    if (
+      !(iconPath instanceof SVGPathElement) ||
+      !(targetPath instanceof SVGPathElement) ||
+      !menu ||
+      !menuItems?.length
+    ) {
+      return;
+    }
+
+    const iconMorph = gsap.timeline({ paused: true }).to(iconPath, {
+      duration: 0.3,
+      ease: "sine.inOut",
+      morphSVG: targetPath,
+    });
+
+    const menuAnimation = gsap
+      .timeline({
+        paused: true,
+        onReverseComplete: () => {
+          gsap.set(menu, { display: "none" });
+        },
+      })
+      .set(menu, { display: "block", autoAlpha: 0 })
+      .set(menuItems, { autoAlpha: 0, y: 12 })
+      .to(menu, { autoAlpha: 1, duration: 0.4, ease: "sine.out" })
+      .to(
+        menuItems,
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.3,
+          ease: "sine.out",
+          stagger: 0.07,
+        },
+        "-=0.1",
+      );
+
+    let isMenuOpen = false;
+    const desktopQuery = window.matchMedia("(min-width: 960px)");
+
+    const resetMenu = () => {
+      isMenuOpen = false;
+      iconMorph.pause(0);
+      menuAnimation.pause(0);
+      gsap.set([menu, ...menuItems], { clearProps: "all" });
+      button.setAttribute("aria-expanded", "false");
+      button.setAttribute("aria-label", "Открыть меню");
+      menu.setAttribute("aria-hidden", String(!desktopQuery.matches));
+    };
+
+    if (desktopQuery.matches) resetMenu();
+
+    desktopQuery.addEventListener("change", ({ matches }) => {
+      if (matches) resetMenu();
+    });
+
+    button.addEventListener("click", () => {
+      isMenuOpen = !isMenuOpen;
+      button.setAttribute("aria-expanded", String(isMenuOpen));
+      button.setAttribute(
+        "aria-label",
+        isMenuOpen ? "Закрыть меню" : "Открыть меню",
+      );
+      menu.setAttribute("aria-hidden", String(!isMenuOpen));
+
+      if (isMenuOpen) {
+        iconMorph.play();
+        menuAnimation.play();
+      } else {
+        iconMorph.reverse();
+        menuAnimation.reverse();
+      }
+    });
+  });
+</script>
