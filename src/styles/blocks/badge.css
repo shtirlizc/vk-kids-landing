@@ -18,7 +18,8 @@ a.badge,
 button.badge {
   cursor: pointer;
 
-  &:hover {
+  &:hover,
+  &.active {
     background-color: var(--color-bg-primary-light);
   }
 }
