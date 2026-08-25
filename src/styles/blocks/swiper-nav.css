@@ -2,7 +2,7 @@
   --size: 62px;
 
   border: none;
-  font-family: var(--font-primary), sans-serif;
+  font-family: var(--font-vk-display), sans-serif;
   font-size: 0;
   padding: 0;
   width: var(--size);

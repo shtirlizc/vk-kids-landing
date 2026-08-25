@@ -1,6 +1,21 @@
 ---
 import Logos from "./logos.astro";
 import Container from "./container.astro";
+
+const nav = [
+  {
+    href: "services",
+    label: "Возможности",
+  },
+  {
+    href: "channels",
+    label: "Каналы",
+  },
+  {
+    href: "faq",
+    label: "FAQ",
+  },
+];
 ---
 
 <header class="header">
@@ -10,15 +25,15 @@ import Container from "./container.astro";
 
       <nav>
         <ul>
-          <li>
-            <a href="#services" class="badge">Возможности</a>
-          </li>
-          <li>
-            <a href="#channels" class="badge">Каналы</a>
-          </li>
-          <li>
-            <a href="#faq" class="badge">FAQ</a>
-          </li>
+          {
+            nav.map(({ href, label }) => (
+              <li>
+                <a href={`#${href}`} class="badge light">
+                  {label}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </nav>
     </div>
