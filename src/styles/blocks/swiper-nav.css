@@ -1,5 +1,5 @@
 .swiper-nav {
-  --size: 62px;
+  --size: 32px;
 
   border: none;
   font-family: var(--font-vk-display), sans-serif;
@@ -16,17 +16,24 @@
   cursor: pointer;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 23px;
+  background-size: 12px;
   transition: background-color var(--transition);
 
   &:hover {
     background-color: var(--color-secondary);
   }
 
-  &.small {
-    --size: 48px;
+  /* tablet */
+  @media (width >= 768px) {
+    --size: 62px;
 
-    background-size: 18px;
+    background-size: 23px;
+
+    &.small {
+      --size: 48px;
+
+      background-size: 18px;
+    }
   }
 
   &.prev {

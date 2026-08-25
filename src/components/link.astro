@@ -81,11 +81,16 @@ const TagName = href ? "a" : "button";
       }
     }
 
-    &.middle {
-      height: 69px;
-    }
-    &.large {
-      height: 72px;
+    height: 54px;
+
+    /* tablet */
+    @media (width >= 768px) {
+      &.middle {
+        height: 69px;
+      }
+      &.large {
+        height: 72px;
+      }
     }
 
     &.block {
