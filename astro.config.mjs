@@ -9,7 +9,7 @@ export default defineConfig({
     {
       provider: fontProviders.local(),
       name: "VK Sans Display",
-      cssVariable: "--font-primary",
+      cssVariable: "--font-vk-display",
       options: {
         variants: [
           {
@@ -33,41 +33,170 @@ export default defineConfig({
     },
     {
       provider: fontProviders.local(),
-      name: "VK Sans Display Expanded",
-      cssVariable: "--font-secondary",
+      name: "VK Sans Text",
+      cssVariable: "--font-vk-text",
       options: {
         variants: [
           {
             src: [
-              "./src/assets/fonts/VKSansDisplayExp/VKSansDisplayExp-Lt.woff2",
-              "./src/assets/fonts/VKSansDisplayExp/VKSansDisplayExp-Lt.woff",
+              "./src/assets/fonts/VKSansText/VKSansText-Light.woff2",
+              "./src/assets/fonts/VKSansText/VKSansText-Light.woff",
             ],
             weight: "300",
             style: "normal",
           },
           {
             src: [
-              "./src/assets/fonts/VKSansDisplayExp/VKSansDisplayExp-Rg.woff2",
-              "./src/assets/fonts/VKSansDisplayExp/VKSansDisplayExp-Rg.woff",
+              "./src/assets/fonts/VKSansText/VKSansText-Regular.woff2",
+              "./src/assets/fonts/VKSansText/VKSansText-Regular.woff",
             ],
             weight: "400",
             style: "normal",
           },
           {
             src: [
-              "./src/assets/fonts/VKSansDisplayExp/VKSansDisplayExp-Md.woff2",
-              "./src/assets/fonts/VKSansDisplayExp/VKSansDisplayExp-Md.woff",
+              "./src/assets/fonts/VKSansText/VKSansText-Medium.woff2",
+              "./src/assets/fonts/VKSansText/VKSansText-Medium.woff",
             ],
             weight: "500",
             style: "normal",
           },
           {
             src: [
-              "./src/assets/fonts/VKSansDisplayExp/VKSansDisplayExp-Bd.woff2",
-              "./src/assets/fonts/VKSansDisplayExp/VKSansDisplayExp-Bd.woff",
+              "./src/assets/fonts/VKSansText/VKSansText-DemiBold.woff2",
+              "./src/assets/fonts/VKSansText/VKSansText-DemiBold.woff",
+            ],
+            weight: "600",
+            style: "normal",
+          },
+          {
+            src: [
+              "./src/assets/fonts/VKSansText/VKSansText-Bold.woff2",
+              "./src/assets/fonts/VKSansText/VKSansText-Bold.woff",
             ],
             weight: "700",
             style: "normal",
+          },
+        ],
+      },
+    },
+    {
+      provider: fontProviders.local(),
+      name: "VK Sans Display Condensed",
+      cssVariable: "--font-vk-condensed",
+      options: {
+        variants: [
+          {
+            src: [
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-Lt.woff2",
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-Lt.woff",
+            ],
+            weight: "300",
+            style: "normal",
+          },
+          {
+            src: [
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-LtIt.woff2",
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-LtIt.woff",
+            ],
+            weight: "300",
+            style: "italic",
+          },
+          {
+            src: [
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-Rg.woff2",
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-Rg.woff",
+            ],
+            weight: "400",
+            style: "normal",
+          },
+          {
+            src: [
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-It.woff2",
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-It.woff",
+            ],
+            weight: "400",
+            style: "italic",
+          },
+          {
+            src: [
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-Md.woff2",
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-Md.woff",
+            ],
+            weight: "500",
+            style: "normal",
+          },
+          {
+            src: [
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-MdIt.woff2",
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-MdIt.woff",
+            ],
+            weight: "500",
+            style: "italic",
+          },
+          {
+            src: [
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-DmBd.woff2",
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-DmBd.woff",
+            ],
+            weight: "600",
+            style: "normal",
+          },
+          {
+            src: [
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-DmBdIt.woff2",
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-DmBdIt.woff",
+            ],
+            weight: "600",
+            style: "italic",
+          },
+          {
+            src: [
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-Bd.woff2",
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-Bd.woff",
+            ],
+            weight: "700",
+            style: "normal",
+          },
+          {
+            src: [
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-BdIt.woff2",
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-BdIt.woff",
+            ],
+            weight: "700",
+            style: "italic",
+          },
+          {
+            src: [
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-XBd.woff2",
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-XBd.woff",
+            ],
+            weight: "800",
+            style: "normal",
+          },
+          {
+            src: [
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-XBdIt.woff2",
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-XBdIt.woff",
+            ],
+            weight: "800",
+            style: "italic",
+          },
+          {
+            src: [
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-Blk.woff2",
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-Blk.woff",
+            ],
+            weight: "900",
+            style: "normal",
+          },
+          {
+            src: [
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-BlkIt.woff2",
+              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-BlkIt.woff",
+            ],
+            weight: "900",
+            style: "italic",
           },
         ],
       },

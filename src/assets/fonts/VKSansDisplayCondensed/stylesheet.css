@@ -1,0 +1,126 @@
+@font-face {
+    font-family: 'VK Sans Display Condensed Cond ExBd';
+    src: url('VKSansDisplayCd-XBdIt.woff2') format('woff2'),
+        url('VKSansDisplayCd-XBdIt.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'VK Sans Display Condensed Cond';
+    src: url('VKSansDisplayCd-BlkIt.woff2') format('woff2'),
+        url('VKSansDisplayCd-BlkIt.woff') format('woff');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'VK Sans Display Condensed ExBd';
+    src: url('VKSansDisplayCd-XBd.woff2') format('woff2'),
+        url('VKSansDisplayCd-XBd.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'VK Sans Display Condensed';
+    src: url('VKSansDisplayCd-Blk.woff2') format('woff2'),
+        url('VKSansDisplayCd-Blk.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'VK Sans Display Condensed';
+    src: url('VKSansDisplayCd-LtIt.woff2') format('woff2'),
+        url('VKSansDisplayCd-LtIt.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'VK Sans Display Condensed';
+    src: url('VKSansDisplayCd-Bd.woff2') format('woff2'),
+        url('VKSansDisplayCd-Bd.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'VK Sans Display Condensed DemiBd';
+    src: url('VKSansDisplayCd-DmBd.woff2') format('woff2'),
+        url('VKSansDisplayCd-DmBd.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'VK Sans Display Condensed';
+    src: url('VKSansDisplayCd-Rg.woff2') format('woff2'),
+        url('VKSansDisplayCd-Rg.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'VK Sans Display Condensed DemiBd';
+    src: url('VKSansDisplayCd-DmBdIt.woff2') format('woff2'),
+        url('VKSansDisplayCd-DmBdIt.woff') format('woff');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'VK Sans Display Condensed';
+    src: url('VKSansDisplayCd-Md.woff2') format('woff2'),
+        url('VKSansDisplayCd-Md.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'VK Sans Display Condensed';
+    src: url('VKSansDisplayCd-It.woff2') format('woff2'),
+        url('VKSansDisplayCd-It.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'VK Sans Display Condensed';
+    src: url('VKSansDisplayCd-Lt.woff2') format('woff2'),
+        url('VKSansDisplayCd-Lt.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'VK Sans Display Condensed';
+    src: url('VKSansDisplayCd-BdIt.woff2') format('woff2'),
+        url('VKSansDisplayCd-BdIt.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'VK Sans Display Condensed';
+    src: url('VKSansDisplayCd-MdIt.woff2') format('woff2'),
+        url('VKSansDisplayCd-MdIt.woff') format('woff');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+

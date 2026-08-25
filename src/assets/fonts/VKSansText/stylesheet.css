@@ -1,0 +1,45 @@
+@font-face {
+    font-family: 'VK Sans Text 3.0';
+    src: url('VKSansText-Light.woff2') format('woff2'),
+        url('VKSansText-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'VK Sans Text 3.0';
+    src: url('VKSansText-Regular.woff2') format('woff2'),
+        url('VKSansText-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'VK Sans Text 3.0';
+    src: url('VKSansText-Medium.woff2') format('woff2'),
+        url('VKSansText-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'VK Sans Text 3.0';
+    src: url('VKSansText-DemiBold.woff2') format('woff2'),
+        url('VKSansText-DemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'VK Sans Text 3.0';
+    src: url('VKSansText-Bold.woff2') format('woff2'),
+        url('VKSansText-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
