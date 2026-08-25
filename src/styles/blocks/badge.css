@@ -6,12 +6,17 @@
   height: 41px;
   line-height: 41px;
   border-radius: 21px;
-  padding: 0 var(--space16);
+  padding: 2px var(--space16) 0;
   background-color: var(--color-bg-main);
   display: inline-flex;
   justify-content: center;
   align-items: center;
   transition: background-color var(--transition);
+}
+
+a.badge,
+button.badge {
+  cursor: pointer;
 
   &:hover {
     background-color: var(--color-bg-primary-light);
