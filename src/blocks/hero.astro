@@ -1,125 +1,17 @@
 ---
-import { Image } from "astro:assets";
-import rattle from "./../assets/images/hero/rattle.webp";
-import Arrow from "./../assets/images/arrow.svg";
+
 ---
 
 <section class="hero">
-  <div class="hero__content">
-    <div class="hero__subtitle">
-      <p>о семье</p>
-      <p>заботимся</p>
-    </div>
-    <Image class="hero__rattle" src={rattle} alt="rattle" />
-  </div>
-  <div class="hero__links">
-    <nav>
-      <ul>
-        <li>
-          <a href="#help" class="badge">помощь при рождении ребёнка</a>
-        </li>
-        <li>
-          <a href="#medicine" class="badge">медицина для близких</a>
-        </li>
-        <li>
-          <a href="#education" class="badge">детское образование</a>
-        </li>
-        <li>
-          <a href="#dosug" class="badge">
-            мероприятия и идеи для совместного досуга
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <a
-    class="hero__arrow"
-    href="#competition"
-    aria-label="Перейти к следующему разделу"
-  >
-    <Arrow />
-  </a>
+  <img src="/vk-kids-landing/Hero.jpg" alt="" />
 </section>
 
 <style>
   .hero {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: var(--color-bg-primary);
-    margin-top: calc(var(--header) * -1);
-    background-image:
-      url(./../assets/images/hero/horse.webp),
-      url(./../assets/images/hero/star.webp);
-    background-repeat: no-repeat;
-    background-position:
-      left bottom,
-      right bottom;
-    background-size:
-      342px auto,
-      462px auto;
-    padding-bottom: 187px;
+    margin-top: calc(-1 * var(--header));
 
-    & .hero__content {
-      position: relative;
-    }
-
-    & .hero__subtitle {
-      font-family: var(--font-vk-condensed), sans-serif;
-      font-size: 32px;
-      position: absolute;
-      display: flex;
-      justify-content: space-between;
-      flex-direction: column;
-      bottom: 50%;
-      left: 0;
-      width: 350px;
-
-      p:first-child {
-        text-align: right;
-      }
-    }
-
-    & .hero__rattle {
+    img {
       width: 100%;
-      max-width: 1250px;
-      height: auto;
-    }
-
-    & .hero__links {
-      display: flex;
-      justify-content: center;
-      width: 750px;
-
-      nav {
-        ul {
-          list-style: none;
-          padding: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-          gap: var(--space8);
-        }
-      }
-    }
-
-    & .hero__arrow {
-      position: absolute;
-      bottom: calc(var(--space) * 8);
-      left: 50%;
-      transform: translateX(-50%);
-      color: var(--color-bg-main);
-      padding: 0;
-      border: 0;
-      font: inherit;
-      background: none;
-      cursor: pointer;
-
-      &:hover {
-        color: var(--color-bg-primary-light);
-      }
     }
   }
 </style>

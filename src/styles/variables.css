@@ -45,9 +45,14 @@
   --scrollbar-color: var(--color-primary);
   --scrollbar-side: var(--space8);
 
-  --container: 1516px;
-  --header: 121px;
-
   --delay: 0.2s;
   --timing-func: cubic-bezier(0.21, 0, 0.29, 1);
+
+  --container: 1516px;
+  --header: 98px;
+
+  /* desktop */
+  @media (width >= 960px) {
+    --header: 121px;
+  }
 }
