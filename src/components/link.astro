@@ -1,3 +1,87 @@
 ---
+interface Props {
+  href?: string;
+  id?: string;
+  view?: "primary" | "secondary";
+  size?: "m" | "l";
+  block?: boolean;
+  isTargetBlank?: boolean;
+}
 
+const {
+  href,
+  id,
+  view = "primary",
+  size = "m",
+  block = false,
+  isTargetBlank = false,
+} = Astro.props;
+
+const TagName = href ? "a" : "button";
 ---
+
+<TagName
+  class:list={[
+    "link",
+    view === "primary" ? "primary" : "secondary",
+    size === "m" ? "middle" : "large",
+    block && "block",
+  ]}
+  id={id}
+  href={href}
+  target={isTargetBlank ? "_blank" : undefined}
+>
+  <span><slot /></span>
+</TagName>
+
+<style>
+  .link {
+    /*font-family: VK Sans Display Condensed;*/
+    font-weight: 500;
+    font-size: 24px;
+    text-transform: uppercase;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--color-bg-main);
+    padding: 0 42px;
+    border-radius: 24px;
+    cursor: pointer;
+    transition:
+      color var(--transition),
+      background-color var(--transition);
+
+    &.primary {
+      border: 1px solid var(--color-primary);
+      background-color: var(--color-primary);
+
+      &:hover {
+        color: var(--color-primary);
+        background-color: transparent;
+      }
+    }
+    &.secondary {
+      border: 1px solid var(--color-secondary);
+      background-color: var(--color-secondary);
+
+      &:hover {
+        color: var(--color-secondary);
+        background-color: transparent;
+      }
+    }
+
+    &.middle {
+      height: 69px;
+      line-height: 69px;
+    }
+    &.large {
+      height: 72px;
+      line-height: 72px;
+    }
+
+    &.block {
+      width: 100%;
+    }
+  }
+</style>
