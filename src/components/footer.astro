@@ -1,10 +1,96 @@
 ---
-
+import desktopTitle from "../assets/images/footer/desktop-title.webp";
+import mobileTitle from "../assets/images/footer/mobile-title.webp";
+import { nav } from "../nav.ts";
+import Logos from "./logos.astro";
 ---
 
-<footer class="footer"></footer>
+<footer class="footer">
+  <div class="footer__title">
+    <picture>
+      <source media="(width >= 960px)" srcset={desktopTitle.src} />
+      <img src={mobileTitle.src} alt="Семья и дети" />
+    </picture>
+  </div>
+
+  <ul>
+    {
+      nav.map(({ href, label }) => (
+        <li>
+          <a href={`#${href}`} class="badge light">
+            {label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <div class="footer__logo">
+    <Logos />
+  </div>
+</footer>
 
 <style>
   .footer {
+    padding-bottom: var(--space32);
+    background-image: url("../assets/images/footer/bracelet-mobile.webp");
+    background-position: center calc(100% + 220px);
+    background-repeat: no-repeat;
+    background-size: 770px auto;
+
+    /* tablet */
+    @media (width >= 768px) {
+      background-image:
+        url("../assets/images/footer/heart-bg.webp"),
+        url("../assets/images/footer/bracelet-desktop.webp");
+      background-size:
+        495px auto,
+        800px auto;
+      background-position:
+        5% bottom,
+        right bottom;
+      background-repeat: no-repeat;
+    }
+
+    & .footer__title {
+      display: flex;
+      justify-content: center;
+
+      & picture,
+      & img {
+        display: block;
+      }
+
+      & picture {
+        width: min(100%, 320px);
+
+        @media (width >= 960px) {
+          width: min(100%, 1400px);
+        }
+      }
+
+      & img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    ul {
+      margin-top: var(--space32);
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: var(--space12);
+    }
+
+    .footer__logo {
+      margin-top: 40vw;
+
+      /* tablet */
+      @media (width >= 768px) {
+        margin-top: 220px;
+      }
+    }
   }
 </style>

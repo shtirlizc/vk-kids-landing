@@ -23,9 +23,23 @@ import Faq from "../blocks/faq.astro";
       <GoodParent />
       <Services />
       <Channels />
-      <Faq />
     </main>
 
-    <Footer />
+    <div class="foot">
+      <Faq />
+      <Footer />
+    </div>
   </body>
 </html>
+
+<style>
+  .foot {
+    border-radius: 32px 32px 0 0;
+    background: var(--bg-gradient);
+
+    /* desktop */
+    @media (width >= 960px) {
+      border-radius: 48px 48px 0 0;
+    }
+  }
+</style>

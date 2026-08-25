@@ -3,21 +3,7 @@ import Logos from "./logos.astro";
 import Container from "./container.astro";
 import OpenIcon from "../assets/images/open-icon.svg";
 import CloseIcon from "../assets/images/close-icon.svg";
-
-const nav = [
-  {
-    href: "services",
-    label: "Возможности",
-  },
-  {
-    href: "channels",
-    label: "Каналы",
-  },
-  {
-    href: "faq",
-    label: "FAQ",
-  },
-];
+import { nav } from "../nav.ts";
 ---
 
 <header class="header">
