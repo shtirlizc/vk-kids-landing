@@ -1,3 +1,33 @@
 ---
-
+import VkLogo from "../assets/images/vk-logo.svg";
+import Logo2 from "../assets/images/logo-2.svg";
 ---
+
+<ul class="logos">
+  <li><a href="#"><VkLogo /></a></li>
+  <li><a href="#"><Logo2 /></a></li>
+</ul>
+
+<style>
+  .logos {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: var(--space28);
+    align-items: center;
+
+    li {
+      font-size: 0;
+
+      a {
+        display: inline-block;
+        color: var(--color-bg-main);
+        transition: color var(--transition);
+
+        &:hover {
+          color: var(--color-bg-primary);
+        }
+      }
+    }
+  }
+</style>
