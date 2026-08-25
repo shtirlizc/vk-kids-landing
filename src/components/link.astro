@@ -36,7 +36,7 @@ const TagName = href ? "a" : "button";
 
 <style>
   .link {
-    /*font-family: VK Sans Display Condensed;*/
+    font-family: var(--font-primary), sans-serif;
     font-weight: 500;
     font-size: 24px;
     text-transform: uppercase;
@@ -51,6 +51,16 @@ const TagName = href ? "a" : "button";
     transition:
       color var(--transition),
       background-color var(--transition);
+
+    &[href] {
+      span {
+        text-decoration: underline;
+        text-decoration-style: solid;
+        text-decoration-thickness: 0;
+        text-decoration-skip-ink: auto;
+        text-underline-offset: 2px;
+      }
+    }
 
     &.primary {
       border: 1px solid var(--color-primary);
@@ -73,11 +83,9 @@ const TagName = href ? "a" : "button";
 
     &.middle {
       height: 69px;
-      line-height: 69px;
     }
     &.large {
       height: 72px;
-      line-height: 72px;
     }
 
     &.block {
