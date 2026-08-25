@@ -47,19 +47,26 @@ import Arrow from "./../assets/images/arrow.svg";
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--color-bg-primary);
     margin-top: calc(var(--header) * -1);
     background-image:
-      url(./../assets/images/hero/horse.webp),
+      var(--bg-gradient), url(./../assets/images/hero/horse.webp),
       url(./../assets/images/hero/star.webp);
     background-repeat: no-repeat;
     background-position:
+      center,
       left bottom,
       right bottom;
     background-size:
+      cover,
       342px auto,
       462px auto;
     padding-bottom: 187px;
+    border-radius: 0 0 32px 32px;
+
+    /* desktop */
+    @media (width >= 960px) {
+      border-radius: 0 0 48px 48px;
+    }
 
     & .hero__content {
       position: relative;
