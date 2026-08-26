@@ -144,13 +144,20 @@ const hasNavigation = slides.length > 1;
     @media (width >= 768px) {
       --swiper-button-size: 62px;
 
+      max-width: 852px;
+      gap: var(--space12);
+
       & .competition-swiper__media {
         padding-inline: var(--swiper-side-space);
       }
 
       & .swiper {
-        border-width: 2px;
+        aspect-ratio: 790 / 598;
+        max-height: 598px;
+        border-width: 0;
         border-radius: 48px;
+        outline: 2px solid rgba(165, 122, 240, 0.15);
+        outline-offset: -2px;
       }
 
       & .swiper-slide img {
@@ -164,11 +171,6 @@ const hasNavigation = slides.length > 1;
       & :global(.swiper-nav.next) {
         right: 0;
       }
-    }
-
-    /* desktop */
-    @media (width >= 960px) {
-      gap: var(--space12);
     }
   }
 </style>

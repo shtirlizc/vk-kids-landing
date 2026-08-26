@@ -4,6 +4,9 @@ import Container from "../components/container.astro";
 import competitionImage1 from "../assets/images/competition/competition-1.png";
 import competitionImage2 from "../assets/images/competition/competition-2.jpg";
 import competitionImage3 from "../assets/images/competition/competition-3.jpg";
+import Title from "../components/title.astro";
+import Description from "../components/description.astro";
+import Link from "../components/link.astro";
 
 const drawingInfoText =
   "Выберите работы, которые понравились больше всего — лучшие станут основной для новых детских карточек";
@@ -39,7 +42,23 @@ const slides = [
 
 <section id="competition" class="competition">
   <Container>
-    <CompetitionSwiper slides={slides} text={drawingInfoText} />
+    <div class="competition-content">
+      <div class="competition-header">
+        <Title>детский конкурс</Title>
+        <Description
+          >Дети сотрудников VK придумали свои варианты дизайна карточки «Код
+          заботы»</Description
+        >
+      </div>
+      <div class="competition-body">
+        <CompetitionSwiper slides={slides} text={drawingInfoText} />
+        <p>
+          <Link href="https://app.pthwy.ru/siz0X" isTargetBlank>
+            Перейти к голосованию
+          </Link>
+        </p>
+      </div>
+    </div>
   </Container>
 </section>
 
@@ -47,9 +66,37 @@ const slides = [
   .competition {
     padding-block: 56px;
 
-    /* desktop */
-    @media (width >= 960px) {
+    /* tablet */
+    @media (width >= 768px) {
       padding-block: 120px;
+    }
+
+    & .competition-content,
+    & .competition-body,
+    & .competition-header {
+      display: flex;
+      flex-direction: column;
+    }
+
+    & .competition-content {
+      gap: var(--space28);
+
+      @media (width >= 768px) {
+        gap: var(--space36);
+      }
+    }
+
+    & .competition-header,
+    & .competition-body {
+      gap: var(--space20);
+
+      @media (width >= 768px) {
+        gap: var(--space24);
+      }
+    }
+
+    & .competition-body > p {
+      text-align: center;
     }
   }
 </style>
