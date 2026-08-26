@@ -1,0 +1,223 @@
+---
+import DrawingInfo from "./drawing-info.astro";
+
+interface Creator {
+  contactName: string;
+  artistFirstName: string;
+  contactHref?: string;
+}
+
+interface Slide {
+  src: string;
+  alt: string;
+  creator: Creator;
+}
+
+interface Props {
+  slides: Slide[];
+  text: string;
+}
+
+const { slides, text } = Astro.props;
+const hasNavigation = slides.length > 1;
+---
+
+<div
+  class="competition-swiper"
+  data-competition-swiper
+  data-loop={hasNavigation}
+>
+  <div class="competition-swiper__media">
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        {
+          slides.map(({ src, alt }, index) => (
+            <div class="swiper-slide">
+              <img
+                src={src}
+                alt={alt}
+                width="1136"
+                height="598"
+                loading={index === 0 ? "eager" : "lazy"}
+                decoding="async"
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    {
+      hasNavigation && (
+        <>
+          <button class="swiper-nav prev">Предыдущий слайд</button>
+          <button class="swiper-nav next">Следующий слайд</button>
+        </>
+      )
+    }
+  </div>
+
+  <div
+    class="competition-swiper__info"
+    data-competition-swiper-info
+    aria-live="polite"
+    aria-atomic="true"
+  >
+    {
+      slides.map(({ creator }, index) => (
+        <div data-slide-info={index} hidden={index !== 0}>
+          <DrawingInfo text={text} creator={creator} />
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .competition-swiper {
+    --swiper-button-size: var(--space32);
+    --swiper-side-space: calc(var(--swiper-button-size) / 2);
+
+    width: 100%;
+    max-width: calc(1136px + var(--swiper-button-size));
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+
+    & .competition-swiper__media {
+      position: relative;
+      width: 100%;
+      min-width: 0;
+    }
+
+    & .swiper {
+      width: 100%;
+      aspect-ratio: 1136 / 598;
+      border: 1px solid rgba(165, 122, 240, 0.15);
+      border-radius: 20px;
+      background-color: var(--color-bg-primary-light);
+    }
+
+    & .swiper-wrapper,
+    & .swiper-slide {
+      height: 100%;
+    }
+
+    & .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 19px;
+      object-fit: contain;
+    }
+
+    & :global(.swiper-nav.prev),
+    & :global(.swiper-nav.next) {
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      transform: translateY(-50%);
+
+      &:focus-visible {
+        outline: 3px solid var(--color-text-primary);
+        outline-offset: 3px;
+      }
+    }
+
+    & :global(.swiper-nav.prev) {
+      left: calc(-1 * var(--swiper-side-space));
+    }
+
+    & :global(.swiper-nav.next) {
+      right: calc(-1 * var(--swiper-side-space));
+    }
+
+    & .competition-swiper__info {
+      width: 100%;
+      min-width: 0;
+      max-width: 790px;
+      margin-inline: auto;
+    }
+
+    /* tablet */
+    @media (width >= 768px) {
+      --swiper-button-size: 62px;
+
+      & .competition-swiper__media {
+        padding-inline: var(--swiper-side-space);
+      }
+
+      & .swiper {
+        border-width: 2px;
+        border-radius: 48px;
+      }
+
+      & .swiper-slide img {
+        border-radius: 46px;
+      }
+
+      & :global(.swiper-nav.prev) {
+        left: 0;
+      }
+
+      & :global(.swiper-nav.next) {
+        right: 0;
+      }
+    }
+
+    /* desktop */
+    @media (width >= 960px) {
+      gap: var(--space12);
+    }
+  }
+</style>
+
+<script>
+  import Swiper from "swiper";
+  import { A11y, Navigation } from "swiper/modules";
+
+  document
+    .querySelectorAll<HTMLElement>("[data-competition-swiper]")
+    .forEach((root) => {
+      const swiperElement = root.querySelector<HTMLElement>(".swiper");
+      const previousButton =
+        root.querySelector<HTMLButtonElement>(".swiper-nav.prev");
+      const nextButton =
+        root.querySelector<HTMLButtonElement>(".swiper-nav.next");
+      const infoItems = root.querySelectorAll<HTMLElement>("[data-slide-info]");
+
+      if (!swiperElement || swiperElement.dataset.initialized === "true") {
+        return;
+      }
+
+      const swiper = new Swiper(swiperElement, {
+        modules: [Navigation, A11y],
+        slidesPerView: 1,
+        speed: 500,
+        loop: root.dataset.loop === "true",
+        navigation: {
+          prevEl: previousButton,
+          nextEl: nextButton,
+        },
+        a11y: {
+          prevSlideMessage: "Предыдущий слайд",
+          nextSlideMessage: "Следующий слайд",
+          firstSlideMessage: "Это первый слайд",
+          lastSlideMessage: "Это последний слайд",
+          paginationBulletMessage: "Перейти к слайду {{index}}",
+        },
+      });
+
+      const updateDrawingInfo = () => {
+        infoItems.forEach((item, index) => {
+          item.hidden = index !== swiper.realIndex;
+        });
+      };
+
+      swiper.on("realIndexChange", updateDrawingInfo);
+      updateDrawingInfo();
+
+      swiperElement.dataset.initialized = "true";
+    });
+</script>

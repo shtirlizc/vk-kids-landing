@@ -1,10 +1,55 @@
 ---
+import CompetitionSwiper from "../components/swiper.astro";
+import Container from "../components/container.astro";
+import competitionImage1 from "../assets/images/competition/competition-1.png";
+import competitionImage2 from "../assets/images/competition/competition-2.jpg";
+import competitionImage3 from "../assets/images/competition/competition-3.jpg";
 
+const drawingInfoText =
+  "Выберите работы, которые понравились больше всего — лучшие станут основной для новых детских карточек";
+
+const slides = [
+  {
+    src: competitionImage1.src,
+    alt: "Детский рисунок с животными, воздушными шарами и сердцами",
+    creator: {
+      contactName: "Валерия Мирошниченко",
+      artistFirstName: "Мирошниченко Валентина, 7 лет",
+      contactHref: "https://home.vk.team/users/va.miroshnichenko/",
+    },
+  },
+  {
+    src: competitionImage2.src,
+    alt: "Работа участника конкурса",
+    creator: {
+      contactName: "Анна Кузнецова",
+      artistFirstName: "Кузнецов Михаил, 8 лет",
+    },
+  },
+  {
+    src: competitionImage3.src,
+    alt: "Работа участника конкурса",
+    creator: {
+      contactName: "Дмитрий Соколов",
+      artistFirstName: "Соколова София, 6 лет",
+    },
+  },
+];
 ---
 
-<section id="competition" class="competition"></section>
+<section id="competition" class="competition">
+  <Container>
+    <CompetitionSwiper slides={slides} text={drawingInfoText} />
+  </Container>
+</section>
 
 <style>
   .competition {
+    padding-block: 56px;
+
+    /* desktop */
+    @media (width >= 960px) {
+      padding-block: 120px;
+    }
   }
 </style>
