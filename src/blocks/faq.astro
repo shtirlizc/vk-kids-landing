@@ -45,8 +45,10 @@ const faq: { head: string; body: string; Body?: any }[] = [
               <h3>{head}</h3>
               <div class="faq__icon" />
             </div>
-            <div class="faq__body text-content">
-              {Body ? <Body /> : <Fragment set:html={body} />}
+            <div class="faq__body">
+              <div class="faq__body-content text-content">
+                {Body ? <Body /> : <Fragment set:html={body} />}
+              </div>
             </div>
           </div>
         ))
@@ -125,9 +127,55 @@ const faq: { head: string; body: string; Body?: any }[] = [
       }
 
       .faq__body {
+        height: 0;
+        overflow: hidden;
+        display: none;
+      }
+
+      .faq__body-content {
         padding: 0 var(--space24) var(--space24);
-        /*display: none;*/
       }
     }
   }
 </style>
+
+<script>
+  import gsap from "gsap";
+
+  document.querySelectorAll<HTMLElement>(".faq__item").forEach((faqItem) => {
+    faqItem.addEventListener("click", () => {
+      if (faqItem.classList.contains("disabled")) {
+        return;
+      }
+
+      faqItem.classList.add("disabled");
+
+      const head = faqItem.querySelector(".faq__head");
+      const body = faqItem.querySelector(".faq__body");
+      const tl = gsap.timeline();
+
+      if (!head || !body) {
+        return;
+      }
+
+      if (head.classList.contains("opened")) {
+        head.classList.remove("opened");
+        tl.to(body, {
+          height: 0,
+          duration: 0.5,
+          ease: "power2.inOut",
+        }).to(body, { display: "none" });
+      } else {
+        head.classList.add("opened");
+        tl.to(body, { display: "block", duration: 0.05 }).to(body, {
+          height: "auto",
+          duration: 0.5,
+          ease: "power2.inOut",
+        });
+      }
+
+      console.log("remove");
+      faqItem.classList.remove("disabled");
+    });
+  });
+</script>
