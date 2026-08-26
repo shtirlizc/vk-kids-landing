@@ -1,0 +1,151 @@
+---
+import Title from "../../components/title.astro";
+import Container from "../../components/container.astro";
+import { categories, services } from "./data.ts";
+import Card from "./card.astro";
+---
+
+<section id="services" class="services">
+  <Container>
+    <Title>Сервисы и возможности</Title>
+
+    <div class="services__nav-wrapper">
+      <ul class="services__nav">
+        {
+          Object.values(categories).map((label) => (
+            <li>
+              <button class="badge">{label}</button>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="services__swiper-nav">
+        <button class="swiper-nav prev">Предыдущий</button>
+        <button class="swiper-nav next">Следующий</button>
+      </div>
+    </div>
+  </Container>
+
+  <div class="services__body">
+    <div class="swiper benefits-swiper">
+      <div class="swiper-wrapper">
+        {
+          services.benefits.map((service) => (
+            <div class="swiper-slide">
+              <Card service={service} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    border-radius: 32px;
+    padding: var(--space32) 0;
+    background-color: var(--color-bg-grey);
+
+    /* desktop */
+    @media (width >= 960px) {
+      border-radius: 86px;
+      padding: 90px 0 74px;
+    }
+
+    & .services__nav-wrapper {
+      /* desktop */
+      @media (width >= 960px) {
+        position: relative;
+        padding: 0 120px;
+      }
+    }
+
+    & .services__swiper-nav {
+      display: none;
+
+      /* desktop */
+      @media (width >= 960px) {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        gap: var(--space24);
+      }
+    }
+
+    & .services__nav {
+      margin-top: var(--space24);
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space8);
+
+      /* desktop */
+      @media (width >= 960px) {
+        gap: 10px;
+        margin-top: 50px;
+      }
+    }
+
+    & .services__body {
+      margin-top: var(--space28);
+
+      /* desktop */
+      @media (width >= 960px) {
+        margin-top: var(--space32);
+      }
+
+      .swiper-wrapper {
+        padding: 0 var(--space24);
+
+        /* desktop */
+        @media (width >= 960px) {
+          padding: 0 var(--space40);
+        }
+      }
+
+      .swiper-slide {
+        /* desktop */
+        @media (width >= 960px) {
+          width: 558px;
+        }
+      }
+    }
+  }
+</style>
+
+<script>
+  import { Swiper } from "swiper";
+  import { FreeMode } from "swiper/modules";
+
+  const swiper = new Swiper(".benefits-swiper", {
+    modules: [FreeMode],
+    loop: true,
+    breakpoints: {
+      320: {
+        freeMode: false,
+        slidesPerView: 1.2,
+        spaceBetween: 10,
+      },
+      960: {
+        freeMode: true,
+        slidesPerView: "auto",
+        spaceBetween: 20,
+      },
+    },
+  });
+
+  const prevBtn = document.querySelector(".services__swiper-nav .prev");
+  const nextBtn = document.querySelector(".services__swiper-nav .next");
+
+  prevBtn?.addEventListener("click", () => {
+    swiper.slidePrev();
+  });
+  nextBtn?.addEventListener("click", () => {
+    swiper.slideNext();
+  });
+</script>

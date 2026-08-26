@@ -3,7 +3,7 @@ import Title from "../../components/title.astro";
 import Container from "../../components/container.astro";
 import FaqLastItem from "./faq-last-item.astro";
 
-const faq: { head: string; body: string; Body?: typeof FaqLastItem }[] = [
+const faq: { head: string; body?: string; Body?: typeof FaqLastItem }[] = [
   {
     head: "Какие документы нужны при вступлении в брак?",
     body: `
@@ -24,10 +24,6 @@ const faq: { head: string; body: string; Body?: typeof FaqLastItem }[] = [
   },
   {
     head: "Не нашли нужную информацию?",
-    body: `
-      <p>Напишите в <a href="https://u.internal.myteam.mail.ru/profile/support_bot" target="_blank">единый чат поддержки</a> с умным помощником Василисой или своему HRBP.</p>
-      <p><Link href="https://u.internal.myteam.mail.ru/profile/family" isTargetBlank>«Семья и дети»</Link></p>
-    `,
     Body: FaqLastItem,
   },
 ];

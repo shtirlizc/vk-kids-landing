@@ -44,7 +44,6 @@ import { nav } from "../nav.ts";
   .header {
     position: sticky;
     top: 0;
-    height: var(--header);
     z-index: 2;
     background-color: var(--color-bg-primary);
 
@@ -89,6 +88,7 @@ import { nav } from "../nav.ts";
       display: flex;
       justify-content: space-between;
       align-items: center;
+      height: var(--header);
 
       nav {
         display: none;
