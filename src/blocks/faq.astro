@@ -143,39 +143,38 @@ const faq: { head: string; body: string; Body?: any }[] = [
   import gsap from "gsap";
 
   document.querySelectorAll<HTMLElement>(".faq__item").forEach((faqItem) => {
-    faqItem.addEventListener("click", () => {
-      if (faqItem.classList.contains("disabled")) {
-        return;
-      }
+    const head = faqItem.querySelector<HTMLElement>(".faq__head");
+    const body = faqItem.querySelector<HTMLElement>(".faq__body");
 
-      faqItem.classList.add("disabled");
+    if (!head || !body) {
+      return;
+    }
 
-      const head = faqItem.querySelector(".faq__head");
-      const body = faqItem.querySelector(".faq__body");
-      const tl = gsap.timeline();
+    head.addEventListener("click", () => {
+      const isOpened = head.classList.toggle("opened");
 
-      if (!head || !body) {
-        return;
-      }
+      gsap.killTweensOf(body);
 
-      if (head.classList.contains("opened")) {
-        head.classList.remove("opened");
-        tl.to(body, {
-          height: 0,
-          duration: 0.5,
-          ease: "power2.inOut",
-        }).to(body, { display: "none" });
-      } else {
-        head.classList.add("opened");
-        tl.to(body, { display: "block", duration: 0.05 }).to(body, {
+      if (isOpened) {
+        gsap.set(body, { display: "block" });
+        gsap.to(body, {
           height: "auto",
           duration: 0.5,
           ease: "power2.inOut",
         });
+        return;
       }
 
-      console.log("remove");
-      faqItem.classList.remove("disabled");
+      gsap.to(body, {
+        height: 0,
+        duration: 0.5,
+        ease: "power2.inOut",
+        onComplete: () => {
+          if (!head.classList.contains("opened")) {
+            gsap.set(body, { display: "none" });
+          }
+        },
+      });
     });
   });
 </script>
