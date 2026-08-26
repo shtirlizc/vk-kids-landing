@@ -63,6 +63,13 @@ const faq: { head: string; body: string; Body?: any }[] = [
       margin-top: var(--space32);
       display: grid;
       gap: var(--space8);
+      max-width: 750px;
+      margin-inline: auto;
+
+      /* desktop */
+      @media (width >= 960px) {
+        margin-top: 50px;
+      }
 
       .faq__item {
         background-color: var(--color-bg-main);

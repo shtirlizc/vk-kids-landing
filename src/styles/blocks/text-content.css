@@ -6,6 +6,11 @@
     font-weight: 500;
     font-size: 15px;
     line-height: 100%;
+
+    /* desktop */
+    @media (width >= 960px) {
+      font-size: 16px;
+    }
   }
 
   ol,
@@ -18,6 +23,22 @@
       font-weight: 500;
       font-size: 15px;
       line-height: 100%;
+
+      /* desktop */
+      @media (width >= 960px) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color var(--transition);
+
+    &:hover {
+      color: var(--color-primary);
     }
   }
 }
