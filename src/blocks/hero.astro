@@ -1,7 +1,7 @@
 ---
-import { Image } from "astro:assets";
 import rattle from "./../assets/images/hero/rattle.webp";
 import Arrow from "./../assets/images/arrow.svg";
+import rattleMobile from "./../assets/images/hero/rattle-mobile.webp";
 ---
 
 <section class="hero">
@@ -10,7 +10,10 @@ import Arrow from "./../assets/images/arrow.svg";
       <p>о семье</p>
       <p>заботимся</p>
     </div>
-    <Image class="hero__rattle" src={rattle} alt="rattle" />
+    <picture>
+      <source media="(width >= 960px)" srcset={rattle.src} />
+      <img src={rattleMobile.src} alt="Семья и дети" />
+    </picture>
   </div>
   <div class="hero__links">
     <nav>
@@ -48,56 +51,84 @@ import Arrow from "./../assets/images/arrow.svg";
     flex-direction: column;
     align-items: center;
     margin-top: calc(var(--header) * -1);
-    background-image:
-      url(./../assets/images/hero/horse.webp),
-      url(./../assets/images/hero/star.webp), var(--bg-gradient);
-    background-repeat: no-repeat;
-    background-position:
-      left bottom,
-      right bottom,
-      center;
-    background-size:
-      342px auto,
-      462px auto,
-      cover;
-    padding-bottom: 187px;
+    background-image: var(--bg-gradient);
     border-radius: 0 0 32px 32px;
 
-    /* desktop */
-    @media (width >= 960px) {
+    /* tablet */
+    @media (width >= 768px) {
       border-radius: 0 0 48px 48px;
+      background-image:
+        url(./../assets/images/hero/horse.webp),
+        url(./../assets/images/hero/star.webp), var(--bg-gradient);
+      background-repeat: no-repeat;
+      background-position:
+        left bottom,
+        right bottom,
+        center;
+      background-size:
+        342px auto,
+        462px auto,
+        cover;
+      padding-bottom: 187px;
     }
 
     & .hero__content {
       position: relative;
+      align-self: flex-end;
+
+      /* tablet */
+      @media (width >= 768px) {
+        align-self: center;
+      }
     }
 
     & .hero__subtitle {
       font-family: var(--font-vk-condensed), sans-serif;
-      font-size: 32px;
+      font-size: 28px;
+      font-weight: 500;
       position: absolute;
       display: flex;
       justify-content: space-between;
       flex-direction: column;
-      bottom: 50%;
-      left: 0;
-      width: 350px;
+      bottom: 60%;
+      left: 7%;
+      width: 160px;
+
+      /* tablet */
+      @media (width >= 768px) {
+        bottom: 50%;
+        left: 0;
+        width: 350px;
+        font-size: 35px;
+      }
 
       p:first-child {
         text-align: right;
       }
     }
 
-    & .hero__rattle {
+    & picture,
+    & img {
       width: 100%;
-      max-width: 1250px;
+      max-width: 336px;
       height: auto;
+
+      /* tablet */
+      @media (width >= 768px) {
+        max-width: 1250px;
+      }
     }
 
     & .hero__links {
       display: flex;
       justify-content: center;
-      width: 750px;
+      max-width: 350px;
+      margin: 15px 0 82px;
+
+      /* tablet */
+      @media (width >= 768px) {
+        max-width: 750px;
+      }
 
       nav {
         ul {
@@ -114,7 +145,7 @@ import Arrow from "./../assets/images/arrow.svg";
 
     & .hero__arrow {
       position: absolute;
-      bottom: calc(var(--space) * 8);
+      bottom: var(--space16);
       left: 50%;
       transform: translateX(-50%);
       color: var(--color-bg-main);
@@ -126,6 +157,10 @@ import Arrow from "./../assets/images/arrow.svg";
 
       &:hover {
         color: var(--color-bg-primary-light);
+      }
+
+      @media (width >= 768px) {
+        bottom: var(--space32);
       }
     }
   }
