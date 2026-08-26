@@ -45,12 +45,26 @@ const TagName = href ? "a" : "button";
     align-items: center;
     text-align: center;
     color: var(--color-bg-main);
-    padding: 0 42px;
-    border-radius: 24px;
+    padding: 2px 42px 0;
+    border-radius: 16px;
     cursor: pointer;
     transition:
       color var(--transition),
       background-color var(--transition);
+
+    height: 54px;
+
+    /* tablet */
+    @media (width >= 768px) {
+      border-radius: 24px;
+
+      &.middle {
+        height: 69px;
+      }
+      &.large {
+        height: 72px;
+      }
+    }
 
     &[href] {
       span {
@@ -78,18 +92,6 @@ const TagName = href ? "a" : "button";
       &:hover {
         color: var(--color-secondary);
         background-color: transparent;
-      }
-    }
-
-    height: 54px;
-
-    /* tablet */
-    @media (width >= 768px) {
-      &.middle {
-        height: 69px;
-      }
-      &.large {
-        height: 72px;
       }
     }
 

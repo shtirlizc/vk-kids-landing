@@ -14,6 +14,14 @@ export default defineConfig({
         variants: [
           {
             src: [
+              "./src/assets/fonts/VKSansDisplay/VKSansDisplay-Light.woff2",
+              "./src/assets/fonts/VKSansDisplay/VKSansDisplay-Light.woff",
+            ],
+            weight: "300",
+            style: "normal",
+          },
+          {
+            src: [
               "./src/assets/fonts/VKSansDisplay/VKSansDisplay-Regular.woff2",
               "./src/assets/fonts/VKSansDisplay/VKSansDisplay-Regular.woff",
             ],
@@ -26,6 +34,38 @@ export default defineConfig({
               "./src/assets/fonts/VKSansDisplay/VKSansDisplay-Medium.woff",
             ],
             weight: "500",
+            style: "normal",
+          },
+          {
+            src: [
+              "./src/assets/fonts/VKSansDisplay/VKSansDisplay-DemiBold.woff2",
+              "./src/assets/fonts/VKSansDisplay/VKSansDisplay-DemiBold.woff",
+            ],
+            weight: "600",
+            style: "normal",
+          },
+          {
+            src: [
+              "./src/assets/fonts/VKSansDisplay/VKSansDisplay-Bold.woff2",
+              "./src/assets/fonts/VKSansDisplay/VKSansDisplay-Bold.woff",
+            ],
+            weight: "700",
+            style: "normal",
+          },
+          {
+            src: [
+              "./src/assets/fonts/VKSansDisplay/VKSansDisplay-ExtraBold.woff2",
+              "./src/assets/fonts/VKSansDisplay/VKSansDisplay-ExtraBold.woff",
+            ],
+            weight: "800",
+            style: "normal",
+          },
+          {
+            src: [
+              "./src/assets/fonts/VKSansDisplay/VKSansDisplay-Black.woff2",
+              "./src/assets/fonts/VKSansDisplay/VKSansDisplay-Black.woff",
+            ],
+            weight: "900",
             style: "normal",
           },
         ],
@@ -96,27 +136,11 @@ export default defineConfig({
           },
           {
             src: [
-              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-LtIt.woff2",
-              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-LtIt.woff",
-            ],
-            weight: "300",
-            style: "italic",
-          },
-          {
-            src: [
               "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-Rg.woff2",
               "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-Rg.woff",
             ],
             weight: "400",
             style: "normal",
-          },
-          {
-            src: [
-              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-It.woff2",
-              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-It.woff",
-            ],
-            weight: "400",
-            style: "italic",
           },
           {
             src: [
@@ -128,27 +152,11 @@ export default defineConfig({
           },
           {
             src: [
-              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-MdIt.woff2",
-              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-MdIt.woff",
-            ],
-            weight: "500",
-            style: "italic",
-          },
-          {
-            src: [
               "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-DmBd.woff2",
               "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-DmBd.woff",
             ],
             weight: "600",
             style: "normal",
-          },
-          {
-            src: [
-              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-DmBdIt.woff2",
-              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-DmBdIt.woff",
-            ],
-            weight: "600",
-            style: "italic",
           },
           {
             src: [
@@ -160,14 +168,6 @@ export default defineConfig({
           },
           {
             src: [
-              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-BdIt.woff2",
-              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-BdIt.woff",
-            ],
-            weight: "700",
-            style: "italic",
-          },
-          {
-            src: [
               "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-XBd.woff2",
               "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-XBd.woff",
             ],
@@ -176,27 +176,11 @@ export default defineConfig({
           },
           {
             src: [
-              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-XBdIt.woff2",
-              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-XBdIt.woff",
-            ],
-            weight: "800",
-            style: "italic",
-          },
-          {
-            src: [
               "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-Blk.woff2",
               "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-Blk.woff",
             ],
             weight: "900",
             style: "normal",
-          },
-          {
-            src: [
-              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-BlkIt.woff2",
-              "./src/assets/fonts/VKSansDisplayCondensed/VKSansDisplayCd-BlkIt.woff",
-            ],
-            weight: "900",
-            style: "italic",
           },
         ],
       },

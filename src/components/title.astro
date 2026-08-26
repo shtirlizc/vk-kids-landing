@@ -1,8 +1,12 @@
 ---
+interface Props {
+  isCentered?: boolean;
+}
 
+const { isCentered = true } = Astro.props;
 ---
 
-<h2 class="title"><slot /></h2>
+<h2 class:list={["title", isCentered && "center"]}><slot /></h2>
 
 <style>
   .title {
@@ -11,6 +15,10 @@
     line-height: 80%;
     text-transform: lowercase;
     color: var(--color-text-primary);
+
+    &.center {
+      text-align: center;
+    }
 
     /* desktop */
     @media (width >= 960px) {
