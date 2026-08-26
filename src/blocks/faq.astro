@@ -1,10 +1,133 @@
 ---
+import Title from "../components/title.astro";
+import FaqLastItem from "./faq-last-item.astro";
+import Container from "../components/container.astro";
 
+const faq: { head: string; body: string; Body?: any }[] = [
+  {
+    head: "Какие документы нужны при вступлении в брак?",
+    body: `
+      <p>Если вы вступили в брак, передайте в отдел кадров свидетельство о браке — лично или в электронном виде. При смене фамилии дополнительно понадобятся СНИЛС, реквизиты на новую фамилию и заявление в отделе кадров.</p>
+      <p>Если у вас родился ребёнок, предоставьте в отдел кадров свидетельство о рождении и напишите заявление на получение материальной помощи. С процессом поможет ваш HR-бизнес-партнёр.</p>
+    `,
+  },
+  {
+    head: "Что стоит сделать, если у меня родился ребёнок?",
+    body: `
+      <p>Нужно предоставить свидетельство о рождении в отдел кадров и написать заявление на получение материальной помощи.</p>
+      <ol>
+        <li>Зайдите в систему по ссылке: <a href="https://vkdoc.mail.ru" target="_blank">vkdoc.mail.ru</a></li>
+        <li>Нажмите кнопку «Создать заявку» в правом верхнем углу и выберите в открывшемся окне «Заявление на изменение персональных данных сотрудника»</li>
+        <li>На открывшейся странице в строке «Причина изменения связана с» выберите «рождением ребёнка/детей». Приложите скан свидетельства о рождении и отправьте заявку. А если остаются вопросы, напишите в <a href="https://home.vk.team/structure/#unit637" target="_blank">отдел кадров</a> или своему HRBP</li>
+      </ol>
+    `,
+  },
+  {
+    head: "Не нашли нужную информацию?",
+    body: `
+      <p>Напишите в <a href="https://u.internal.myteam.mail.ru/profile/support_bot" target="_blank">единый чат поддержки</a> с умным помощником Василисой или своему HRBP.</p>
+      <p><Link href="https://u.internal.myteam.mail.ru/profile/family" isTargetBlank>«Семья и дети»</Link></p>
+    `,
+    Body: FaqLastItem,
+  },
+];
 ---
 
-<section id="faq" class="faq"></section>
+<section id="faq" class="faq">
+  <Container>
+    <Title>Ответы<br />на вопросы</Title>
+
+    <div class="faq_list">
+      {
+        faq.map(({ head, body, Body }) => (
+          <div class="faq__item">
+            <div class="faq__head">
+              <h3>{head}</h3>
+              <div class="faq__icon" />
+            </div>
+            <div class="faq__body text-content">
+              {Body ? <Body /> : <Fragment set:html={body} />}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </Container>
+</section>
 
 <style>
   .faq {
+    & .faq_list {
+      margin-top: var(--space32);
+      display: grid;
+      gap: var(--space8);
+
+      .faq__item {
+        background-color: var(--color-bg-main);
+        border-radius: 24px;
+      }
+
+      .faq__head {
+        display: grid;
+        grid-template-columns: 1fr var(--space32);
+        padding: var(--space24);
+        border-radius: 24px;
+        cursor: pointer;
+        transition:
+          background-color var(--transition),
+          margin var(--transition);
+
+        &:hover {
+          background-color: var(--color-bg-secondary);
+        }
+
+        h3 {
+          font-weight: 600;
+          font-size: 18px;
+          line-height: 100%;
+        }
+
+        &.opened {
+          &:hover {
+            margin-bottom: var(--space12);
+          }
+
+          .faq__icon::after {
+            transform: rotate(-90deg);
+          }
+        }
+      }
+
+      .faq__icon {
+        position: relative;
+
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          background-color: var(--color-text-primary);
+        }
+
+        &::before {
+          width: 10px;
+          height: 2px;
+          right: 0;
+          top: calc(50% - 1px);
+        }
+
+        &::after {
+          width: 2px;
+          height: 10px;
+          right: 4px;
+          top: calc(50% - 5px);
+          transition: transform var(--transition-long);
+        }
+      }
+
+      .faq__body {
+        padding: 0 var(--space24) var(--space24);
+        /*display: none;*/
+      }
+    }
   }
 </style>

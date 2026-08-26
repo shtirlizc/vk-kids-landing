@@ -1,2 +1,23 @@
 .text-content {
+  display: grid;
+  gap: var(--space12);
+
+  p {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 100%;
+  }
+
+  ol,
+  ul {
+    display: grid;
+    gap: var(--space12);
+    padding-left: var(--space12);
+
+    li {
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 100%;
+    }
+  }
 }
