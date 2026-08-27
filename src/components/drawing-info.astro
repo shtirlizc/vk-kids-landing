@@ -1,0 +1,176 @@
+---
+interface Creator {
+  contactName: string;
+  artistFirstName: string;
+  contactHref?: string;
+}
+
+interface Props {
+  text: string;
+  creator: Creator;
+}
+
+const { text, creator } = Astro.props;
+---
+
+<div class="drawing-info">
+  <p class="drawing-info__description">{text}</p>
+
+  <div class="drawing-info__creator">
+    {
+      creator.contactHref ? (
+        <a
+          class="drawing-info__contact"
+          href={creator.contactHref}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {creator.contactName}
+        </a>
+      ) : (
+        <span class="drawing-info__contact">{creator.contactName}</span>
+      )
+    }
+
+    <p set:html={creator.artistFirstName} class="drawing-info__artist" />
+  </div>
+</div>
+
+<style>
+  .drawing-info {
+    width: 100%;
+    min-height: 158px;
+    padding: 14px 14px 13px;
+    display: grid;
+    grid-template-rows: auto auto;
+    align-content: space-between;
+    gap: 15px;
+    border-radius: 24px;
+    color: var(--color-text-primary);
+    background:
+      radial-gradient(
+        97.8% 266.16% at 98.68% 1.74%,
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(255, 255, 255, 0) 100%
+      ),
+      color-mix(in srgb, var(--color-bg-primary) 55%, transparent);
+    backdrop-filter: blur(12.5px);
+
+    & .drawing-info__description,
+    & .drawing-info__contact,
+    & .drawing-info__artist {
+      font-family: var(--font-vk-display), sans-serif;
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 18px;
+      overflow-wrap: break-word;
+    }
+
+    & .drawing-info__description,
+    & .drawing-info__artist {
+      margin: 0;
+    }
+
+    & .drawing-info__artist {
+      display: flex;
+      gap: 0 0.5ch;
+      flex-wrap: wrap;
+
+      span:nth-child(1) {
+        order: 2;
+
+        /* tablet */
+        @media (width >= 768px) {
+          order: 1;
+        }
+        &::after {
+          content: ",";
+
+          /* tablet */
+          @media (width >= 768px) {
+            content: "";
+          }
+        }
+      }
+      span:nth-child(2) {
+        order: 1;
+
+        /* tablet */
+        @media (width >= 768px) {
+          order: 2;
+
+          &::after {
+            content: ",";
+          }
+        }
+      }
+      span:nth-child(3) {
+        order: 3;
+      }
+    }
+
+    & .drawing-info__creator {
+      width: 100%;
+      min-height: 62px;
+      padding: 12px 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 2px;
+      border-radius: 18px;
+      background-color: var(--color-bg-main);
+      backdrop-filter: blur(12.5px);
+    }
+
+    & .drawing-info__contact {
+      color: inherit;
+      text-decoration: underline;
+      text-decoration-skip-ink: auto;
+      text-underline-offset: 2px;
+    }
+
+    & a.drawing-info__contact {
+      transition: color var(--transition);
+
+      &:hover {
+        color: var(--color-primary);
+      }
+
+      &:focus-visible {
+        border-radius: var(--border-radius);
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+      }
+    }
+
+    /* tablet */
+    @media (width >= 768px) {
+      min-height: 90px;
+      padding: 15px 24px;
+      display: block;
+
+      & .drawing-info__description,
+      & .drawing-info__contact,
+      & .drawing-info__artist {
+        font-size: 16px;
+        line-height: 20px;
+      }
+
+      & .drawing-info__description {
+        width: 323px;
+      }
+
+      & .drawing-info__creator {
+        position: absolute;
+        top: var(--space8);
+        right: var(--space8);
+        width: 408px;
+        min-height: 74px;
+        padding: var(--space16) 22px;
+        grid-template-columns: 164px 167px;
+        align-items: start;
+        gap: 7px;
+      }
+    }
+  }
+</style>
