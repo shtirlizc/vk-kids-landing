@@ -1,0 +1,256 @@
+---
+interface SlideImage {
+  src: string;
+  width: number;
+  height: number;
+}
+
+interface NewsSlide {
+  category: string;
+  title: string;
+  image: SlideImage;
+  imageAlt: string;
+}
+
+interface Props {
+  slides: NewsSlide[];
+}
+
+const { slides } = Astro.props;
+const hasNavigation = slides.length > 1;
+---
+
+<div
+  class="news-slider"
+  data-news-slider
+  data-loop={hasNavigation}
+  role="region"
+  aria-label="Последние новости"
+>
+  <div class="news-slider__viewport">
+    <div class="swiper news-slider__swiper" data-news-swiper>
+      <div class="swiper-wrapper">
+        {
+          slides.map(({ category, title, image, imageAlt }, index) => (
+            <article class="swiper-slide news-card">
+              <img
+                class="news-card__image"
+                src={image.src}
+                alt={imageAlt}
+                width={image.width}
+                height={image.height}
+                loading={index === 0 ? "eager" : "lazy"}
+                decoding="async"
+              />
+              <span class="news-card__category">{category}</span>
+              <h3 class="news-card__title">{title}</h3>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  {
+    hasNavigation && (
+      <>
+        <button
+          class="swiper-nav prev news-slider__button news-slider__button--prev"
+          data-news-prev
+          type="button"
+          aria-label="Предыдущая новость"
+        >
+          Предыдущая новость
+        </button>
+        <button
+          class="swiper-nav next news-slider__button news-slider__button--next"
+          data-news-next
+          type="button"
+          aria-label="Следующая новость"
+        >
+          Следующая новость
+        </button>
+      </>
+    )
+  }
+</div>
+
+<style>
+  .news-slider {
+    position: relative;
+    flex: none;
+    width: 100vw;
+
+    & .news-slider__viewport {
+      min-width: 0;
+      padding-left: 24px;
+    }
+
+    & .news-slider__swiper {
+      width: 100%;
+    }
+
+    & .news-card {
+      position: relative;
+      width: min(310px, calc(100vw - 10px));
+      height: 310px;
+      border-radius: var(--border-radius20);
+      overflow: hidden;
+      isolation: isolate;
+
+      &::after {
+        position: absolute;
+        z-index: 1;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(47, 57, 117, 0.06) 12%,
+          rgba(47, 57, 117, 0.22) 47%,
+          rgba(35, 30, 91, 0.94) 100%
+        );
+        content: "";
+        pointer-events: none;
+      }
+    }
+
+    & .news-card__image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 65%;
+    }
+
+    & .news-card__category,
+    & .news-card__title {
+      position: absolute;
+      z-index: 2;
+    }
+
+    & .news-card__category {
+      top: var(--space16);
+      left: var(--space16);
+      padding: 5px var(--space12);
+      border-radius: 999px;
+      background-color: #dffaff;
+      color: var(--color-text-primary);
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+    }
+
+    & .news-card__title {
+      right: var(--space16);
+      bottom: var(--space16);
+      left: var(--space16);
+      color: #fff;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 120%;
+    }
+
+    & .news-slider__button {
+      position: absolute;
+      z-index: 3;
+      top: 50%;
+      display: none;
+      transform: translateY(-50%);
+
+      &:focus-visible {
+        outline: 3px solid var(--color-text-primary);
+        outline-offset: 3px;
+      }
+    }
+
+    & .news-slider__button--prev {
+      left: 0;
+    }
+
+    & .news-slider__button--next {
+      right: 0;
+    }
+
+    /* tablet */
+    @media (width >= 768px) {
+      & .news-slider__viewport {
+        padding-inline: 31px;
+      }
+
+      & .news-card {
+        width: 365px;
+        height: 350px;
+        border-radius: var(--space32);
+      }
+
+      & .news-card__category {
+        top: var(--space32);
+        left: var(--space32);
+      }
+
+      & .news-card__title {
+        top: 216px;
+        right: var(--space32);
+        bottom: auto;
+        left: var(--space32);
+        font-size: 20px;
+        line-height: 120%;
+        text-align: center;
+      }
+
+      & .news-slider__button {
+        display: flex;
+      }
+    }
+
+    /* desktop */
+    @media (width >= 960px) {
+      width: min(1582px, 100vw);
+    }
+  }
+</style>
+
+<script>
+  import Swiper from "swiper";
+  import { A11y, Navigation } from "swiper/modules";
+
+  document
+    .querySelectorAll<HTMLElement>("[data-news-slider]")
+    .forEach((root) => {
+      const swiperElement =
+        root.querySelector<HTMLElement>("[data-news-swiper]");
+      const previousButton =
+        root.querySelector<HTMLButtonElement>("[data-news-prev]");
+      const nextButton =
+        root.querySelector<HTMLButtonElement>("[data-news-next]");
+
+      if (!swiperElement || swiperElement.dataset.initialized === "true") {
+        return;
+      }
+
+      new Swiper(swiperElement, {
+        modules: [Navigation, A11y],
+        slidesPerView: "auto",
+        spaceBetween: 10,
+        speed: 500,
+        loop: root.dataset.loop === "true",
+        navigation: {
+          prevEl: previousButton,
+          nextEl: nextButton,
+        },
+        breakpoints: {
+          768: {
+            spaceBetween: 20,
+          },
+        },
+        a11y: {
+          prevSlideMessage: "Предыдущая новость",
+          nextSlideMessage: "Следующая новость",
+          firstSlideMessage: "Это первая новость",
+          lastSlideMessage: "Это последняя новость",
+        },
+      });
+
+      swiperElement.dataset.initialized = "true";
+    });
+</script>

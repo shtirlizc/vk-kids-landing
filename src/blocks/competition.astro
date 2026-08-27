@@ -347,13 +347,9 @@ const slides = Array.from({ length: 44 }, (_, index) => index + 1)
 
 <style>
   .competition {
-    padding-block: 56px;
+    margin: 82px 0;
 
     /* tablet */
-    @media (width >= 768px) {
-      padding-block: 120px;
-    }
-
     & .competition-description {
       max-width: 273px;
 
@@ -390,6 +386,7 @@ const slides = Array.from({ length: 44 }, (_, index) => index + 1)
 
     & .competition-body > p {
       width: 100%;
+      max-width: 365px;
       text-align: center;
     }
   }
