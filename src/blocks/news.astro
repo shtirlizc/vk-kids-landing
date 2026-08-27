@@ -1,10 +1,76 @@
 ---
+import Container from "../components/container.astro";
+import Title from "../components/title.astro";
+import NewsSwiper from "../components/news-swiper.astro";
+import newsImage1 from "../assets/images/news/news-1.webp";
+import newsImage2 from "../assets/images/news/news-2.webp";
+import newsImage3 from "../assets/images/news/news-3.webp";
+import newsImage4 from "../assets/images/news/news-4.webp";
 
+const news = [
+  {
+    category: "Сферум",
+    title:
+      "«Стесняюсь спросить» — новый проект о взрослении для девочек-подростков",
+    image: newsImage1,
+    imageAlt: "Девушка в игровой комнате",
+  },
+  {
+    category: "Код заботы",
+    title:
+      "К 1 Сентября собрали всё, что поможет подготовиться к учебному году быстрее и выгоднее",
+    image: newsImage2,
+    imageAlt: "Молодой человек работает за компьютером",
+  },
+  {
+    category: "Код заботы",
+    title:
+      "Запустили программу проверки мужского здоровья для подготовки к отцовству",
+    image: newsImage3,
+    imageAlt: "Молодой человек смотрит фильм на проекторе",
+  },
+  {
+    category: "VK Музыка",
+    title:
+      "«Почему листья зелёные?» и «Кто живёт в лесу?» Ответы на сотни детских вопросов — в аудиокнигах от VK Музыки и НЭН",
+    image: newsImage4,
+    imageAlt: "Девушка играет на портативной консоли",
+  },
+  {
+    category: "VK Видео",
+    title:
+      "В детском разделе VK Видео эксклюзивно запустили новый проект «Спокойной ночи, малыши! Ждут друзей»",
+    image: newsImage2,
+    imageAlt: "Молодой человек работает за компьютером",
+  },
+];
 ---
 
-<section class="news"></section>
+<section class="news">
+  <Container>
+    <div class="news__content">
+      <Title>последние новости</Title>
+      <NewsSwiper slides={news} />
+    </div>
+  </Container>
+</section>
 
 <style>
   .news {
+    overflow: hidden;
+
+    & .news__content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space28);
+    }
+
+    /* desktop */
+    @media (width >= 960px) {
+      & .news__content {
+        gap: var(--space48);
+      }
+    }
   }
 </style>
