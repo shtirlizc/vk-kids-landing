@@ -22,8 +22,18 @@ const badges: { label: string; tabId: CategoryId }[] = [
       <p>заботимся</p>
     </div>
     <picture>
-      <source media="(width >= 960px)" srcset={rattle.src} />
-      <img src={rattleMobile.src} alt="Семья и дети" />
+      <source
+        media="(width >= 960px)"
+        srcset={rattle.src}
+        width={rattle.width}
+        height={rattle.height}
+      />
+      <img
+        src={rattleMobile.src}
+        width={rattleMobile.width}
+        height={rattleMobile.height}
+        alt="Семья и дети"
+      />
     </picture>
   </div>
   <div class="hero__links">
