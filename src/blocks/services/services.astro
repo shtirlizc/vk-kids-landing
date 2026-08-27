@@ -3,6 +3,8 @@ import Title from "../../components/title.astro";
 import Container from "../../components/container.astro";
 import { categories, services } from "./data.ts";
 import Card from "./card.astro";
+
+const serviceCategories = Object.entries(services);
 ---
 
 <section id="services" class="services">
@@ -10,11 +12,18 @@ import Card from "./card.astro";
     <Title>Сервисы и возможности</Title>
 
     <div class="services__nav-wrapper">
-      <ul class="services__nav">
+      <ul class="services__nav" aria-label="Категории сервисов">
         {
-          Object.values(categories).map((label) => (
+          serviceCategories.map(([key], index) => (
             <li>
-              <button class="badge">{label}</button>
+              <button
+                class:list={["badge", { active: index === 0 }]}
+                type="button"
+                data-category-index={index}
+                aria-pressed={index === 0 ? "true" : "false"}
+              >
+                {categories[key as keyof typeof categories]}
+              </button>
             </li>
           ))
         }
@@ -27,12 +36,20 @@ import Card from "./card.astro";
   </Container>
 
   <div class="services__body">
-    <div class="swiper benefits-swiper">
+    <div class="swiper services-categories-swiper">
       <div class="swiper-wrapper">
         {
-          services.benefits.map((service) => (
-            <div class="swiper-slide">
-              <Card service={service} />
+          serviceCategories.map(([key, items]) => (
+            <div class="swiper-slide" data-category={key}>
+              <div class="swiper services-swiper">
+                <div class="swiper-wrapper">
+                  {items.map((service) => (
+                    <div class="swiper-slide">
+                      <Card service={service} category={key} />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           ))
         }
@@ -99,7 +116,7 @@ import Card from "./card.astro";
         margin-top: var(--space32);
       }
 
-      .swiper-wrapper {
+      .services-swiper .swiper-wrapper {
         padding: 0 var(--space24);
 
         /* desktop */
@@ -108,11 +125,23 @@ import Card from "./card.astro";
         }
       }
 
-      .swiper-slide {
+      .services-swiper .swiper-slide {
         /* desktop */
         @media (width >= 960px) {
           width: 558px;
         }
+      }
+
+      .services-categories-swiper
+        > .swiper-wrapper
+        > .swiper-slide-active
+        .services-swiper,
+      .services-categories-swiper
+        > .swiper-wrapper
+        > .swiper-slide-active
+        .services-swiper
+        .swiper-slide {
+        pointer-events: auto;
       }
     }
   }
@@ -120,32 +149,138 @@ import Card from "./card.astro";
 
 <script>
   import { Swiper } from "swiper";
-  import { FreeMode } from "swiper/modules";
+  import { EffectFade, FreeMode } from "swiper/modules";
+  import "swiper/css/effect-fade";
 
-  const swiper = new Swiper(".benefits-swiper", {
-    modules: [FreeMode],
-    loop: true,
-    breakpoints: {
-      320: {
-        freeMode: false,
-        slidesPerView: 1.2,
-        spaceBetween: 10,
-      },
-      960: {
-        freeMode: true,
-        slidesPerView: "auto",
-        spaceBetween: 20,
-      },
-    },
-  });
+  const servicesSection = document.querySelector<HTMLElement>(".services");
 
-  const prevBtn = document.querySelector(".services__swiper-nav .prev");
-  const nextBtn = document.querySelector(".services__swiper-nav .next");
+  if (servicesSection) {
+    const innerSwipers = new Map<string, Swiper>();
+    const categorySlides = servicesSection.querySelectorAll<HTMLElement>(
+      ".services-categories-swiper > .swiper-wrapper > .swiper-slide",
+    );
+    const categoryButtons = servicesSection.querySelectorAll<HTMLButtonElement>(
+      ".services__nav [data-category-index]",
+    );
+    const prevButton = servicesSection.querySelector<HTMLButtonElement>(
+      ".services__swiper-nav .prev",
+    );
+    const nextButton = servicesSection.querySelector<HTMLButtonElement>(
+      ".services__swiper-nav .next",
+    );
 
-  prevBtn?.addEventListener("click", () => {
-    swiper.slidePrev();
-  });
-  nextBtn?.addEventListener("click", () => {
-    swiper.slideNext();
-  });
+    servicesSection
+      .querySelectorAll<HTMLElement>(".services__body .services-swiper")
+      .forEach((element) => {
+        const category =
+          element.closest<HTMLElement>("[data-category]")?.dataset.category;
+        const swiper = new Swiper(element, {
+          modules: [FreeMode],
+          loop: true,
+          nested: true,
+          breakpoints: {
+            320: {
+              freeMode: false,
+              slidesPerView: 1.2,
+              spaceBetween: 10,
+            },
+            960: {
+              freeMode: true,
+              slidesPerView: "auto",
+              spaceBetween: 20,
+            },
+          },
+        });
+
+        if (category) {
+          innerSwipers.set(category, swiper);
+        }
+      });
+
+    const categoriesSwiperElement = servicesSection.querySelector<HTMLElement>(
+      ".services-categories-swiper",
+    );
+
+    if (categoriesSwiperElement) {
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      const fadeDuration = prefersReducedMotion ? 0 : 500;
+      const categoriesSwiper = new Swiper(categoriesSwiperElement, {
+        modules: [EffectFade],
+        effect: "fade",
+        fadeEffect: { crossFade: true },
+        speed: fadeDuration,
+        slidesPerView: 1,
+        allowTouchMove: false,
+        autoHeight: true,
+      });
+
+      const updateControls = () => {
+        const { activeIndex } = categoriesSwiper;
+
+        categoryButtons.forEach((button, index) => {
+          const isActive = index === activeIndex;
+          button.classList.toggle("active", isActive);
+          button.setAttribute("aria-pressed", String(isActive));
+        });
+      };
+
+      const getActiveInnerSwiper = () => {
+        const activeCategory =
+          categorySlides[categoriesSwiper.activeIndex]?.dataset.category;
+
+        return activeCategory ? innerSwipers.get(activeCategory) : undefined;
+      };
+
+      categoriesSwiper.on("slideChange", () => {
+        const previousCategory =
+          categorySlides[categoriesSwiper.previousIndex]?.dataset.category;
+
+        if (previousCategory) {
+          window.setTimeout(() => {
+            const activeCategory =
+              categorySlides[categoriesSwiper.activeIndex]?.dataset.category;
+
+            if (activeCategory !== previousCategory) {
+              innerSwipers.get(previousCategory)?.slideToLoop(0, 0);
+            }
+          }, fadeDuration);
+        }
+
+        updateControls();
+      });
+
+      categoriesSwiper.on("slideChangeTransitionEnd", () => {
+        getActiveInnerSwiper()?.update();
+      });
+
+      categoryButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          categoriesSwiper.slideTo(Number(button.dataset.categoryIndex));
+        });
+      });
+
+      servicesSection
+        .querySelectorAll<HTMLButtonElement>(".card .link[id]")
+        .forEach((button) => {
+          button.addEventListener("click", () => {
+            const categoryIndex = Array.from(categorySlides).findIndex(
+              (slide) => slide.dataset.category === button.id,
+            );
+
+            if (categoryIndex >= 0) categoriesSwiper.slideTo(categoryIndex);
+          });
+        });
+
+      prevButton?.addEventListener("click", () =>
+        getActiveInnerSwiper()?.slidePrev(),
+      );
+      nextButton?.addEventListener("click", () =>
+        getActiveInnerSwiper()?.slideNext(),
+      );
+
+      updateControls();
+    }
+  }
 </script>
