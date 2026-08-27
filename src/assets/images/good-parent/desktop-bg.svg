@@ -1,0 +1,14 @@
+<svg width="690" height="496" viewBox="0 0 690 496" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="335" height="242" rx="32" fill="#F1F8FF"/>
+<rect y="254" width="335" height="242" rx="32" fill="#F1F8FF"/>
+<rect x="355" width="335" height="242" rx="32" fill="#F1F8FF"/>
+<rect x="355" y="254" width="335" height="242" rx="32" fill="#F1F8FF"/>
+<ellipse cx="523.234" cy="121.236" rx="46.9007" ry="99.0967" transform="rotate(45 523.234 121.236)" fill="white"/>
+<ellipse cx="46.9007" cy="99.0967" rx="46.9007" ry="99.0967" transform="matrix(-0.707107 0.707107 0.707107 0.707107 486.326 18)" fill="white"/>
+<ellipse cx="168.234" cy="121.236" rx="46.9007" ry="99.0967" transform="rotate(45 168.234 121.236)" fill="white"/>
+<ellipse cx="46.9007" cy="99.0967" rx="46.9007" ry="99.0967" transform="matrix(-0.707107 0.707107 0.707107 0.707107 131.328 18)" fill="white"/>
+<ellipse cx="168.236" cy="375.236" rx="46.9007" ry="99.0967" transform="rotate(45 168.236 375.236)" fill="white"/>
+<ellipse cx="46.9007" cy="99.0967" rx="46.9007" ry="99.0967" transform="matrix(-0.707107 0.707107 0.707107 0.707107 131.33 272)" fill="white"/>
+<ellipse cx="523.236" cy="375.236" rx="46.9007" ry="99.0967" transform="rotate(45 523.236 375.236)" fill="white"/>
+<ellipse cx="46.9007" cy="99.0967" rx="46.9007" ry="99.0967" transform="matrix(-0.707107 0.707107 0.707107 0.707107 486.33 272)" fill="white"/>
+</svg>

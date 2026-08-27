@@ -1,10 +1,108 @@
 ---
+import Container from "../components/container.astro";
+import Link from "../components/link.astro";
+import Title from "../components/title.astro";
 
+import mobileImg from "../assets/images/good-parent/mobile.webp";
+import desktopImg from "../assets/images/good-parent/desktop.webp";
 ---
 
-<section class="good-parent"></section>
+<Container>
+  <section class="good-parent">
+    <div class="good-parent__info">
+      <Title isCentered={false}>Достаточно хороший родитель</Title>
+      <p class="good-parent__description">
+        Идеальных родителей не&nbsp;существует! Этот курс — о настоящем
+        родительстве: как совмещать роли и&nbsp;быть хорошим родителем.
+      </p>
+      <div class="good-parent__start">
+        <Link href="#" view="secondary" block>Начать</Link>
+      </div>
+    </div>
+
+    <div class="good-parent__picture">
+      <picture>
+        <source media="(min-width: 960px)" srcset={desktopImg.src} />
+        <img src={mobileImg.src} alt="" />
+      </picture>
+    </div>
+  </section>
+</Container>
 
 <style>
   .good-parent {
+    margin: 90px 0;
+    background-color: var(--color-bg-secondary);
+    border-radius: 20px;
+    display: grid;
+    gap: var(--space24);
+    overflow: hidden;
+
+    /* desktop */
+    @media (width >= 960px) {
+      grid-template-columns: 1.75fr 2fr;
+    }
+
+    & .good-parent__info {
+      padding: var(--space20);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space24);
+
+      /* desktop */
+      @media (width >= 960px) {
+        padding: 45px;
+        justify-content: space-between;
+      }
+    }
+
+    & .good-parent__description {
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 100%;
+
+      /* desktop */
+      @media (width >= 960px) {
+        font-size: 24px;
+      }
+    }
+
+    & .good-parent__start {
+      /* desktop */
+      @media (width >= 960px) {
+        max-width: 276px;
+      }
+    }
+
+    & .good-parent__picture {
+      font-size: 0;
+
+      background-image: url("../assets/images/good-parent/mobile-bg.svg");
+      background-repeat: no-repeat;
+      background-position: var(--space20);
+      background-size: calc(100% - (2 * var(--space20)));
+
+      /* desktop */
+      @media (width >= 960px) {
+        display: flex;
+        justify-content: flex-end;
+        background-image: url("../assets/images/good-parent/desktop-bg.svg");
+        background-position: 20px 20px;
+        background-size: calc(100% + (2 * var(--space20)))
+          calc(100% - (2 * var(--space20)));
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+
+        /* desktop */
+        @media (width >= 960px) {
+          height: 100%;
+          object-fit: cover;
+          object-position: left center;
+        }
+      }
+    }
   }
 </style>

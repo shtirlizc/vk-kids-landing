@@ -1,0 +1,8 @@
+<svg width="287" height="310" viewBox="0 0 287 310" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="287" height="150" rx="27.4442" fill="#F1F8FF"/>
+<ellipse cx="27.2584" cy="57.5943" rx="27.2584" ry="57.5943" transform="matrix(0.707105 0.707108 -0.707105 0.707108 165.953 15)" fill="white"/>
+<ellipse cx="27.2584" cy="57.5943" rx="27.2584" ry="57.5943" transform="matrix(-0.707105 0.707108 0.707105 0.707108 123.051 15)" fill="white"/>
+<rect y="160" width="287" height="150" rx="27.4442" fill="#F1F8FF"/>
+<ellipse cx="27.2584" cy="57.5943" rx="27.2584" ry="57.5943" transform="matrix(0.707105 0.707108 -0.707105 0.707108 165.953 175)" fill="white"/>
+<ellipse cx="27.2584" cy="57.5943" rx="27.2584" ry="57.5943" transform="matrix(-0.707105 0.707108 0.707105 0.707108 123.051 175)" fill="white"/>
+</svg>
