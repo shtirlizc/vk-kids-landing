@@ -31,13 +31,17 @@ const imgSrc = `${baseUrl}images/benefits/${image}.webp`;
   </div>
 
   <div class="card__foot">
-    <Link
-      block
-      href={action.type === "link" ? action.href : undefined}
-      id={action.type === "tab" ? action.tabId : undefined}
-    >
-      {action.label}
-    </Link>
+    {
+      action && (
+        <Link
+          block
+          href={action.type === "link" ? action.href : undefined}
+          id={action.type === "tab" ? action.tabId : undefined}
+        >
+          {action.label}
+        </Link>
+      )
+    }
   </div>
 </div>
 
