@@ -11,6 +11,7 @@ import braceletDesktopLeft from "../assets/images/channels/bracelet-desktop-left
 import braceletDesktopRight from "../assets/images/channels/bracelet-desktop-right.webp";
 import braceletMobileLeft from "../assets/images/channels/bracelet-mobile-left.webp";
 import braceletMobileRight from "../assets/images/channels/bracelet-mobile-right.webp";
+import Container from "../components/container.astro";
 
 interface ChannelLink {
   href: string;
@@ -48,12 +49,14 @@ const channels: ChannelLink[] = [
 ---
 
 <section id="channels" class="channels">
-  <div class="channels__head">
-    <Title>Каналы</Title>
-    <Description>
-      Подписывайтесь на каналы, чтобы не искать анонсы вручную
-    </Description>
-  </div>
+  <Container>
+    <div class="channels__head">
+      <Title>Каналы</Title>
+      <Description>
+        Подписывайтесь на каналы, чтобы не искать анонсы вручную
+      </Description>
+    </div>
+  </Container>
 
   <div class="channels__body">
     <div class="channels__bg-1">

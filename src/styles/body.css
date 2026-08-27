@@ -32,6 +32,10 @@ body {
   padding: 0;
   min-width: 320px;
   min-height: 100dvh;
+
+  &:has(#page-nav[aria-hidden="false"]) {
+    overflow: hidden;
+  }
 }
 
 a {

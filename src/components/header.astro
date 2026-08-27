@@ -23,7 +23,7 @@ import { nav } from "../nav.ts";
         <CloseIcon class="header__burger-morph-target" aria-hidden="true" />
       </button>
 
-      <nav aria-hidden="true">
+      <nav id="page-nav" aria-hidden="true">
         <ul>
           {
             nav.map(({ href, label }) => (
@@ -90,6 +90,15 @@ import { nav } from "../nav.ts";
       align-items: center;
       height: var(--header);
 
+      @supports (
+        (animation-timeline: scroll()) and (animation-range: 0 400px)
+      ) {
+        animation: header-height 1s linear;
+        animation-timeline: scroll(root block);
+        animation-range: 0 400px;
+        animation-fill-mode: both;
+      }
+
       nav {
         display: none;
         position: fixed;
@@ -97,7 +106,7 @@ import { nav } from "../nav.ts";
         left: 0;
         padding-top: var(--header);
         width: 100%;
-        height: calc(100dvh - var(--header));
+        height: 100dvh;
         background: linear-gradient(
           180deg,
           #e5d2ff 0%,
@@ -156,6 +165,16 @@ import { nav } from "../nav.ts";
     to {
       background-color: var(--color-bg-primary);
       box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  @keyframes header-height {
+    from {
+      height: var(--header);
+    }
+
+    to {
+      height: 80px;
     }
   }
 </style>
@@ -230,22 +249,34 @@ import { nav } from "../nav.ts";
       if (matches) resetMenu();
     });
 
-    button.addEventListener("click", () => {
-      isMenuOpen = !isMenuOpen;
-      button.setAttribute("aria-expanded", String(isMenuOpen));
-      button.setAttribute(
-        "aria-label",
-        isMenuOpen ? "Закрыть меню" : "Открыть меню",
-      );
-      menu.setAttribute("aria-hidden", String(!isMenuOpen));
+    const closeMenu = () => {
+      if (!isMenuOpen) return;
 
+      isMenuOpen = false;
+      button.setAttribute("aria-expanded", "false");
+      button.setAttribute("aria-label", "Открыть меню");
+      menu.setAttribute("aria-hidden", "true");
+      iconMorph.reverse();
+      menuAnimation.reverse();
+    };
+
+    button.addEventListener("click", () => {
       if (isMenuOpen) {
+        closeMenu();
+      } else {
+        isMenuOpen = true;
+        button.setAttribute("aria-expanded", "true");
+        button.setAttribute("aria-label", "Закрыть меню");
+        menu.setAttribute("aria-hidden", "false");
         iconMorph.play();
         menuAnimation.play();
-      } else {
-        iconMorph.reverse();
-        menuAnimation.reverse();
       }
+    });
+
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        if (!desktopQuery.matches) closeMenu();
+      });
     });
   });
 </script>
