@@ -35,6 +35,11 @@ body {
 
   &:has(#page-nav[aria-hidden="false"]) {
     overflow: hidden;
+
+    /* desktop */
+    @media (width >= 960px) {
+      overflow: visible;
+    }
   }
 }
 
