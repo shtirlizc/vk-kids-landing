@@ -2,6 +2,17 @@
 import rattle from "./../assets/images/hero/rattle.webp";
 import Arrow from "./../assets/images/arrow.svg";
 import rattleMobile from "./../assets/images/hero/rattle-mobile.webp";
+import { CategoryId } from "./services/data.ts";
+
+const badges: { label: string; tabId: CategoryId }[] = [
+  { label: "помощь при рождении ребёнка", tabId: CategoryId.Pregnancy },
+  { label: "медицина для близких", tabId: CategoryId.Health },
+  { label: "детское образование", tabId: CategoryId.Parenting },
+  {
+    label: "мероприятия и идеи для совместного досуга",
+    tabId: CategoryId.Kids,
+  },
+];
 ---
 
 <section class="hero">
@@ -18,20 +29,15 @@ import rattleMobile from "./../assets/images/hero/rattle-mobile.webp";
   <div class="hero__links">
     <nav>
       <ul>
-        <li>
-          <a href="#help" class="badge">помощь при рождении ребёнка</a>
-        </li>
-        <li>
-          <a href="#medicine" class="badge">медицина для близких</a>
-        </li>
-        <li>
-          <a href="#education" class="badge">детское образование</a>
-        </li>
-        <li>
-          <a href="#dosug" class="badge">
-            мероприятия и идеи для совместного досуга
-          </a>
-        </li>
+        {
+          badges.map(({ label, tabId }) => (
+            <li>
+              <button type="button" data-tab-id={tabId} class="badge">
+                {label}
+              </button>
+            </li>
+          ))
+        }
       </ul>
     </nav>
   </div>
@@ -165,3 +171,20 @@ import rattleMobile from "./../assets/images/hero/rattle-mobile.webp";
     }
   }
 </style>
+
+<script>
+  import { setCategoryInUrl } from "./services/category-url.ts";
+
+  document
+    .querySelectorAll<HTMLButtonElement>(".hero__links .badge")
+    .forEach((button) => {
+      button.addEventListener("click", () => {
+        const tabId = button.dataset.tabId;
+
+        if (!tabId) return;
+
+        setCategoryInUrl(tabId);
+        document.getElementById("services")?.scrollIntoView();
+      });
+    });
+</script>
