@@ -7,9 +7,15 @@ interface Creator {
   contactHref?: string;
 }
 
-interface Slide {
+interface SlideImage {
   src: string;
   alt: string;
+  width: number;
+  height: number;
+}
+
+interface Slide {
+  images: SlideImage[];
   creator: Creator;
 }
 
@@ -20,6 +26,7 @@ interface Props {
 
 const { slides, text } = Astro.props;
 const hasNavigation = slides.length > 1;
+const hasNestedNavigation = slides.some(({ images }) => images.length > 1);
 ---
 
 <div
@@ -28,19 +35,47 @@ const hasNavigation = slides.length > 1;
   data-loop={hasNavigation}
 >
   <div class="competition-swiper__media">
-    <div class="swiper">
+    <div class="swiper competition-swiper__main" data-competition-main>
       <div class="swiper-wrapper">
         {
-          slides.map(({ src, alt }, index) => (
+          slides.map(({ images }, slideIndex) => (
             <div class="swiper-slide">
-              <img
-                src={src}
-                alt={alt}
-                width="1136"
-                height="598"
-                loading={index === 0 ? "eager" : "lazy"}
-                decoding="async"
-              />
+              {images.length > 1 ? (
+                <div class="competition-swiper__nested">
+                  <div
+                    class="swiper competition-swiper__nested-swiper"
+                    data-competition-nested
+                  >
+                    <div class="swiper-wrapper">
+                      {images.map(({ src, alt, width, height }, imageIndex) => (
+                        <div class="swiper-slide">
+                          <img
+                            src={src}
+                            alt={alt}
+                            width={width}
+                            height={height}
+                            loading={
+                              slideIndex === 0 && imageIndex === 0
+                                ? "eager"
+                                : "lazy"
+                            }
+                            decoding="async"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <img
+                  src={images[0].src}
+                  alt={images[0].alt}
+                  width={images[0].width}
+                  height={images[0].height}
+                  loading={slideIndex === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                />
+              )}
             </div>
           ))
         }
@@ -50,8 +85,43 @@ const hasNavigation = slides.length > 1;
     {
       hasNavigation && (
         <>
-          <button class="swiper-nav prev">Предыдущий слайд</button>
-          <button class="swiper-nav next">Следующий слайд</button>
+          <button
+            class="swiper-nav prev"
+            data-competition-main-prev
+            type="button"
+          >
+            Предыдущая конкурсная работа
+          </button>
+          <button
+            class="swiper-nav next"
+            data-competition-main-next
+            type="button"
+          >
+            Следующая конкурсная работа
+          </button>
+        </>
+      )
+    }
+
+    {
+      hasNestedNavigation && (
+        <>
+          <button
+            class="swiper-nav small prev competition-swiper__nested-nav competition-swiper__nested-nav--prev"
+            data-competition-nested-prev
+            type="button"
+            hidden
+          >
+            Предыдущее изображение работы
+          </button>
+          <button
+            class="swiper-nav small next competition-swiper__nested-nav competition-swiper__nested-nav--next"
+            data-competition-nested-next
+            type="button"
+            hidden
+          >
+            Следующее изображение работы
+          </button>
         </>
       )
     }
@@ -77,6 +147,8 @@ const hasNavigation = slides.length > 1;
   .competition-swiper {
     --swiper-button-size: var(--space32);
     --swiper-side-space: calc(var(--swiper-button-size) / 2);
+    --nested-button-size: var(--space32);
+    --nested-side-space: calc(var(--nested-button-size) / 2);
 
     width: 100%;
     max-width: calc(1136px + var(--swiper-button-size));
@@ -89,9 +161,10 @@ const hasNavigation = slides.length > 1;
       position: relative;
       width: 100%;
       min-width: 0;
+      padding-block: var(--nested-side-space);
     }
 
-    & .swiper {
+    & .competition-swiper__main {
       width: 100%;
       aspect-ratio: 1136 / 598;
       border: 1px solid rgba(165, 122, 240, 0.15);
@@ -99,9 +172,18 @@ const hasNavigation = slides.length > 1;
       background-color: var(--color-bg-primary-light);
     }
 
-    & .swiper-wrapper,
-    & .swiper-slide {
+    & .competition-swiper__main > .swiper-wrapper,
+    & .competition-swiper__main > .swiper-wrapper > .swiper-slide,
+    & .competition-swiper__nested,
+    & .competition-swiper__nested-swiper,
+    & .competition-swiper__nested-swiper > .swiper-wrapper,
+    & .competition-swiper__nested-swiper > .swiper-wrapper > .swiper-slide {
       height: 100%;
+    }
+
+    & .competition-swiper__nested {
+      position: relative;
+      width: 100%;
     }
 
     & .swiper-slide img {
@@ -112,10 +194,10 @@ const hasNavigation = slides.length > 1;
       object-fit: contain;
     }
 
-    & :global(.swiper-nav.prev),
-    & :global(.swiper-nav.next) {
+    & [data-competition-main-prev],
+    & [data-competition-main-next] {
       position: absolute;
-      z-index: 1;
+      z-index: 3;
       top: 50%;
       transform: translateY(-50%);
 
@@ -125,12 +207,36 @@ const hasNavigation = slides.length > 1;
       }
     }
 
-    & :global(.swiper-nav.prev) {
+    & [data-competition-main-prev] {
       left: calc(-1 * var(--swiper-side-space));
     }
 
-    & :global(.swiper-nav.next) {
+    & [data-competition-main-next] {
       right: calc(-1 * var(--swiper-side-space));
+    }
+
+    & .competition-swiper__nested-nav {
+      position: absolute;
+      z-index: 2;
+      left: 50%;
+      transform: translateX(-50%) rotate(90deg);
+
+      &[hidden] {
+        display: none;
+      }
+
+      &:focus-visible {
+        outline: 3px solid var(--color-text-primary);
+        outline-offset: 3px;
+      }
+    }
+
+    & .competition-swiper__nested-nav--prev {
+      top: 0;
+    }
+
+    & .competition-swiper__nested-nav--next {
+      bottom: 0;
     }
 
     & .competition-swiper__info {
@@ -143,6 +249,7 @@ const hasNavigation = slides.length > 1;
     /* tablet */
     @media (width >= 768px) {
       --swiper-button-size: 62px;
+      --nested-button-size: 48px;
 
       max-width: 852px;
       gap: var(--space12);
@@ -151,7 +258,7 @@ const hasNavigation = slides.length > 1;
         padding-inline: var(--swiper-side-space);
       }
 
-      & .swiper {
+      & .competition-swiper__main {
         aspect-ratio: 790 / 598;
         max-height: 598px;
         border-width: 0;
@@ -164,11 +271,11 @@ const hasNavigation = slides.length > 1;
         border-radius: 46px;
       }
 
-      & :global(.swiper-nav.prev) {
+      & [data-competition-main-prev] {
         left: 0;
       }
 
-      & :global(.swiper-nav.next) {
+      & [data-competition-main-next] {
         right: 0;
       }
     }
@@ -182,18 +289,28 @@ const hasNavigation = slides.length > 1;
   document
     .querySelectorAll<HTMLElement>("[data-competition-swiper]")
     .forEach((root) => {
-      const swiperElement = root.querySelector<HTMLElement>(".swiper");
-      const previousButton =
-        root.querySelector<HTMLButtonElement>(".swiper-nav.prev");
-      const nextButton =
-        root.querySelector<HTMLButtonElement>(".swiper-nav.next");
+      const mainElement = root.querySelector<HTMLElement>(
+        "[data-competition-main]",
+      );
+      const previousButton = root.querySelector<HTMLButtonElement>(
+        "[data-competition-main-prev]",
+      );
+      const nextButton = root.querySelector<HTMLButtonElement>(
+        "[data-competition-main-next]",
+      );
+      const nestedPreviousButton = root.querySelector<HTMLButtonElement>(
+        "[data-competition-nested-prev]",
+      );
+      const nestedNextButton = root.querySelector<HTMLButtonElement>(
+        "[data-competition-nested-next]",
+      );
       const infoItems = root.querySelectorAll<HTMLElement>("[data-slide-info]");
 
-      if (!swiperElement || swiperElement.dataset.initialized === "true") {
+      if (!mainElement || mainElement.dataset.initialized === "true") {
         return;
       }
 
-      const swiper = new Swiper(swiperElement, {
+      const mainSwiper = new Swiper(mainElement, {
         modules: [Navigation, A11y],
         slidesPerView: 1,
         speed: 500,
@@ -203,23 +320,83 @@ const hasNavigation = slides.length > 1;
           nextEl: nextButton,
         },
         a11y: {
-          prevSlideMessage: "Предыдущий слайд",
-          nextSlideMessage: "Следующий слайд",
-          firstSlideMessage: "Это первый слайд",
-          lastSlideMessage: "Это последний слайд",
-          paginationBulletMessage: "Перейти к слайду {{index}}",
+          prevSlideMessage: "Предыдущая конкурсная работа",
+          nextSlideMessage: "Следующая конкурсная работа",
+          firstSlideMessage: "Это первая конкурсная работа",
+          lastSlideMessage: "Это последняя конкурсная работа",
         },
       });
 
       const updateDrawingInfo = () => {
         infoItems.forEach((item, index) => {
-          item.hidden = index !== swiper.realIndex;
+          item.hidden = index !== mainSwiper.realIndex;
         });
       };
 
-      swiper.on("realIndexChange", updateDrawingInfo);
-      updateDrawingInfo();
+      const getActiveNestedSwiper = () => {
+        const activeSlide = mainSwiper.slides[mainSwiper.activeIndex];
+        const nestedElement = activeSlide?.querySelector<
+          HTMLElement & { swiper?: Swiper }
+        >("[data-competition-nested]");
 
-      swiperElement.dataset.initialized = "true";
+        return nestedElement?.swiper;
+      };
+
+      const updateNestedNavigation = () => {
+        const nestedSwiper = getActiveNestedSwiper();
+        const hasActiveNestedSwiper = Boolean(nestedSwiper);
+
+        if (nestedPreviousButton) {
+          nestedPreviousButton.hidden = !hasActiveNestedSwiper;
+          nestedPreviousButton.disabled = !nestedSwiper;
+        }
+
+        if (nestedNextButton) {
+          nestedNextButton.hidden = !hasActiveNestedSwiper;
+          nestedNextButton.disabled = !nestedSwiper;
+        }
+      };
+
+      nestedPreviousButton?.addEventListener("click", () => {
+        getActiveNestedSwiper()?.slidePrev();
+      });
+      nestedNextButton?.addEventListener("click", () => {
+        getActiveNestedSwiper()?.slideNext();
+      });
+
+      mainSwiper.on("realIndexChange", () => {
+        updateDrawingInfo();
+        updateNestedNavigation();
+      });
+
+      root
+        .querySelectorAll<HTMLElement>("[data-competition-nested]")
+        .forEach((nestedElement) => {
+          if (nestedElement.dataset.initialized === "true") {
+            return;
+          }
+
+          const nestedSwiper = new Swiper(nestedElement, {
+            modules: [A11y],
+            direction: "vertical",
+            slidesPerView: 1,
+            speed: 500,
+            loop: true,
+            nested: true,
+            a11y: {
+              prevSlideMessage: "Предыдущее изображение работы",
+              nextSlideMessage: "Следующее изображение работы",
+              firstSlideMessage: "Это первое изображение работы",
+              lastSlideMessage: "Это последнее изображение работы",
+            },
+          });
+
+          nestedSwiper.on("slideChange", updateNestedNavigation);
+          nestedElement.dataset.initialized = "true";
+        });
+
+      updateDrawingInfo();
+      updateNestedNavigation();
+      mainElement.dataset.initialized = "true";
     });
 </script>
