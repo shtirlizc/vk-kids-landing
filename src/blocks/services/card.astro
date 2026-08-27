@@ -72,6 +72,8 @@ const imgSrc = `${baseUrl}images/${category}/${image}.webp`;
       @media (width >= 960px) {
         grid-template-columns: 1fr 1fr;
         gap: 0;
+        padding: 0 0 0 14px;
+        min-height: 148px;
       }
 
       .card__text {
@@ -82,6 +84,7 @@ const imgSrc = `${baseUrl}images/${category}/${image}.webp`;
 
         /* desktop */
         @media (width >= 960px) {
+          padding-top: 14px;
           gap: var(--space24);
           margin-right: -80px;
         }
@@ -123,7 +126,15 @@ const imgSrc = `${baseUrl}images/${category}/${image}.webp`;
 
           /* desktop */
           @media (width >= 960px) {
-            height: 147px;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: auto;
+            height: auto;
+            max-width: none;
+            max-height: none;
+            transform: scale(0.5);
+            transform-origin: right bottom;
           }
         }
       }
