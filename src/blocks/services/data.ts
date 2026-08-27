@@ -2,9 +2,9 @@ export enum CategoryId {
   Benefits = "benefits",
   Events = "events",
   Health = "health",
-  Pregnancy = "pregnancy",
-  Parenting = "parenting",
-  Kids = "kids",
+  // Pregnancy = "pregnancy",
+  // Parenting = "parenting",
+  // Kids = "kids",
 }
 
 type ActionType = { label: string };
@@ -22,9 +22,9 @@ export const categories: Record<CategoryId, string> = {
   [CategoryId.Benefits]: "Льготы",
   [CategoryId.Events]: "Мероприятия",
   [CategoryId.Health]: "Здоровье",
-  [CategoryId.Pregnancy]: "Беременность",
-  [CategoryId.Parenting]: "Родительство",
-  [CategoryId.Kids]: "Детям",
+  // [CategoryId.Pregnancy]: "Беременность",
+  // [CategoryId.Parenting]: "Родительство",
+  // [CategoryId.Kids]: "Детям",
 };
 
 const benefits: Card[] = [
@@ -255,58 +255,158 @@ const events: Card[] = [
 ];
 const health: Card[] = [
   {
-    title: "",
+    title: "ДМС для детей и родственников",
     description: `
-      <p></p>
-      <p></p>
+      <p>VK полностью оплачивает ДМС для детей сотрудников до 18 лет: есть программы для детей до года и от года до 18 лет. Полис приходит на корпоративную почту в течение месяца после передачи данных в отдел кадров. В программу входят профилактика, диагностика, вакцинация, чекапы и стоматологическая гигиена; для детей до года — массаж на дому по показаниям.</p>
+      <p>Для супругов, родителей и совершеннолетних детей можно приобрести полис по специальной стоимости — через Aladdin или напрямую через СОГАЗ. В 2026 году оформление через Aladdin доступно 15–24 июня и 21 сентября – 1 октября. По вопросам: <a href="mailto:fldms@sogaz.ru" target="_blank">fldms@sogaz.ru</a>, медпульт <a href="tel:8 800 333-44-19" target="_blank">8 800 333-44-19</a>, <a href="mailto:dms@vk.team" target="_blank">dms@vk.team</a>.</p>
     `,
-    label: "",
-    image: "",
-    action: { label: "", type: "link", href: "" },
+    label: "ЗДОРОВЬЕ",
+    image: "1",
+    action: {
+      label: "Подробнее в Интранете",
+      type: "link",
+      href: "https://home.vk.team/blog/health/dms-relative/",
+    },
   },
-];
-const pregnancy: Card[] = [
   {
-    title: "",
+    title: "Онлайн-консультации",
     description: `
-      <p></p>
-      <p></p>
+      <p>В ДМС сотрудников и застрахованных родственников (кроме детей) входят онлайн-консультации врачей, психологов, юристов, финансистов и других специалистов.</p>
+      <p>Сервис работает круглосуточно, консультации не ограничены. Можно получить второе мнение, помощь с анализами, питанием, стрессом, а также имущественными, налоговыми и потребительскими вопросами.</p>
+      <p>Откройте приложение «СОГАЗ — здоровье и страхование», добавьте полис и выберите «Онлайн-консультации». Если записи нет, напишите на <a href="mailto:eap_consult@sogaz.ru">eap_consult@sogaz.ru</a> и укажите данные полиса, контакты, тему и удобное время.</p>
     `,
-    label: "",
-    image: "",
-    action: { label: "", type: "link", href: "" },
+    label: "Здоровье",
+    image: "2",
+    action: {
+      label: "Подробнее в Интранете",
+      type: "link",
+      href: "https://home.vk.team/blog/health/dms-relative/",
+    },
   },
-];
-const parenting: Card[] = [
   {
-    title: "",
+    title: "Сопровождение беременности и родов",
     description: `
-      <p></p>
-      <p></p>
+      <p>По ДМС доступно ведение беременности до 8 недель. При непрерывной работе в VK больше года — расширенная программа: ведение беременности с 1 по 35 неделю и родовспоможение с 36 недели.</p>
+      <p>Включает наблюдение, исследования, индивидуальный родзал, анестезию и партнёрские роды. Лимиты: до 75 000 ₽ на ведение беременности и до 120 000 ₽ на родовспоможение.</p>
+      <p>Доступно штатным сотрудницам после испытательного срока; не распространяется на стажёров, совместителей, модерацию и клиентскую поддержку.</p>
     `,
-    label: "",
-    image: "",
-    action: { label: "", type: "link", href: "" },
+    label: "Здоровье",
+    image: "3",
+    action: {
+      label: "Подробнее — во вкладке «Беременность»",
+      type: "tab",
+      tabId: CategoryId.Pregnancy,
+    },
   },
-];
-const kids: Card[] = [
   {
-    title: "",
+    title: "Психологическая поддержка",
     description: `
-      <p></p>
-      <p></p>
+      <p>Доступно до 10 сессий в течение полугода — онлайн или очно  в Скайлайте или Авроре. Специалисты помогают при тревоге, выгорании, сложностях в общении, отношениях, самооценке  и ментальном самочувствии. Используются разные терапевтические подходы.</p>
     `,
-    label: "",
-    image: "",
-    action: { label: "", type: "link", href: "" },
+    label: "Здоровье",
+    image: "4",
+    action: {
+      label: "Подробнее в Интранете",
+      type: "link",
+      href: "https://home.vk.team/blog/health/psychologist/",
+    },
+  },
+  {
+    title: "Консультации семейного психолога",
+    description: `
+      <p>Семейный психолог помогает с вопросами пары, кризисами, сексуальной дисгармонией, выбором партнёра и созданием семьи.</p>
+      <p>Можно прийти одному или с партнёром, даже если он не работает в VK. Приём проходит онлайн.</p>
+    `,
+    label: "Здоровье",
+    image: "5",
+    action: { label: "Подробнее", type: "link", href: "#" },
+  },
+  {
+    title: "Неделя здоровья  в офисах",
+    description: `
+      <p>Дважды в год в офисах Москвы и Санкт-Петербурга можно бесплатно сдать анализы, пройти обследования и получить консультации специалистов.</p>
+      <p>Программа может включать чекап, лабораторные исследования, УЗИ, ЭКГ, врачебные консультации, йогу, ЛФК и другие профилактические активности.</p>
+      <p>Доступно всем штатным сотрудникам. Следите за анонсами «Льгот» и записывайтесь через форму в публикации.</p>
+    `,
+    label: "подписка",
+    image: "6",
+    action: {
+      label: "В сообществе «Льготы»",
+      type: "tab",
+      tabId: CategoryId.Benefits,
+    },
+  },
+  {
+    title: "Полис для поездки за границу",
+    description: `
+      <p>Страхование для семейных поездок за границу. Полис путешественника входит в ДМС, в том числе для застрахованных детей, и покрывает внезапное заболевание или несчастный случай в поездке.</p>
+      <p>Получите полис в приложении: «Полисы» → «ДМС» → «Полис путешественника», либо за два рабочих дня по почте <a href="mailto:my.dms@sogaz.ru">my.dms@sogaz.ru</a>.</p>
+      <p>Покрытие — 50 000 €. Поездок может быть сколько угодно, каждая — до 90 дней. Полис действует по всему миру, кроме России, включая лечение COVID-19.</p>
+    `,
+    label: "ЗДОРОВЬЕ",
+    image: "7",
+    action: {
+      label: "подробнее в Интранете",
+      type: "link",
+      href: "https://home.vk.team/blog/health/travel-insurance/",
+    },
+  },
+  {
+    title: "Предложения партнёров",
+    description: `
+      <p>На <a href="https://vk.aladdin.store/home/catalog/service?category=da64729f-8f7b-4285-8fce-5cb7ec7f7ec0&page=1" target="_blank">Aladdin</a> в разделе «Медицина» собраны услуги и купоны партнёров. Доступ к сервису сохраняется и во время декретного отпуска. Подробнее о платформе и её возможностях — на странице программы <a href="https://home.vk.team/kod-zaboty/#how-it-works:~:text=%D0%BD%D0%B0%C2%A0VK%20%D0%97%D0%BD%D0%B0%D0%BA%D0%BE%D0%BC%D1%81%D1%82%D0%B2%D0%B0-,%D0%93%D0%B8%D0%B1%D0%BA%D0%B8%D0%B5%20%D0%BB%D1%8C%D0%B3%D0%BE%D1%82%D1%8B,-%2B15%25%20%D0%B4%D0%BB%D1%8F%C2%A0%D1%83%D1%87%D0%B0%D1%81%D1%82%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2" target="_blank">«Код заботы»</a></p>
+    `,
+    label: "ИНСТРУКЦИЯ",
+    image: "8",
+    action: {
+      label: "Перейти на Aladdin",
+      type: "link",
+      href: "https://vk.aladdin.store/",
+    },
   },
 ];
+// const pregnancy: Card[] = [
+//   {
+//     title: "",
+//     description: `
+//       <p></p>
+//       <p></p>
+//     `,
+//     label: "",
+//     image: "",
+//     action: { label: "", type: "link", href: "" },
+//   },
+// ];
+// const parenting: Card[] = [
+//   {
+//     title: "",
+//     description: `
+//       <p></p>
+//       <p></p>
+//     `,
+//     label: "",
+//     image: "",
+//     action: { label: "", type: "link", href: "" },
+//   },
+// ];
+// const kids: Card[] = [
+//   {
+//     title: "",
+//     description: `
+//       <p></p>
+//       <p></p>
+//     `,
+//     label: "",
+//     image: "",
+//     action: { label: "", type: "link", href: "" },
+//   },
+// ];
 
 export const services: Record<CategoryId, Card[]> = {
   [CategoryId.Benefits]: benefits,
   [CategoryId.Events]: events,
   [CategoryId.Health]: health,
-  [CategoryId.Pregnancy]: pregnancy,
-  [CategoryId.Parenting]: parenting,
-  [CategoryId.Kids]: kids,
+  // [CategoryId.Pregnancy]: pregnancy,
+  // [CategoryId.Parenting]: parenting,
+  // [CategoryId.Kids]: kids,
 };
