@@ -202,24 +202,63 @@ const benefits: Card[] = [
       href: "mailto:a.luzin@corp.mail.ru",
       label: "Связаться с Алексеем Лузиным",
       type: "link",
-      href: "",
     },
   },
 ];
 const events: Card[] = [
   {
-    title: "",
+    title: "Детский день",
     description: `
+      <p>Ежегодный семейный праздник VK: игры, творчество, технологии и знакомство детей с компанией.</p>
+      <p>В программе — мастер-классы, квесты, экскурсии, творческие зоны и подарки. Формат зависит от города.</p>
     `,
-    label: "",
-    image: "",
-    action: { label: "", type: "link", href: "" },
+    label: "СОБЫТИЕ",
+    image: "1",
+  },
+  {
+    title: "VK Fest",
+    description: `
+      <p>На VK Fest для сотрудников и близких работает пространство VK Team: отдых, перекус, зарядка телефона и хранение вещей.</p>
+      <p>Для семей — аниматоры, мастер-классы, творческие зоны и детское питание. Наполнение зависит от города.</p>
+    `,
+    label: "ДОСТУП",
+    image: "2",
+  },
+  {
+    title: "Новогодние праздники",
+    description: `
+      <p>Зимние встречи для сотрудников и семей: игры, мастер-классы, Дед Мороз, подарки и фото.</p>
+      <p>Формат зависит от города: ёлка, каток, спектакль, праздник в парке или камерная творческая встреча.</p>
+      <p>К Новому году VK готовит подарки не только для сотрудников, но и для их детей до 14 лет.</p>
+    `,
+    label: "СОБЫТИЕ",
+    image: "3",
+  },
+  {
+    title: "Гендер-пати",
+    description: `
+      <p>Гендер-пати в офисе: цветовая подсветка, подарки и памятное видео. Участвовать могут будущие родители — сотрудницы VK и сотрудники, чьи жёны беременны.</p>
+      <p>Следите за анонсами в <a href="https://home.vk.team/users/egor.antipov/" target="_blank">Интранете</a> и <a href="https://u.internal.myteam.mail.ru/profile/family" target="_blank">VK WorkSpace</a>.</p>
+    `,
+    label: "СОБЫТИЕ",
+    image: "4",
+  },
+  {
+    title: "Дайджест семейного досуга",
+    description: `
+      <p>Ежемесячные идеи для семейных выходных: мастер-классы, кинопремьеры, выставки и развлечения от продуктов VK.</p>
+      <p>Следите за анонсами в <a href="https://home.vk.team/users/egor.antipov/" target="_blank">Интранете</a> и <a href="https://u.internal.myteam.mail.ru/profile/family" target="_blank">VK WorkSpace</a>.</p>
+    `,
+    label: "ИНСТРУКЦИЯ",
+    image: "5",
   },
 ];
 const health: Card[] = [
   {
     title: "",
     description: `
+      <p></p>
+      <p></p>
     `,
     label: "",
     image: "",
@@ -230,6 +269,8 @@ const pregnancy: Card[] = [
   {
     title: "",
     description: `
+      <p></p>
+      <p></p>
     `,
     label: "",
     image: "",
@@ -240,6 +281,8 @@ const parenting: Card[] = [
   {
     title: "",
     description: `
+      <p></p>
+      <p></p>
     `,
     label: "",
     image: "",
@@ -250,6 +293,8 @@ const kids: Card[] = [
   {
     title: "",
     description: `
+      <p></p>
+      <p></p>
     `,
     label: "",
     image: "",

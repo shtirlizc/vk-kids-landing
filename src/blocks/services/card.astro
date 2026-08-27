@@ -149,6 +149,17 @@ const imgSrc = `${baseUrl}images/benefits/${image}.webp`;
         @media (width >= 960px) {
           font-size: 16px;
         }
+
+        a {
+          color: inherit;
+          text-decoration: underline;
+          text-underline-offset: 2px;
+          transition: color var(--transition);
+
+          &:hover {
+            color: var(--color-primary);
+          }
+        }
       }
     }
 
