@@ -17,10 +17,10 @@ const serviceCategories = Object.entries(services);
           serviceCategories.map(([key], index) => (
             <li>
               <button
-                class:list={["badge", { active: index === 0 }]}
+                class="badge"
                 type="button"
                 data-category-index={index}
-                aria-pressed={index === 0 ? "true" : "false"}
+                aria-pressed="false"
               >
                 {categories[key as keyof typeof categories]}
               </button>
@@ -40,7 +40,7 @@ const serviceCategories = Object.entries(services);
       <div class="swiper-wrapper">
         {
           serviceCategories.map(([key, items]) => (
-            <div class="swiper-slide" data-category={key}>
+            <div class="swiper-slide services__category" data-category={key}>
               <div class="swiper services-swiper">
                 <div class="swiper-wrapper">
                   {items.map((service) => (
@@ -132,16 +132,10 @@ const serviceCategories = Object.entries(services);
         }
       }
 
-      .services-categories-swiper
-        > .swiper-wrapper
-        > .swiper-slide-active
-        .services-swiper,
-      .services-categories-swiper
-        > .swiper-wrapper
-        > .swiper-slide-active
-        .services-swiper
-        .swiper-slide {
-        pointer-events: auto;
+      .services__category {
+        &.swiper-slide-active .services-swiper .swiper-slide {
+          pointer-events: auto;
+        }
       }
     }
   }
@@ -151,6 +145,29 @@ const serviceCategories = Object.entries(services);
   import { Swiper } from "swiper";
   import { EffectFade, FreeMode } from "swiper/modules";
   import "swiper/css/effect-fade";
+  import { categoryQueryParameter } from "./data.ts";
+  import { setCategoryInUrl } from "./category-url.ts";
+
+  const locationChangeEvent = "services:location-change";
+  type HistoryMethodName = "pushState" | "replaceState";
+  type ObservableHistory = Pick<History, HistoryMethodName> & {
+    servicesLocationEventsPatched?: boolean;
+  };
+
+  const observableHistory = window.history as unknown as ObservableHistory;
+
+  if (!observableHistory.servicesLocationEventsPatched) {
+    (["pushState", "replaceState"] as const).forEach((method) => {
+      const originalMethod = observableHistory[method];
+
+      observableHistory[method] = (...args) => {
+        originalMethod.apply(window.history, args);
+        window.dispatchEvent(new Event(locationChangeEvent));
+      };
+    });
+
+    observableHistory.servicesLocationEventsPatched = true;
+  }
 
   const servicesSection = document.querySelector<HTMLElement>(".services");
 
@@ -202,6 +219,18 @@ const serviceCategories = Object.entries(services);
     );
 
     if (categoriesSwiperElement) {
+      const getCategoryIndex = (category: string | null) =>
+        Array.from(categorySlides).findIndex(
+          (slide) => slide.dataset.category === category,
+        );
+      const getCategoryIndexFromLocation = () => {
+        const category = new URL(window.location.href).searchParams.get(
+          categoryQueryParameter,
+        );
+        const categoryIndex = getCategoryIndex(category);
+
+        return categoryIndex >= 0 ? categoryIndex : 0;
+      };
       const prefersReducedMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
       ).matches;
@@ -212,6 +241,7 @@ const serviceCategories = Object.entries(services);
         fadeEffect: { crossFade: true },
         speed: fadeDuration,
         slidesPerView: 1,
+        initialSlide: getCategoryIndexFromLocation(),
         allowTouchMove: false,
         autoHeight: true,
       });
@@ -231,6 +261,26 @@ const serviceCategories = Object.entries(services);
           categorySlides[categoriesSwiper.activeIndex]?.dataset.category;
 
         return activeCategory ? innerSwipers.get(activeCategory) : undefined;
+      };
+
+      const selectCategory = (index: number, updateUrl = false) => {
+        if (index < 0 || index >= categorySlides.length) return;
+
+        if (updateUrl) {
+          const category = categorySlides[index]?.dataset.category;
+
+          if (category) {
+            setCategoryInUrl(category);
+          }
+        }
+
+        if (categoriesSwiper.activeIndex !== index) {
+          categoriesSwiper.slideTo(index);
+        }
+      };
+
+      const selectCategoryFromLocation = () => {
+        selectCategory(getCategoryIndexFromLocation());
       };
 
       categoriesSwiper.on("slideChange", () => {
@@ -257,21 +307,12 @@ const serviceCategories = Object.entries(services);
 
       categoryButtons.forEach((button) => {
         button.addEventListener("click", () => {
-          categoriesSwiper.slideTo(Number(button.dataset.categoryIndex));
+          selectCategory(Number(button.dataset.categoryIndex), true);
         });
       });
 
-      servicesSection
-        .querySelectorAll<HTMLButtonElement>(".card .link[id]")
-        .forEach((button) => {
-          button.addEventListener("click", () => {
-            const categoryIndex = Array.from(categorySlides).findIndex(
-              (slide) => slide.dataset.category === button.id,
-            );
-
-            if (categoryIndex >= 0) categoriesSwiper.slideTo(categoryIndex);
-          });
-        });
+      window.addEventListener("popstate", selectCategoryFromLocation);
+      window.addEventListener(locationChangeEvent, selectCategoryFromLocation);
 
       prevButton?.addEventListener("click", () =>
         getActiveInnerSwiper()?.slidePrev(),

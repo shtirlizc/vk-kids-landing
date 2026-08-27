@@ -37,7 +37,7 @@ const imgSrc = `${baseUrl}images/${category}/${image}.webp`;
         <Link
           block
           href={action.type === "link" ? action.href : undefined}
-          id={action.type === "tab" ? action.tabId : undefined}
+          dataTabId={action.type === "tab" ? action.tabId : undefined}
         >
           {action.label}
         </Link>
@@ -169,3 +169,19 @@ const imgSrc = `${baseUrl}images/${category}/${image}.webp`;
     }
   }
 </style>
+
+<script>
+  import { setCategoryInUrl } from "./category-url.ts";
+
+  document
+    .querySelectorAll<HTMLButtonElement>(".card .link[data-tab-id]")
+    .forEach((button) => {
+      button.addEventListener("click", () => {
+        const tabId = button.dataset.tabId;
+
+        if (!tabId) return;
+
+        setCategoryInUrl(tabId);
+      });
+    });
+</script>

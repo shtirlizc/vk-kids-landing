@@ -7,6 +7,8 @@ export enum CategoryId {
   // Kids = "kids",
 }
 
+export const categoryQueryParameter = "category";
+
 type ActionType = { label: string };
 
 export interface Card {

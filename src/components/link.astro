@@ -1,7 +1,7 @@
 ---
 interface Props {
   href?: string;
-  id?: string;
+  dataTabId?: string;
   view?: "primary" | "secondary";
   size?: "m" | "l";
   block?: boolean;
@@ -10,7 +10,7 @@ interface Props {
 
 const {
   href,
-  id,
+  dataTabId,
   view = "primary",
   size = "m",
   block = false,
@@ -27,7 +27,7 @@ const TagName = href ? "a" : "button";
     size === "m" ? "middle" : "large",
     block && "block",
   ]}
-  id={id}
+  data-tab-id={dataTabId}
   href={href}
   target={isTargetBlank ? "_blank" : undefined}
 >
