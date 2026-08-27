@@ -63,7 +63,7 @@ const imgSrc = `${baseUrl}images/${category}/${image}.webp`;
       position: relative;
       background-color: var(--color-bg-primary-light);
       border-radius: 16px;
-      padding: 14px 14px 0;
+      padding: 14px 0 0 14px;
       display: grid;
       gap: var(--space24);
       overflow: hidden;
@@ -150,16 +150,35 @@ const imgSrc = `${baseUrl}images/${category}/${image}.webp`;
         @media (width >= 960px) {
           font-size: 16px;
         }
+      }
 
-        a {
-          color: inherit;
-          text-decoration: underline;
-          text-underline-offset: 2px;
-          transition: color var(--transition);
+      ol,
+      ul {
+        margin: var(--space8) 0;
+        display: grid;
+        gap: var(--space12);
+        padding-left: var(--space16);
 
-          &:hover {
-            color: var(--color-primary);
+        li {
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 100%;
+
+          /* desktop */
+          @media (width >= 960px) {
+            font-size: 16px;
           }
+        }
+      }
+
+      a {
+        color: inherit;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        transition: color var(--transition);
+
+        &:hover {
+          color: var(--color-primary);
         }
       }
     }
