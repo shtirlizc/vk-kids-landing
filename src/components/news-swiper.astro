@@ -32,18 +32,20 @@ const hasNavigation = slides.length > 1;
       <div class="swiper-wrapper">
         {
           slides.map(({ category, title, image, imageAlt }, index) => (
-            <article class="swiper-slide news-card">
-              <img
-                class="news-card__image"
-                src={image.src}
-                alt={imageAlt}
-                width={image.width}
-                height={image.height}
-                loading={index === 0 ? "eager" : "lazy"}
-                decoding="async"
-              />
-              <span class="news-card__category">{category}</span>
-              <h3 class="news-card__title">{title}</h3>
+            <article class="swiper-slide">
+              <div class="news-card">
+                <img
+                  class="news-card__image"
+                  src={image.src}
+                  alt={imageAlt}
+                  width={image.width}
+                  height={image.height}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                />
+                <span class="news-card__category">{category}</span>
+                <p class="news-card__title">{title}</p>
+              </div>
             </article>
           ))
         }
@@ -81,26 +83,48 @@ const hasNavigation = slides.length > 1;
     flex: none;
     width: 100vw;
 
-    & .news-slider__viewport {
-      min-width: 0;
-      padding-left: 24px;
-    }
-
     & .news-slider__swiper {
-      width: 100%;
+      width: calc(100vw - 2 * var(--container-padding));
+      margin-left: var(--container-padding);
+      overflow: visible;
+
+      /* fullhd */
+      @media (width >= 1600px) {
+        width: calc(var(--container) - 2 * var(--container-padding));
+        margin-left: calc(
+          (100vw - var(--container)) / 2 + var(--container-padding)
+        );
+      }
+
+      & > .swiper-wrapper > .swiper-slide {
+        /* tablet */
+        @media (width >= 768px) {
+          width: 365px;
+        }
+      }
     }
 
     & .news-card {
+      aspect-ratio: 1;
       position: relative;
-      width: min(310px, calc(100vw - 10px));
-      height: 310px;
       border-radius: var(--border-radius20);
       overflow: hidden;
-      isolation: isolate;
+      padding: var(--space16);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      /* tablet */
+      @media (width >= 768px) {
+        aspect-ratio: 365 / 350;
+
+        border-radius: var(--space32);
+        padding: var(--space32);
+      }
 
       &::after {
         position: absolute;
-        z-index: 1;
         inset: 0;
         background: linear-gradient(
           180deg,
@@ -122,15 +146,9 @@ const hasNavigation = slides.length > 1;
       object-position: center 65%;
     }
 
-    & .news-card__category,
-    & .news-card__title {
-      position: absolute;
-      z-index: 2;
-    }
-
     & .news-card__category {
-      top: var(--space16);
-      left: var(--space16);
+      position: relative;
+      z-index: 1;
       padding: 5px var(--space12);
       border-radius: 999px;
       background-color: #dffaff;
@@ -141,13 +159,16 @@ const hasNavigation = slides.length > 1;
     }
 
     & .news-card__title {
-      right: var(--space16);
-      bottom: var(--space16);
-      left: var(--space16);
-      color: #fff;
-      font-weight: 400;
+      position: relative;
+      color: var(--color-bg-main);
       font-size: 16px;
       line-height: 120%;
+      z-index: 1;
+
+      /* tablet */
+      @media (width >= 768px) {
+        font-size: 18px;
+      }
     }
 
     & .news-slider__button {
@@ -157,6 +178,11 @@ const hasNavigation = slides.length > 1;
       display: none;
       transform: translateY(-50%);
 
+      /* tablet */
+      @media (width >= 768px) {
+        display: flex;
+      }
+
       &:focus-visible {
         outline: 3px solid var(--color-text-primary);
         outline-offset: 3px;
@@ -164,55 +190,28 @@ const hasNavigation = slides.length > 1;
     }
 
     & .news-slider__button--prev {
-      left: 0;
+      left: var(--space12);
+
+      /* fullhd */
+      @media (width >= 1600px) {
+        left: calc((100vw - var(--container)) / 2 + 12px);
+      }
     }
 
     & .news-slider__button--next {
-      right: 0;
-    }
+      right: var(--space12);
 
-    /* tablet */
-    @media (width >= 768px) {
-      & .news-slider__viewport {
-        padding-inline: 31px;
+      /* fullhd */
+      @media (width >= 1600px) {
+        right: calc((100vw - var(--container)) / 2 + 6px);
       }
-
-      & .news-card {
-        width: 365px;
-        height: 350px;
-        border-radius: var(--space32);
-      }
-
-      & .news-card__category {
-        top: var(--space32);
-        left: var(--space32);
-      }
-
-      & .news-card__title {
-        top: 216px;
-        right: var(--space32);
-        bottom: auto;
-        left: var(--space32);
-        font-size: 20px;
-        line-height: 120%;
-        text-align: center;
-      }
-
-      & .news-slider__button {
-        display: flex;
-      }
-    }
-
-    /* desktop */
-    @media (width >= 960px) {
-      width: min(1582px, 100vw);
     }
   }
 </style>
 
 <script>
   import Swiper from "swiper";
-  import { A11y, Navigation } from "swiper/modules";
+  import { A11y, FreeMode, Navigation } from "swiper/modules";
 
   document
     .querySelectorAll<HTMLElement>("[data-news-slider]")
@@ -229,7 +228,7 @@ const hasNavigation = slides.length > 1;
       }
 
       new Swiper(swiperElement, {
-        modules: [Navigation, A11y],
+        modules: [Navigation, A11y, FreeMode],
         slidesPerView: "auto",
         spaceBetween: 10,
         speed: 500,
@@ -240,6 +239,11 @@ const hasNavigation = slides.length > 1;
         },
         breakpoints: {
           768: {
+            spaceBetween: 20,
+          },
+          960: {
+            freeMode: true,
+            slidesPerView: "auto",
             spaceBetween: 20,
           },
         },

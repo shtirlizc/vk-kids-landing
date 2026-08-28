@@ -49,11 +49,13 @@
   --delay: 0.2s;
   --timing-func: cubic-bezier(0.21, 0, 0.29, 1);
 
-  --container: 1516px;
+  --container-padding: var(--space24);
+  --container: 1596px;
   --header: 98px;
 
   /* desktop */
   @media (width >= 960px) {
+    --container-padding: var(--space40);
     --header: 121px;
   }
 }

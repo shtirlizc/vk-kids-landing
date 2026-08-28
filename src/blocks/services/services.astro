@@ -117,11 +117,12 @@ const serviceCategories = Object.entries(services);
       }
 
       .services-swiper .swiper-wrapper {
-        padding: 0 var(--space24);
+        padding: 0 var(--container-padding);
 
-        /* desktop */
-        @media (width >= 960px) {
-          padding: 0 var(--space40);
+        /* fullhd */
+        @media (width >= 1600px) {
+          padding: 0
+            calc((100vw - var(--container)) / 2 + var(--container-padding));
         }
       }
 
@@ -199,6 +200,11 @@ const serviceCategories = Object.entries(services);
             320: {
               freeMode: false,
               slidesPerView: 1.2,
+              spaceBetween: 10,
+            },
+            560: {
+              freeMode: false,
+              slidesPerView: 2,
               spaceBetween: 10,
             },
             960: {

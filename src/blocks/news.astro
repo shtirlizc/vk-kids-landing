@@ -48,11 +48,12 @@ const news = [
 
 <section class="news">
   <Container>
-    <div class="news__content">
-      <Title>последние новости</Title>
-      <NewsSwiper slides={news} />
-    </div>
+    <Title>последние новости</Title>
   </Container>
+
+  <div class="news__content">
+    <NewsSwiper slides={news} />
+  </div>
 </section>
 
 <style>
@@ -60,16 +61,11 @@ const news = [
     overflow: hidden;
 
     & .news__content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: var(--space28);
-    }
+      margin-top: var(--space28);
 
-    /* desktop */
-    @media (width >= 960px) {
-      & .news__content {
-        gap: var(--space48);
+      /* desktop */
+      @media (width >= 960px) {
+        margin-top: var(--space48);
       }
     }
   }
