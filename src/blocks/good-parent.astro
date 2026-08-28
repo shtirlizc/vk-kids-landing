@@ -2,7 +2,6 @@
 import Container from "../components/container.astro";
 import Link from "../components/link.astro";
 import Title from "../components/title.astro";
-import Grid from "../components/grid.astro";
 
 import mobileImg from "../assets/images/good-parent/mobile.webp";
 import desktopImg from "../assets/images/good-parent/desktop.webp";
@@ -10,44 +9,46 @@ import desktopImg from "../assets/images/good-parent/desktop.webp";
 
 <Container>
   <section class="good-parent">
-    <Grid cols={[3, 5]}>
-      <div class="good-parent__info">
-        <Title isCentered={false}>Достаточно хороший родитель</Title>
-        <p class="good-parent__description">
-          Идеальных родителей не&nbsp;существует! Этот курс — о настоящем
-          родительстве: как совмещать роли и&nbsp;быть хорошим родителем.
-        </p>
-        <div class="good-parent__start">
-          <Link
-            href="https://vkube.vkteam.ru/courses/2894/"
-            view="secondary"
-            block>Начать</Link
-          >
-        </div>
+    <div class="good-parent__info">
+      <Title isCentered={false}>Достаточно хороший родитель</Title>
+      <p class="good-parent__description">
+        Идеальных родителей не&nbsp;существует! Этот курс — о настоящем
+        родительстве: как совмещать роли и&nbsp;быть хорошим родителем.
+      </p>
+      <div class="good-parent__start">
+        <Link
+          href="https://vkube.vkteam.ru/courses/2894/"
+          view="secondary"
+          block
+        >
+          Начать
+        </Link>
       </div>
+    </div>
 
-      <div class="good-parent__picture">
-        <picture>
-          <source media="(min-width: 960px)" srcset={desktopImg.src} />
-          <img src={mobileImg.src} alt="" />
-        </picture>
-      </div>
-    </Grid>
+    <div class="good-parent__picture">
+      <picture>
+        <source media="(min-width: 960px)" srcset={desktopImg.src} />
+        <img src={mobileImg.src} alt="" />
+      </picture>
+    </div>
   </section>
 </Container>
 
 <style>
   .good-parent {
     margin: 90px 0;
-    background-image: linear-gradient(180deg, #b4f0ff 0%, #40cbff 100%);
+    background-image: linear-gradient(180deg, #40cbff 0%, #b4f0ff 100%);
     border-radius: 20px;
-    display: grid;
-    gap: var(--space24);
+    display: flex;
+    flex-direction: column-reverse;
+    gap: var(--space20);
     overflow: hidden;
 
     /* desktop */
     @media (width >= 960px) {
-      background-image: linear-gradient(180deg, #40cbff 0%, #b4f0ff 100%);
+      display: grid;
+      grid-template-columns: 3fr 5fr;
     }
 
     & .good-parent__info {
@@ -55,11 +56,13 @@ import desktopImg from "../assets/images/good-parent/desktop.webp";
       display: flex;
       flex-direction: column;
       gap: var(--space24);
+      margin-top: -120px;
 
       /* desktop */
       @media (width >= 960px) {
         padding: 45px;
         justify-content: space-between;
+        margin-top: 0;
       }
     }
 

@@ -50,6 +50,7 @@ const TagName = href ? "a" : "button";
     cursor: pointer;
     transition:
       color var(--transition),
+      border var(--transition),
       background-color var(--transition);
 
     height: 54px;
@@ -91,7 +92,8 @@ const TagName = href ? "a" : "button";
       background-color: var(--color-secondary);
 
       &:hover {
-        color: var(--color-secondary);
+        color: var(--color-text-primary);
+        border-color: var(--color-text-primary);
         background-color: transparent;
       }
     }
