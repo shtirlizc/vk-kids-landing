@@ -23,7 +23,6 @@ const hasNavigation = slides.length > 1;
 <div
   class="news-slider"
   data-news-slider
-  data-loop={hasNavigation}
   role="region"
   aria-label="Последние новости"
 >
@@ -232,7 +231,7 @@ const hasNavigation = slides.length > 1;
         slidesPerView: "auto",
         spaceBetween: 10,
         speed: 500,
-        loop: root.dataset.loop === "true",
+        rewind: true,
         navigation: {
           prevEl: previousButton,
           nextEl: nextButton,
