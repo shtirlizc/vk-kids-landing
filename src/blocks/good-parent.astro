@@ -16,7 +16,11 @@ import desktopImg from "../assets/images/good-parent/desktop.webp";
         родительстве: как совмещать роли и&nbsp;быть хорошим родителем.
       </p>
       <div class="good-parent__start">
-        <Link href="#" view="secondary" block>Начать</Link>
+        <Link
+          href="https://vkube.vkteam.ru/courses/2894/"
+          view="secondary"
+          block>Начать</Link
+        >
       </div>
     </div>
 
@@ -32,7 +36,7 @@ import desktopImg from "../assets/images/good-parent/desktop.webp";
 <style>
   .good-parent {
     margin: 90px 0;
-    background-color: var(--color-bg-secondary);
+    background-image: linear-gradient(180deg, #b4f0ff 0%, #40cbff 100%);
     border-radius: 20px;
     display: grid;
     gap: var(--space24);
@@ -41,6 +45,7 @@ import desktopImg from "../assets/images/good-parent/desktop.webp";
     /* desktop */
     @media (width >= 960px) {
       grid-template-columns: 1.75fr 2fr;
+      background-image: linear-gradient(180deg, #40cbff 0%, #b4f0ff 100%);
     }
 
     & .good-parent__info {
@@ -77,19 +82,10 @@ import desktopImg from "../assets/images/good-parent/desktop.webp";
     & .good-parent__picture {
       font-size: 0;
 
-      background-image: url("../assets/images/good-parent/mobile-bg.svg");
-      background-repeat: no-repeat;
-      background-position: var(--space20);
-      background-size: calc(100% - (2 * var(--space20)));
-
       /* desktop */
       @media (width >= 960px) {
         display: flex;
         justify-content: flex-end;
-        background-image: url("../assets/images/good-parent/desktop-bg.svg");
-        background-position: 20px 20px;
-        background-size: calc(100% + (2 * var(--space20)))
-          calc(100% - (2 * var(--space20)));
       }
 
       img {
