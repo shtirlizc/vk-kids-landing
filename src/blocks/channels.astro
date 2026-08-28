@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import Title from "../components/title.astro";
 import Description from "../components/description.astro";
 
@@ -120,13 +121,13 @@ const channels: ChannelLink[] = [
       padding: 32px;
       display: flex;
       flex-direction: column;
-      gap: var(--space);
 
       /* desktop */
       @media (width >= 960px) {
         margin-top: var(--space48);
         height: 600px;
-        padding: 48px;
+        padding: 150px 48px 0;
+        margin-bottom: -50px;
       }
 
       &::before {
@@ -183,7 +184,6 @@ const channels: ChannelLink[] = [
         display: grid;
         gap: var(--space8);
         grid-template-columns: 45px 1fr;
-        box-shadow: 0 7px 6.55px 0 #00000040;
         background:
           linear-gradient(
             0deg,
@@ -195,16 +195,12 @@ const channels: ChannelLink[] = [
             #ffffff 31.27%,
             rgba(255, 255, 255, 0) 105.23%
           );
-        backdrop-filter: blur(6px);
-        border-radius: 26px;
         padding: var(--space);
         align-items: center;
         overflow: hidden;
-        transition: backdrop-filter var(--transition);
 
         /* desktop */
         @media (width >= 960px) {
-          border-radius: 50px;
           grid-template-columns: 84px 1fr;
           gap: var(--space16);
           padding: 6px;
@@ -212,6 +208,7 @@ const channels: ChannelLink[] = [
 
         &:hover {
           backdrop-filter: blur(2px);
+          letter-spacing: 1px;
 
           .channel__img {
             filter: hue-rotate(60deg);
@@ -250,6 +247,7 @@ const channels: ChannelLink[] = [
             font-weight: 500;
             font-size: 8.66px;
             line-height: 100%;
+            transition: letter-spacing var(--transition);
 
             /* desktop */
             @media (width >= 960px) {
@@ -262,6 +260,7 @@ const channels: ChannelLink[] = [
             font-size: 7.58px;
             line-height: 100%;
             color: var(--color-text-secondary);
+            transition: letter-spacing var(--transition);
 
             /* desktop */
             @media (width >= 960px) {
