@@ -2,6 +2,8 @@
 import "../styles/_main.css";
 
 import { Font } from "astro:assets";
+
+const faviconPath = `${import.meta.env.BASE_URL}favicon/`;
 ---
 
 <head>
@@ -10,11 +12,31 @@ import { Font } from "astro:assets";
   <Font cssVariable="--font-vk-text" />
   <Font cssVariable="--font-vk-condensed" />
 
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="icon" href="/favicon.ico" />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href={`${faviconPath}favicon-32x32.png`}
+  />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href={`${faviconPath}favicon-16x16.png`}
+  />
+  <link rel="icon" href={`${faviconPath}favicon.ico`} sizes="any" />
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href={`${faviconPath}apple-touch-icon.png`}
+  />
+  <link rel="manifest" href={`${faviconPath}site.webmanifest`} />
   <meta name="viewport" content="width=device-width" />
   <meta name="theme-color" content="#dec7ff" />
   <meta name="generator" content={Astro.generator} />
+  <meta property="og:image" content="https://shtirlizc.github.io/vk-kids-landing/OpenGraph.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://shtirlizc.github.io/vk-kids-landing/OpenGraph.jpg" />
   <title>Семья и дети | Детский конкурс</title>
 
   <!-- Top.Mail.Ru counter -->
