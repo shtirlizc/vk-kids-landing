@@ -4,7 +4,6 @@ export enum CategoryId {
   Health = "health",
   Pregnancy = "pregnancy",
   Parenting = "parenting",
-  Kids = "kids",
 }
 
 export const categoryQueryParameter = "category";
@@ -26,7 +25,6 @@ export const categories: Record<CategoryId, string> = {
   [CategoryId.Health]: "Здоровье",
   [CategoryId.Pregnancy]: "Беременность",
   [CategoryId.Parenting]: "Родительство",
-  [CategoryId.Kids]: "Детям",
 };
 
 const benefits: Card[] = [
@@ -825,5 +823,4 @@ export const services: Record<CategoryId, Card[]> = {
   [CategoryId.Health]: health,
   [CategoryId.Pregnancy]: pregnancy,
   [CategoryId.Parenting]: parenting,
-  [CategoryId.Kids]: kids,
 };
