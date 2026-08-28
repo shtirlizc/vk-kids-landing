@@ -38,6 +38,12 @@ const getImage = (filename: string) => {
 };
 
 const creatorBySlide: Record<number, Creator> = {
+  0: {
+    contactName: "Валерия Мирошниченко",
+    artistFirstName:
+      "<span>Валентина </span><span>Мирошниченко</span><span>7 лет</span>",
+    contactHref: "https://home.vk.team/users/va.miroshnichenko/",
+  },
   1: {
     contactName: "Валерия Мирошниченко",
     artistFirstName:
@@ -295,7 +301,7 @@ const groupedSlideImages: Record<number, string[]> = {
   38: ["38.webp", "38.1.webp", "38.2.webp"],
 };
 
-const slides = Array.from({ length: 44 }, (_, index) => index + 1)
+const slides = Array.from({ length: 45 }, (_, index) => index)
   .filter((slideNumber) => slideNumber !== 11 && slideNumber !== 12)
   .map((slideNumber) => {
     const imageNames = groupedSlideImages[slideNumber] ?? [
