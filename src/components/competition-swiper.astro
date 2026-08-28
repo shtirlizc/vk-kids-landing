@@ -35,123 +35,117 @@ const hasNestedNavigation = slides.some(({ images }) => images.length > 1);
   data-competition-swiper
   data-loop={hasNavigation}
 >
-  <Grid
-    cols={[2, 4, 2]}
-    offset={1}
-    customGridTemplateColumns="1fr calc(50% + 40px) 1fr"
-  >
-    <div class="competition-swiper__content">
-      <div class="competition-swiper__media">
-        <div class="swiper competition-swiper__main" data-competition-main>
-          <div class="swiper-wrapper">
-            {
-              slides.map(({ images }, slideIndex) => (
-                <div class="swiper-slide">
-                  {images.length > 1 ? (
-                    <div class="competition-swiper__nested">
-                      <div
-                        class="swiper competition-swiper__nested-swiper"
-                        data-competition-nested
-                      >
-                        <div class="swiper-wrapper">
-                          {images.map(
-                            ({ src, alt, width, height }, imageIndex) => (
-                              <div class="swiper-slide">
-                                <img
-                                  src={src}
-                                  alt={alt}
-                                  width={width}
-                                  height={height}
-                                  loading={
-                                    slideIndex === 0 && imageIndex === 0
-                                      ? "eager"
-                                      : "lazy"
-                                  }
-                                  decoding="async"
-                                />
-                              </div>
-                            ),
-                          )}
-                        </div>
+  <div class="competition-swiper__content">
+    <div class="competition-swiper__media">
+      <div class="swiper competition-swiper__main" data-competition-main>
+        <div class="swiper-wrapper">
+          {
+            slides.map(({ images }, slideIndex) => (
+              <div class="swiper-slide">
+                {images.length > 1 ? (
+                  <div class="competition-swiper__nested">
+                    <div
+                      class="swiper competition-swiper__nested-swiper"
+                      data-competition-nested
+                    >
+                      <div class="swiper-wrapper">
+                        {images.map(
+                          ({ src, alt, width, height }, imageIndex) => (
+                            <div class="swiper-slide">
+                              <img
+                                src={src}
+                                alt={alt}
+                                width={width}
+                                height={height}
+                                loading={
+                                  slideIndex === 0 && imageIndex === 0
+                                    ? "eager"
+                                    : "lazy"
+                                }
+                                decoding="async"
+                              />
+                            </div>
+                          ),
+                        )}
                       </div>
                     </div>
-                  ) : (
-                    <img
-                      src={images[0].src}
-                      alt={images[0].alt}
-                      width={images[0].width}
-                      height={images[0].height}
-                      loading={slideIndex === 0 ? "eager" : "lazy"}
-                      decoding="async"
-                    />
-                  )}
-                </div>
-              ))
-            }
-          </div>
+                  </div>
+                ) : (
+                  <img
+                    src={images[0].src}
+                    alt={images[0].alt}
+                    width={images[0].width}
+                    height={images[0].height}
+                    loading={slideIndex === 0 ? "eager" : "lazy"}
+                    decoding="async"
+                  />
+                )}
+              </div>
+            ))
+          }
         </div>
-
-        {
-          hasNavigation && (
-            <>
-              <button
-                class="swiper-nav prev"
-                data-competition-main-prev
-                type="button"
-              >
-                Предыдущая конкурсная работа
-              </button>
-              <button
-                class="swiper-nav next"
-                data-competition-main-next
-                type="button"
-              >
-                Следующая конкурсная работа
-              </button>
-            </>
-          )
-        }
-
-        {
-          hasNestedNavigation && (
-            <>
-              <button
-                class="swiper-nav small prev competition-swiper__nested-nav competition-swiper__nested-nav--prev"
-                data-competition-nested-prev
-                type="button"
-                hidden
-              >
-                Предыдущее изображение работы
-              </button>
-              <button
-                class="swiper-nav small next competition-swiper__nested-nav competition-swiper__nested-nav--next"
-                data-competition-nested-next
-                type="button"
-                hidden
-              >
-                Следующее изображение работы
-              </button>
-            </>
-          )
-        }
       </div>
 
-      <div
-        class="competition-swiper__info"
-        data-competition-swiper-info
-        aria-live="polite"
-        aria-atomic="true"
-      >
-        {
-          slides.map(({ creator }, index) => (
-            <div data-slide-info={index} hidden={index !== 0}>
-              <DrawingInfo text={text} creator={creator} />
-            </div>
-          ))
-        }
-      </div>
+      {
+        hasNavigation && (
+          <>
+            <button
+              class="swiper-nav prev"
+              data-competition-main-prev
+              type="button"
+            >
+              Предыдущая конкурсная работа
+            </button>
+            <button
+              class="swiper-nav next"
+              data-competition-main-next
+              type="button"
+            >
+              Следующая конкурсная работа
+            </button>
+          </>
+        )
+      }
+
+      {
+        hasNestedNavigation && (
+          <>
+            <button
+              class="swiper-nav small prev competition-swiper__nested-nav competition-swiper__nested-nav--prev"
+              data-competition-nested-prev
+              type="button"
+              hidden
+            >
+              Предыдущее изображение работы
+            </button>
+            <button
+              class="swiper-nav small next competition-swiper__nested-nav competition-swiper__nested-nav--next"
+              data-competition-nested-next
+              type="button"
+              hidden
+            >
+              Следующее изображение работы
+            </button>
+          </>
+        )
+      }
     </div>
-  </Grid>
+
+    <div
+      class="competition-swiper__info"
+      data-competition-swiper-info
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      {
+        slides.map(({ creator }, index) => (
+          <div data-slide-info={index} hidden={index !== 0}>
+            <DrawingInfo text={text} creator={creator} />
+          </div>
+        ))
+      }
+    </div>
+  </div>
 </div>
 
 <style>
@@ -164,6 +158,11 @@ const hasNestedNavigation = slides.some(({ images }) => images.length > 1);
     & .competition-swiper__content,
     & .competition-swiper__media {
       min-width: 0;
+    }
+
+    & .competition-swiper__content {
+      max-width: 798px;
+      margin-inline: auto;
     }
 
     & .competition-swiper__media {
