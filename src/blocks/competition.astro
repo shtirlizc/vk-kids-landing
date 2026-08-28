@@ -1,9 +1,10 @@
 ---
-import CompetitionSwiper from "../components/swiper.astro";
+import CompetitionCompetitionSwiper from "../components/competition-swiper.astro";
 import Container from "../components/container.astro";
 import Title from "../components/title.astro";
 import Description from "../components/description.astro";
 import Link from "../components/link.astro";
+import Grid from "../components/grid.astro";
 
 const drawingInfoText =
   "Выберите работы, которые понравились больше всего — лучшие станут основной для новых детских карточек";
@@ -324,22 +325,26 @@ const slides = Array.from({ length: 44 }, (_, index) => index + 1)
 <section id="competition" class="competition">
   <Container>
     <div class="competition-content">
-      <div class="competition-header">
-        <Title>детский конкурс</Title>
-        <div class="competition-description">
-          <Description
-            >Дети сотрудников VK придумали свои варианты дизайна карточки «Код
-            заботы»</Description
-          >
+      <Grid cols={[2, 4, 2]} offset={1}>
+        <div class="competition-header">
+          <Title>детский конкурс</Title>
+          <Description>
+            Дети сотрудников VK придумали свои варианты дизайна карточки «Код
+            заботы»
+          </Description>
         </div>
-      </div>
+      </Grid>
+
       <div class="competition-body">
-        <CompetitionSwiper slides={slides} text={drawingInfoText} />
-        <p>
-          <Link href="https://app.pthwy.ru/siz0X" isTargetBlank block>
-            Перейти к голосованию
-          </Link>
-        </p>
+        <CompetitionCompetitionSwiper slides={slides} text={drawingInfoText} />
+
+        <div class="competition-foot">
+          <Grid cols={[3, 2, 3]} offset={1}>
+            <Link href="https://app.pthwy.ru/siz0X" isTargetBlank block>
+              Перейти к голосованию
+            </Link>
+          </Grid>
+        </div>
       </div>
     </div>
   </Container>
@@ -349,45 +354,16 @@ const slides = Array.from({ length: 44 }, (_, index) => index + 1)
   .competition {
     margin: 82px 0;
 
-    /* tablet */
-    & .competition-description {
-      max-width: 273px;
+    .competition-header {
+      display: grid;
+      gap: var(--space24);
+    }
 
-      /* tablet */
-      @media (width >= 768px) {
-        max-width: 630px;
+    & .competition-foot {
+      /* desktop */
+      @media (width >= 960px) {
+        margin-top: var(--space24);
       }
-    }
-
-    & .competition-content,
-    & .competition-body,
-    & .competition-header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    & .competition-content {
-      gap: var(--space28);
-
-      @media (width >= 768px) {
-        gap: var(--space36);
-      }
-    }
-
-    & .competition-header,
-    & .competition-body {
-      gap: var(--space20);
-
-      @media (width >= 768px) {
-        gap: var(--space24);
-      }
-    }
-
-    & .competition-body > p {
-      width: 100%;
-      max-width: 365px;
-      text-align: center;
     }
   }
 </style>

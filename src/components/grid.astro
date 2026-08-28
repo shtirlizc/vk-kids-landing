@@ -1,0 +1,27 @@
+---
+interface Props {
+  cols: number[];
+  offset?: number;
+  customGridTemplateColumns?: string;
+}
+
+const { cols, offset = 0, customGridTemplateColumns } = Astro.props;
+const gridTemplateColumns =
+  customGridTemplateColumns ||
+  cols.map((col) => `minmax(0, ${col}fr)`).join(" ");
+---
+
+<div class="grid" style={{ gridTemplateColumns }}>
+  {Array.from({ length: offset }).map(() => <div />)}
+  <slot />
+</div>
+
+<style>
+  .grid {
+    /* desktop */
+    @media (width >= 960px) {
+      display: grid;
+      gap: var(--space20);
+    }
+  }
+</style>

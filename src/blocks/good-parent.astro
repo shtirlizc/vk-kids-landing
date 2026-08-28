@@ -2,6 +2,7 @@
 import Container from "../components/container.astro";
 import Link from "../components/link.astro";
 import Title from "../components/title.astro";
+import Grid from "../components/grid.astro";
 
 import mobileImg from "../assets/images/good-parent/mobile.webp";
 import desktopImg from "../assets/images/good-parent/desktop.webp";
@@ -9,27 +10,29 @@ import desktopImg from "../assets/images/good-parent/desktop.webp";
 
 <Container>
   <section class="good-parent">
-    <div class="good-parent__info">
-      <Title isCentered={false}>Достаточно хороший родитель</Title>
-      <p class="good-parent__description">
-        Идеальных родителей не&nbsp;существует! Этот курс — о настоящем
-        родительстве: как совмещать роли и&nbsp;быть хорошим родителем.
-      </p>
-      <div class="good-parent__start">
-        <Link
-          href="https://vkube.vkteam.ru/courses/2894/"
-          view="secondary"
-          block>Начать</Link
-        >
+    <Grid cols={[3, 5]}>
+      <div class="good-parent__info">
+        <Title isCentered={false}>Достаточно хороший родитель</Title>
+        <p class="good-parent__description">
+          Идеальных родителей не&nbsp;существует! Этот курс — о настоящем
+          родительстве: как совмещать роли и&nbsp;быть хорошим родителем.
+        </p>
+        <div class="good-parent__start">
+          <Link
+            href="https://vkube.vkteam.ru/courses/2894/"
+            view="secondary"
+            block>Начать</Link
+          >
+        </div>
       </div>
-    </div>
 
-    <div class="good-parent__picture">
-      <picture>
-        <source media="(min-width: 960px)" srcset={desktopImg.src} />
-        <img src={mobileImg.src} alt="" />
-      </picture>
-    </div>
+      <div class="good-parent__picture">
+        <picture>
+          <source media="(min-width: 960px)" srcset={desktopImg.src} />
+          <img src={mobileImg.src} alt="" />
+        </picture>
+      </div>
+    </Grid>
   </section>
 </Container>
 
@@ -44,7 +47,6 @@ import desktopImg from "../assets/images/good-parent/desktop.webp";
 
     /* desktop */
     @media (width >= 960px) {
-      grid-template-columns: 1.75fr 2fr;
       background-image: linear-gradient(180deg, #40cbff 0%, #b4f0ff 100%);
     }
 

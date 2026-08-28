@@ -3,6 +3,7 @@ import rattle from "./../assets/images/hero/rattle.webp";
 import Arrow from "./../assets/images/arrow.svg";
 import rattleMobile from "./../assets/images/hero/rattle-mobile.webp";
 import { CategoryId } from "./services/data.ts";
+import Grid from "../components/grid.astro";
 
 const badges: { label: string; tabId: CategoryId }[] = [
   { label: "помощь при рождении ребёнка", tabId: CategoryId.Pregnancy },
@@ -37,19 +38,21 @@ const badges: { label: string; tabId: CategoryId }[] = [
     </picture>
   </div>
   <div class="hero__links">
-    <nav>
-      <ul>
-        {
-          badges.map(({ label, tabId }) => (
-            <li>
-              <button type="button" data-tab-id={tabId} class="badge">
-                {label}
-              </button>
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
+    <Grid cols={[2, 4, 2]} offset={1}>
+      <nav>
+        <ul>
+          {
+            badges.map(({ label, tabId }) => (
+              <li>
+                <button type="button" data-tab-id={tabId} class="badge">
+                  {label}
+                </button>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </Grid>
   </div>
   <a
     class="hero__arrow"
@@ -137,17 +140,12 @@ const badges: { label: string; tabId: CategoryId }[] = [
     }
 
     & .hero__links {
-      display: flex;
-      justify-content: center;
-      max-width: 350px;
       margin: 15px 0 82px;
 
-      /* tablet */
-      @media (width >= 768px) {
-        max-width: 750px;
-      }
-
       nav {
+        display: flex;
+        justify-content: center;
+
         ul {
           list-style: none;
           padding: 0;
