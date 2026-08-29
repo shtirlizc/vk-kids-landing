@@ -8,15 +8,12 @@ export enum CategoryId {
 
 export const categoryQueryParameter = "category";
 
-type ActionType = { label: string };
-
 export interface Card {
   title: string;
   description: string;
   label: string;
   image: string;
-  action?: ActionType &
-    ({ type: "link"; href: string } | { type: "tab"; tabId: CategoryId });
+  action?: { label: string; type: "link"; href: string };
 }
 
 export const categories: Record<CategoryId, string> = {

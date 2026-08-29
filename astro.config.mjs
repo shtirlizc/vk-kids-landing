@@ -5,6 +5,9 @@ import { defineConfig, fontProviders } from "astro/config";
 export default defineConfig({
   site: "https://shtirlizc.github.io",
   base: "/vk-kids-landing",
+  redirects: {
+    "/404": "/vk-kids-landing",
+  },
   vite: {
     build: {
       cssMinify: "esbuild",

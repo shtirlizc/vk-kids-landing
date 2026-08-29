@@ -34,11 +34,7 @@ const imgSrc = `${baseUrl}images/${category}/${image}.webp`;
   <div class="card__foot">
     {
       action && (
-        <Link
-          block
-          href={action.type === "link" ? action.href : undefined}
-          dataTabId={action.type === "tab" ? action.tabId : undefined}
-        >
+        <Link block href={action?.href}>
           {action.label}
         </Link>
       )

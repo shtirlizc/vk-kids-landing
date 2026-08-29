@@ -10,29 +10,25 @@ interface Props {
 
 const {
   href,
-  dataTabId,
   view = "primary",
   size = "m",
   block = false,
   isTargetBlank = true,
 } = Astro.props;
-
-const TagName = href ? "a" : "button";
 ---
 
-<TagName
+<a
   class:list={[
     "link",
     view === "primary" ? "primary" : "secondary",
     size === "m" ? "middle" : "large",
     block && "block",
   ]}
-  data-tab-id={dataTabId}
   href={href}
   target={isTargetBlank ? "_blank" : undefined}
 >
-  <span><slot /></span>
-</TagName>
+  <slot />
+</a>
 
 <style>
   .link {
@@ -65,16 +61,6 @@ const TagName = href ? "a" : "button";
       }
       &.large {
         height: 72px;
-      }
-    }
-
-    &[href] {
-      span {
-        text-decoration: underline;
-        text-decoration-style: solid;
-        text-decoration-thickness: 0;
-        text-decoration-skip-ink: auto;
-        text-underline-offset: 2px;
       }
     }
 
