@@ -359,6 +359,20 @@ const hasNestedNavigation = slides.some(({ images }) => images.length > 1);
           children: "[data-pswp-item]",
           arrowPrevSVG: "",
           arrowNextSVG: "",
+          tapAction: (_point, originalEvent) => {
+            const target = originalEvent.target;
+
+            if (
+              target instanceof HTMLElement &&
+              (target.classList.contains("pswp__item") ||
+                target.classList.contains("pswp__zoom-wrap"))
+            ) {
+              lightbox.pswp?.close();
+              return;
+            }
+
+            lightbox.pswp?.element?.classList.toggle("pswp--ui-visible");
+          },
           pswpModule: () => import("photoswipe"),
         });
 
