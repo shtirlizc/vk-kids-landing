@@ -14,10 +14,10 @@
   align-items: center;
   overflow: hidden;
   cursor: pointer;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 12px;
-  transition: background-color var(--transition);
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: 12px !important;
+  transition: background-color var(--transition) !important;
 
   &:hover {
     background-color: var(--color-text-primary);
@@ -27,12 +27,12 @@
   @media (width >= 768px) {
     --size: 62px;
 
-    background-size: 23px;
+    background-size: 23px !important;
 
     &.small {
       --size: 48px;
 
-      background-size: 18px;
+      background-size: 18px !important;
     }
   }
 
@@ -42,4 +42,20 @@
   &.next {
     background-image: url("../../assets/images/next.svg");
   }
+}
+
+.pswp__button--arrow.swiper-nav {
+  margin-top: calc(var(--size) / -2);
+}
+
+.pswp__button--arrow--prev.swiper-nav {
+  left: 20px;
+}
+
+.pswp__button--arrow--next.swiper-nav {
+  right: 20px;
+}
+
+.pswp--touch .pswp__button--arrow.swiper-nav {
+  visibility: visible;
 }

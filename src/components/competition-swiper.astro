@@ -316,7 +316,6 @@ const hasNestedNavigation = slides.some(({ images }) => images.length > 1);
 
 <script>
   import PhotoSwipeLightbox from "photoswipe/lightbox";
-  import "photoswipe/style.css";
   import Swiper from "swiper";
   import { A11y, Navigation } from "swiper/modules";
 
@@ -368,7 +367,21 @@ const hasNestedNavigation = slides.some(({ images }) => images.length > 1);
         const lightbox = new PhotoSwipeLightbox({
           gallery: lightboxElement,
           children: "[data-pswp-item]",
+          arrowPrevSVG: "",
+          arrowNextSVG: "",
           pswpModule: () => import("photoswipe"),
+        });
+
+        lightbox.addFilter("uiElement", (element, data) => {
+          if (data.name === "arrowPrev") {
+            element.classList.add("swiper-nav", "prev");
+          }
+
+          if (data.name === "arrowNext") {
+            element.classList.add("swiper-nav", "next");
+          }
+
+          return element;
         });
 
         lightbox.init();
