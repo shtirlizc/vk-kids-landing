@@ -35,7 +35,7 @@ const hasNestedNavigation = slides.some(({ images }) => images.length > 1);
   data-loop={hasNavigation}
 >
   <div class="competition-swiper__content">
-    <div class="competition-swiper__media">
+    <div class="competition-swiper__media" data-competition-lightbox>
       <div class="swiper competition-swiper__main" data-competition-main>
         <div class="swiper-wrapper">
           {
@@ -51,18 +51,28 @@ const hasNestedNavigation = slides.some(({ images }) => images.length > 1);
                         {images.map(
                           ({ src, alt, width, height }, imageIndex) => (
                             <div class="swiper-slide">
-                              <img
-                                src={src}
-                                alt={alt}
-                                width={width}
-                                height={height}
-                                loading={
-                                  slideIndex === 0 && imageIndex === 0
-                                    ? "eager"
-                                    : "lazy"
-                                }
-                                decoding="async"
-                              />
+                              <a
+                                href={src}
+                                data-pswp-width={width}
+                                data-pswp-height={height}
+                                data-pswp-item
+                                target="_blank"
+                                rel="noopener"
+                                aria-label={`Открыть: ${alt}`}
+                              >
+                                <img
+                                  src={src}
+                                  alt={alt}
+                                  width={width}
+                                  height={height}
+                                  loading={
+                                    slideIndex === 0 && imageIndex === 0
+                                      ? "eager"
+                                      : "lazy"
+                                  }
+                                  decoding="async"
+                                />
+                              </a>
                             </div>
                           ),
                         )}
@@ -70,14 +80,24 @@ const hasNestedNavigation = slides.some(({ images }) => images.length > 1);
                     </div>
                   </div>
                 ) : (
-                  <img
-                    src={images[0].src}
-                    alt={images[0].alt}
-                    width={images[0].width}
-                    height={images[0].height}
-                    loading={slideIndex === 0 ? "eager" : "lazy"}
-                    decoding="async"
-                  />
+                  <a
+                    href={images[0].src}
+                    data-pswp-width={images[0].width}
+                    data-pswp-height={images[0].height}
+                    data-pswp-item
+                    target="_blank"
+                    rel="noopener"
+                    aria-label={`Открыть: ${images[0].alt}`}
+                  >
+                    <img
+                      src={images[0].src}
+                      alt={images[0].alt}
+                      width={images[0].width}
+                      height={images[0].height}
+                      loading={slideIndex === 0 ? "eager" : "lazy"}
+                      decoding="async"
+                    />
+                  </a>
                 )}
               </div>
             ))
@@ -192,6 +212,17 @@ const hasNestedNavigation = slides.some(({ images }) => images.length > 1);
       width: 100%;
     }
 
+    & .swiper-slide a {
+      display: block;
+      width: 100%;
+      height: 100%;
+
+      &:focus-visible {
+        outline: 3px solid var(--color-text-primary);
+        outline-offset: -3px;
+      }
+    }
+
     & .swiper-slide img {
       display: block;
       width: 100%;
@@ -284,6 +315,8 @@ const hasNestedNavigation = slides.some(({ images }) => images.length > 1);
 </style>
 
 <script>
+  import PhotoSwipeLightbox from "photoswipe/lightbox";
+  import "photoswipe/style.css";
   import Swiper from "swiper";
   import { A11y, Navigation } from "swiper/modules";
 
@@ -306,6 +339,9 @@ const hasNestedNavigation = slides.some(({ images }) => images.length > 1);
         "[data-competition-nested-next]",
       );
       const infoItems = root.querySelectorAll<HTMLElement>("[data-slide-info]");
+      const lightboxElement = root.querySelector<HTMLElement>(
+        "[data-competition-lightbox]",
+      );
 
       if (!mainElement || mainElement.dataset.initialized === "true") {
         return;
@@ -327,6 +363,16 @@ const hasNestedNavigation = slides.some(({ images }) => images.length > 1);
           lastSlideMessage: "Это последняя конкурсная работа",
         },
       });
+
+      if (lightboxElement) {
+        const lightbox = new PhotoSwipeLightbox({
+          gallery: lightboxElement,
+          children: "[data-pswp-item]",
+          pswpModule: () => import("photoswipe"),
+        });
+
+        lightbox.init();
+      }
 
       const updateDrawingInfo = () => {
         infoItems.forEach((item, index) => {
