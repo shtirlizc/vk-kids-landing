@@ -24,8 +24,16 @@ import Logo2 from "../assets/images/logo-2.svg";
         color: var(--color-bg-main);
         transition: color var(--transition);
 
+        svg path {
+          transition: fill var(--transition);
+        }
+
         &:hover {
           color: var(--color-primary);
+
+          svg path {
+            fill: var(--color-primary);
+          }
         }
       }
     }
