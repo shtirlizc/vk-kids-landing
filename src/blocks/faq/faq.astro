@@ -59,7 +59,7 @@ const faq: { head: string; body?: string; Body?: typeof FaqLastItem }[] = [
 <style>
   .faq {
     & .faq_list {
-      margin-top: var(--space32);
+      margin-top: var(--space28);
       display: grid;
       gap: var(--space8);
 
@@ -82,6 +82,7 @@ const faq: { head: string; body?: string; Body?: typeof FaqLastItem }[] = [
         -webkit-tap-highlight-color: transparent;
         transition:
           background-color var(--transition),
+          padding var(--transition),
           margin var(--transition);
 
         &:hover {
@@ -91,10 +92,12 @@ const faq: { head: string; body?: string; Body?: typeof FaqLastItem }[] = [
         h3 {
           font-weight: 600;
           font-size: 18px;
-          line-height: 100%;
+          line-height: 1.3em;
         }
 
         &.opened {
+          padding-bottom: var(--space16);
+
           &:hover {
             margin-bottom: var(--space12);
           }

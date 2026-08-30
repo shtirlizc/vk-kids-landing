@@ -3,13 +3,26 @@ import Link from "../../components/link.astro";
 ---
 
 <p>
-  Напишите в&nbsp;<a
+  Напишите&nbsp;в <a
     href="https://u.internal.myteam.mail.ru/profile/support_bot"
     target="_blank">единый чат поддержки</a
   >&nbsp;с&nbsp;умным помощником Василисой или&nbsp;своему HRBP.
 </p>
-<p>
+<p class="p">
   <Link href="https://u.internal.myteam.mail.ru/profile/family">
     «Семья и&nbsp;дети»
   </Link>
 </p>
+
+<style>
+  .p {
+    a {
+      text-decoration: none;
+
+      /* mobile */
+      @media (width < 560px) {
+        width: 100%;
+      }
+    }
+  }
+</style>

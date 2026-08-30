@@ -13,7 +13,7 @@ import Logos from "./logos.astro";
     </picture>
   </div>
 
-  <ul>
+  <ul class="footer__nav">
     {
       nav.map(({ href, label }) => (
         <li>
@@ -34,7 +34,7 @@ import Logos from "./logos.astro";
   .footer {
     padding-bottom: var(--space32);
     background-image: url("../assets/images/footer/bracelet-mobile.webp");
-    background-position: center calc(100% + 220px);
+    background-position: 64% calc(100% + 235px);
     background-repeat: no-repeat;
     background-size: 770px auto;
 
@@ -75,8 +75,8 @@ import Logos from "./logos.astro";
       }
     }
 
-    ul {
-      margin-top: var(--space32);
+    & .footer__nav {
+      margin-top: var(--space24);
       list-style: none;
       padding: 0;
       display: flex;
@@ -85,7 +85,9 @@ import Logos from "./logos.astro";
     }
 
     .footer__logo {
-      margin-top: 40vw;
+      margin-top: 41vw;
+      display: flex;
+      justify-content: center;
 
       /* tablet */
       @media (width >= 768px) {

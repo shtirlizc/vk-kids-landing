@@ -76,7 +76,7 @@ const imgSrc = `${baseUrl}images/${category}/${image}.webp`;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: 10px;
+        gap: var(--space12);
 
         /* desktop */
         @media (width >= 960px) {
@@ -90,13 +90,16 @@ const imgSrc = `${baseUrl}images/${category}/${image}.webp`;
         font-family: var(--font-vk-text), sans-serif;
         font-weight: 600;
         font-size: 12px;
-        line-height: 115%;
         letter-spacing: -4%;
         text-transform: uppercase;
         background-color: var(--color-bg-primary);
-        padding: calc(var(--space) + 2px) var(--space12)
-          calc(var(--space) - 2px);
+        padding: 1px var(--space12) 0;
         border-radius: 12px;
+        height: 22px;
+        line-height: 22px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
       }
 
       h4 {
@@ -104,6 +107,7 @@ const imgSrc = `${baseUrl}images/${category}/${image}.webp`;
         font-size: 18px;
         line-height: 1.05em;
         min-height: 2.1em;
+        width: min-content;
 
         /* desktop */
         @media (width >= 960px) {
@@ -151,7 +155,7 @@ const imgSrc = `${baseUrl}images/${category}/${image}.webp`;
       p {
         font-weight: 500;
         font-size: 14px;
-        line-height: 125%;
+        line-height: 1.3em;
 
         /* desktop */
         @media (width >= 960px) {
@@ -191,7 +195,7 @@ const imgSrc = `${baseUrl}images/${category}/${image}.webp`;
     }
 
     & .card__foot {
-      margin-top: var(--space24);
+      margin-top: 22px;
     }
   }
 </style>

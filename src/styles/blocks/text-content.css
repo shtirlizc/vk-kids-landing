@@ -1,11 +1,11 @@
 .text-content {
   display: grid;
-  gap: var(--space12);
+  gap: 10px;
 
   p {
     font-weight: 500;
     font-size: 15px;
-    line-height: 100%;
+    line-height: 1.25em;
 
     /* desktop */
     @media (width >= 960px) {
@@ -15,14 +15,15 @@
 
   ol,
   ul {
+    margin: -3px 0 0;
     display: grid;
-    gap: var(--space12);
-    padding-left: var(--space12);
+    gap: 9px;
+    padding-left: 21px;
 
     li {
       font-weight: 500;
       font-size: 15px;
-      line-height: 100%;
+      line-height: 1.25em;
 
       /* desktop */
       @media (width >= 960px) {
@@ -35,6 +36,7 @@
     color: inherit;
     text-decoration: underline;
     text-underline-offset: 2px;
+    white-space: nowrap;
     transition: color var(--transition);
 
     &:hover {

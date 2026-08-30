@@ -65,14 +65,13 @@ const badges: { label: string; tabId: CategoryId }[] = [
 
 <style>
   .hero {
-    margin: 100px 0;
+    margin-top: calc(var(--header) * -1);
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: calc(var(--header) * -1);
     background-image: var(--bg-gradient);
-    border-radius: 0 0 32px 32px;
+    border-radius: 0 0 20px 20px;
 
     /* tablet */
     @media (width >= 768px) {
@@ -111,8 +110,8 @@ const badges: { label: string; tabId: CategoryId }[] = [
       justify-content: space-between;
       flex-direction: column;
       bottom: 60%;
-      left: 7%;
-      width: 160px;
+      left: -13px;
+      width: 185px;
 
       /* tablet */
       @media (width >= 768px) {
@@ -140,7 +139,7 @@ const badges: { label: string; tabId: CategoryId }[] = [
     }
 
     & .hero__links {
-      margin: 15px 0 82px;
+      margin: 19px 0 82px;
 
       nav {
         display: flex;
@@ -162,7 +161,7 @@ const badges: { label: string; tabId: CategoryId }[] = [
       position: absolute;
       font-size: 0;
       padding: var(--space16);
-      bottom: 0;
+      bottom: var(--space12);
       left: 50%;
       transform: translateX(-50%);
       color: var(--color-bg-main);

@@ -54,7 +54,7 @@ const channels: ChannelLink[] = [
     <div class="channels__head">
       <Title>Каналы</Title>
       <Description>
-        Подписывайтесь на каналы, чтобы не искать анонсы вручную
+        Подписывайтесь на&nbsp;каналы, чтобы не&nbsp;искать анонсы вручную
       </Description>
     </div>
   </Container>
@@ -94,7 +94,7 @@ const channels: ChannelLink[] = [
 
 <style>
   .channels {
-    padding-top: 90px;
+    padding-top: 94px;
     overflow: hidden;
 
     /* desktop */
@@ -104,7 +104,7 @@ const channels: ChannelLink[] = [
 
     & .channels__head {
       display: grid;
-      gap: var(--space24);
+      gap: 22px;
 
       /* desktop */
       @media (width >= 960px) {
@@ -114,11 +114,12 @@ const channels: ChannelLink[] = [
 
     & .channels__body {
       position: relative;
-      margin-top: var(--space32);
+      margin-top: var(--space20);
+      margin-bottom: -8px;
       margin-inline: auto;
-      aspect-ratio: 796 / 1096;
-      height: 398px;
-      padding: 32px;
+      aspect-ratio: 786 / 1114;
+      height: 310px;
+      padding: 75px 20px 0;
       display: flex;
       flex-direction: column;
 
@@ -156,8 +157,8 @@ const channels: ChannelLink[] = [
 
       .channels__bg-1 {
         width: 458px;
-        top: 10%;
-        right: calc(100% - 20px);
+        top: -15%;
+        right: calc(100% - 59px);
 
         /* desktop */
         @media (width >= 960px) {
@@ -168,8 +169,8 @@ const channels: ChannelLink[] = [
 
       .channels__bg-2 {
         width: 385px;
-        top: -10%;
-        left: calc(100% - 20px);
+        top: -26%;
+        left: calc(100% - 67px);
 
         /* desktop */
         @media (width >= 960px) {
@@ -182,7 +183,7 @@ const channels: ChannelLink[] = [
         position: relative;
         z-index: 1;
         display: grid;
-        gap: var(--space8);
+        gap: 12px;
         grid-template-columns: 45px 1fr;
         background:
           linear-gradient(
@@ -216,8 +217,8 @@ const channels: ChannelLink[] = [
         }
 
         & .channel__img {
-          width: 45px;
-          height: 45px;
+          width: 49px;
+          height: 49px;
           border-radius: 50%;
           transition: filter var(--transition);
 
@@ -236,7 +237,8 @@ const channels: ChannelLink[] = [
 
         & .channel__body {
           display: grid;
-          gap: 2px;
+          gap: 4px;
+          padding-right: 4px;
 
           /* desktop */
           @media (width >= 960px) {
@@ -245,8 +247,8 @@ const channels: ChannelLink[] = [
 
           h4 {
             font-weight: 500;
-            font-size: 8.66px;
-            line-height: 100%;
+            font-size: 9.29px;
+            line-height: 1.2em;
             transition: letter-spacing var(--transition);
 
             /* desktop */
@@ -257,8 +259,8 @@ const channels: ChannelLink[] = [
 
           p {
             font-weight: 500;
-            font-size: 7.58px;
-            line-height: 100%;
+            font-size: 8.13px;
+            line-height: 1.2em;
             color: var(--color-text-secondary);
             transition: letter-spacing var(--transition);
 

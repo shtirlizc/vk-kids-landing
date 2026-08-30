@@ -148,20 +148,30 @@ const hasNavigation = slides.length > 1;
     & .news-card__category {
       position: relative;
       z-index: 1;
-      padding: 5px var(--space12);
-      border-radius: 999px;
+      padding: 2px 8px 0;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 16px;
       background-color: #dffaff;
-      color: var(--color-text-primary);
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 20px;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: -2%;
+      height: 29px;
+      line-height: 29px;
+
+      /* tablet */
+      @media (width >= 768px) {
+        font-size: 16px;
+      }
     }
 
     & .news-card__title {
       position: relative;
       color: var(--color-bg-main);
-      font-size: 16px;
-      line-height: 120%;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.25em;
       z-index: 1;
 
       /* tablet */
@@ -228,7 +238,7 @@ const hasNavigation = slides.length > 1;
 
       new Swiper(swiperElement, {
         modules: [Navigation, A11y, FreeMode],
-        slidesPerView: "auto",
+        slidesPerView: 1.05,
         spaceBetween: 10,
         speed: 500,
         rewind: true,

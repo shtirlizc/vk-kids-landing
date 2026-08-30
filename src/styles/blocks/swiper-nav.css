@@ -16,7 +16,7 @@
   cursor: pointer;
   background-position: center !important;
   background-repeat: no-repeat !important;
-  background-size: 12px !important;
+  background-size: 10px !important;
   transition: background-color var(--transition) !important;
 
   &:hover {
