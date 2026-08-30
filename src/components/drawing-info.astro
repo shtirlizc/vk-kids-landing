@@ -147,9 +147,10 @@ const { text, creator } = Astro.props;
     @media (width >= 768px) {
       min-height: auto;
       gap: 0 15px;
-      padding: 15px 24px;
+      padding: 10px 24px;
       display: grid;
-      grid-template-columns: 1fr 408px;
+      grid-template-columns: 1fr 392px;
+      align-items: center;
 
       & .drawing-info__description,
       & .drawing-info__contact,
@@ -159,11 +160,9 @@ const { text, creator } = Astro.props;
       }
 
       & .drawing-info__creator {
-        min-height: 74px;
         padding: var(--space16) 22px;
         grid-template-columns: 1fr 1fr;
         align-items: start;
-        gap: 7px;
       }
     }
   }

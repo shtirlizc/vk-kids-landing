@@ -344,7 +344,7 @@ const slides = Array.from({ length: 45 }, (_, index) => index)
 
         <div class="competition-foot">
           <Grid cols={[3, 2, 3]} offset={1}>
-            <Link href="https://app.pthwy.ru/siz0X" isTargetBlank block>
+            <Link href="https://app.pthwy.ru/siz0X" size="l" block>
               Перейти к голосованию
             </Link>
           </Grid>
@@ -358,9 +358,19 @@ const slides = Array.from({ length: 45 }, (_, index) => index)
   .competition {
     margin: 95px 0;
 
+    /* desktop */
+    @media (width >= 960px) {
+      margin: 107px 0 82px;
+    }
+
     .competition-header {
       display: grid;
       gap: 22px;
+
+      /* desktop */
+      @media (width >= 960px) {
+        gap: var(--space40);
+      }
     }
 
     & .competition-foot {

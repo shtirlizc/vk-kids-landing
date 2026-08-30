@@ -47,9 +47,11 @@ import Logos from "./logos.astro";
         495px auto,
         800px auto;
       background-position:
-        5% bottom,
+        7% bottom,
         right bottom;
       background-repeat: no-repeat;
+      padding-top: 72px;
+      padding-bottom: 60px;
     }
 
     & .footer__title {
@@ -65,7 +67,7 @@ import Logos from "./logos.astro";
         width: min(100%, 320px);
 
         @media (width >= 960px) {
-          width: min(100%, 1400px);
+          width: min(100%, 1600px);
         }
       }
 
@@ -82,6 +84,12 @@ import Logos from "./logos.astro";
       display: flex;
       justify-content: center;
       gap: var(--space12);
+
+      /* desktop */
+      @media (width >= 960px) {
+        gap: var(--space24);
+        margin-top: 11px;
+      }
     }
 
     .footer__logo {
@@ -91,7 +99,7 @@ import Logos from "./logos.astro";
 
       /* tablet */
       @media (width >= 768px) {
-        margin-top: 220px;
+        margin-top: 155px;
       }
     }
   }

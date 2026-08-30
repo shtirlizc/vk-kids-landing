@@ -66,6 +66,7 @@ const faq: { head: string; body?: string; Body?: typeof FaqLastItem }[] = [
       /* desktop */
       @media (width >= 960px) {
         margin-top: 50px;
+        gap: 6px;
       }
 
       .faq__item {
@@ -84,6 +85,11 @@ const faq: { head: string; body?: string; Body?: typeof FaqLastItem }[] = [
           background-color var(--transition),
           padding var(--transition),
           margin var(--transition);
+
+        /* desktop */
+        @media (width >= 960px) {
+          padding: 22px var(--space40) 20px;
+        }
 
         &:hover {
           background-color: var(--color-bg-secondary);

@@ -73,8 +73,9 @@ const badges: { label: string; tabId: CategoryId }[] = [
     background-image: var(--bg-gradient);
     border-radius: 0 0 20px 20px;
 
-    /* tablet */
-    @media (width >= 768px) {
+    /* desktop */
+    @media (width >= 960px) {
+      min-height: 100vh;
       border-radius: 0 0 48px 48px;
       background-image:
         url(./../assets/images/hero/horse.webp),
@@ -89,6 +90,11 @@ const badges: { label: string; tabId: CategoryId }[] = [
         462px auto,
         cover;
       padding-bottom: 187px;
+
+      /* desktop */
+      @media (width >= 960px) {
+        padding-bottom: 155px;
+      }
     }
 
     & .hero__content {
@@ -115,9 +121,9 @@ const badges: { label: string; tabId: CategoryId }[] = [
 
       /* tablet */
       @media (width >= 768px) {
-        bottom: 50%;
+        bottom: 52.2%;
         left: 0;
-        width: 350px;
+        width: 344px;
         font-size: 35px;
       }
 
@@ -140,6 +146,12 @@ const badges: { label: string; tabId: CategoryId }[] = [
 
     & .hero__links {
       margin: 19px 0 82px;
+
+      /* desktop */
+      @media (width >= 960px) {
+        margin-top: -34px;
+        margin-bottom: var(--space32);
+      }
 
       nav {
         display: flex;

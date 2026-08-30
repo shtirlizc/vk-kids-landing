@@ -27,7 +27,7 @@
   @media (width >= 768px) {
     --size: 62px;
 
-    background-size: 23px !important;
+    background-size: 20px !important;
 
     &.small {
       --size: 48px;
