@@ -239,7 +239,7 @@ const hasNavigation = slides.length > 1;
         modules: [Navigation, A11y, FreeMode],
         slidesPerView: 1.05,
         spaceBetween: 10,
-        speed: 500,
+        speed: 300,
         rewind: true,
         navigation: {
           prevEl: previousButton,
@@ -247,9 +247,11 @@ const hasNavigation = slides.length > 1;
         },
         breakpoints: {
           768: {
-            spaceBetween: 20,
+            spaceBetween: 16,
+            slidesPerView: 2,
           },
           960: {
+            speed: 500,
             freeMode: true,
             slidesPerView: "auto",
             spaceBetween: 20,

@@ -157,14 +157,31 @@ const channels: ChannelLink[] = [
 
       .channels__bg-1 {
         width: 458px;
-        top: -15%;
+        top: -5%;
         right: calc(100% - 59px);
+
+        /* tablet */
+        @media (width >= 768px) {
+          right: calc(100% - 32px);
+        }
 
         /* desktop */
         @media (width >= 960px) {
-          top: -19%;
+          top: -12%;
           right: calc(100% - 7px);
+          width: 600px;
+        }
+
+        /* widescreen */
+        @media (width >= 1200px) {
+          top: -19%;
           width: 803px;
+        }
+
+        /* fullhd */
+        @media (width >= 1600px) {
+          top: -20%;
+          width: calc((100vw - 395px) / 2 + 20px);
         }
       }
 
@@ -173,11 +190,29 @@ const channels: ChannelLink[] = [
         top: -26%;
         left: calc(100% - 67px);
 
+        /* tablet */
+        @media (width >= 768px) {
+          top: -16%;
+          left: calc(100% - 4px);
+        }
+
         /* desktop */
         @media (width >= 960px) {
+          top: -32%;
+          left: calc(100% - 48px);
+          width: 688px;
+        }
+
+        /* widescreen */
+        @media (width >= 1200px) {
           top: -44%;
           left: calc(100% - 12px);
-          width: 688px;
+        }
+
+        /* fullhd */
+        @media (width >= 1600px) {
+          top: -32px;
+          width: calc((100vw - 395px) / 2 + 20px);
         }
       }
 

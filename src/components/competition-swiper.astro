@@ -345,7 +345,12 @@ const hasNestedNavigation = slides.some(({ images }) => images.length > 1);
       const mainSwiper = new Swiper(mainElement, {
         modules: [Navigation, A11y],
         slidesPerView: 1,
-        speed: 500,
+        speed: 300,
+        breakpoints: {
+          960: {
+            speed: 500,
+          },
+        },
         loop: root.dataset.loop === "true",
         navigation: {
           prevEl: previousButton,
@@ -450,7 +455,12 @@ const hasNestedNavigation = slides.some(({ images }) => images.length > 1);
             modules: [A11y],
             direction: "vertical",
             slidesPerView: 1,
-            speed: 500,
+            speed: 300,
+            breakpoints: {
+              960: {
+                speed: 500,
+              },
+            },
             loop: true,
             nested: true,
             a11y: {

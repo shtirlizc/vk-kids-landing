@@ -30,7 +30,7 @@ import desktopImg from "../assets/images/good-parent/desktop.webp";
 
     <div class="good-parent__picture">
       <picture>
-        <source media="(min-width: 960px)" srcset={desktopImg.src} />
+        <source media="(min-width: 768px)" srcset={desktopImg.src} />
         <img src={mobileImg.src} alt="" />
       </picture>
     </div>
@@ -47,11 +47,16 @@ import desktopImg from "../assets/images/good-parent/desktop.webp";
     gap: var(--space20);
     overflow: hidden;
 
+    /* tablet */
+    @media (width >= 768px) {
+      display: grid;
+      grid-template-columns: 5fr 3fr;
+      border-radius: 48px;
+    }
+
     /* desktop */
     @media (width >= 960px) {
-      display: grid;
       grid-template-columns: 3fr 5fr;
-      border-radius: 48px;
     }
 
     & .good-parent__info {
@@ -61,11 +66,15 @@ import desktopImg from "../assets/images/good-parent/desktop.webp";
       gap: 22px;
       margin-top: -127px;
 
-      /* desktop */
-      @media (width >= 960px) {
+      /* tablet */
+      @media (width >= 768px) {
+        margin-top: 0;
+      }
+
+      /* widescreen */
+      @media (width >= 1200px) {
         padding: 43px 45px 46px;
         justify-content: space-between;
-        margin-top: 0;
         gap: var(--space40);
       }
     }
@@ -75,8 +84,8 @@ import desktopImg from "../assets/images/good-parent/desktop.webp";
       font-size: 15px;
       line-height: 1.25em;
 
-      /* desktop */
-      @media (width >= 960px) {
+      /* widescreen */
+      @media (width >= 1200px) {
         font-size: 24px;
         line-height: 1.3em;
       }
@@ -102,8 +111,8 @@ import desktopImg from "../assets/images/good-parent/desktop.webp";
         width: 100%;
         height: auto;
 
-        /* desktop */
-        @media (width >= 960px) {
+        /* tablet */
+        @media (width >= 768px) {
           height: 100%;
           object-fit: cover;
           object-position: left center;

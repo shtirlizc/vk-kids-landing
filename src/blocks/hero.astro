@@ -3,7 +3,6 @@ import rattle from "./../assets/images/hero/rattle.webp";
 import Arrow from "./../assets/images/arrow.svg";
 import rattleMobile from "./../assets/images/hero/rattle-mobile.webp";
 import { CategoryId } from "./services/data.ts";
-import Grid from "../components/grid.astro";
 
 const badges: { label: string; tabId: CategoryId }[] = [
   { label: "помощь при рождении ребёнка", tabId: CategoryId.Pregnancy },
@@ -38,21 +37,20 @@ const badges: { label: string; tabId: CategoryId }[] = [
     </picture>
   </div>
   <div class="hero__links">
-    <Grid cols={[2, 4, 2]} offset={1}>
-      <nav>
-        <ul>
-          {
-            badges.map(({ label, tabId }) => (
-              <li>
-                <button type="button" data-tab-id={tabId} class="badge">
-                  {label}
-                </button>
-              </li>
-            ))
-          }
-        </ul>
-      </nav>
-    </Grid>
+    <div></div>
+    <nav>
+      <ul>
+        {
+          badges.map(({ label, tabId }) => (
+            <li>
+              <button type="button" data-tab-id={tabId} class="badge">
+                {label}
+              </button>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
   </div>
   <a
     class="hero__arrow"
@@ -89,20 +87,15 @@ const badges: { label: string; tabId: CategoryId }[] = [
         342px auto,
         462px auto,
         cover;
-      padding-bottom: 187px;
-
-      /* desktop */
-      @media (width >= 960px) {
-        padding-bottom: 155px;
-      }
+      padding-bottom: 155px;
     }
 
     & .hero__content {
       position: relative;
       align-self: flex-end;
 
-      /* tablet */
-      @media (width >= 768px) {
+      /* desktop */
+      @media (width >= 960px) {
         align-self: center;
       }
     }
@@ -123,8 +116,21 @@ const badges: { label: string; tabId: CategoryId }[] = [
       @media (width >= 768px) {
         bottom: 52.2%;
         left: 0;
-        width: 344px;
+        width: 300px;
         font-size: 35px;
+      }
+
+      /* desktop */
+      @media (width >= 960px) {
+        bottom: 52.2%;
+        left: 0;
+        width: 290px;
+        font-size: 35px;
+      }
+
+      /* widescreen */
+      @media (width >= 1200px) {
+        width: 344px;
       }
 
       p:first-child {
@@ -138,8 +144,13 @@ const badges: { label: string; tabId: CategoryId }[] = [
       max-width: 336px;
       height: auto;
 
-      /* tablet */
-      @media (width >= 768px) {
+      /* desktop */
+      @media (width >= 960px) {
+        max-width: calc(100vw - 40px);
+      }
+
+      /* widescreen */
+      @media (width >= 1300px) {
         max-width: 1250px;
       }
     }
@@ -149,13 +160,21 @@ const badges: { label: string; tabId: CategoryId }[] = [
 
       /* desktop */
       @media (width >= 960px) {
+        display: grid;
+        grid-template-columns: 1fr 4fr 1fr;
         margin-top: -34px;
         margin-bottom: var(--space32);
+      }
+
+      /* widescreen */
+      @media (width >= 1200px) {
+        grid-template-columns: 1fr 2fr 1fr;
       }
 
       nav {
         display: flex;
         justify-content: center;
+        padding: var(--container-padding);
 
         ul {
           list-style: none;

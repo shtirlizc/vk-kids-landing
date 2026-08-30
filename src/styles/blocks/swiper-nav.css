@@ -25,6 +25,13 @@
 
   /* tablet */
   @media (width >= 768px) {
+    --size: 42px;
+
+    background-size: 16px !important;
+  }
+
+  /* desktop */
+  @media (width >= 960px) {
     --size: 62px;
 
     background-size: 20px !important;
