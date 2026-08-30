@@ -245,9 +245,7 @@ import { nav } from "../nav.ts";
 
     if (desktopQuery.matches) resetMenu();
 
-    desktopQuery.addEventListener("change", ({ matches }) => {
-      if (matches) resetMenu();
-    });
+    desktopQuery.addEventListener("change", resetMenu);
 
     const closeMenu = () => {
       if (!isMenuOpen) return;

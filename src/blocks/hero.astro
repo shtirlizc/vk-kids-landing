@@ -160,22 +160,20 @@ const badges: { label: string; tabId: CategoryId }[] = [
 
     & .hero__arrow {
       position: absolute;
-      bottom: var(--space16);
+      font-size: 0;
+      padding: var(--space16);
+      bottom: 0;
       left: 50%;
       transform: translateX(-50%);
       color: var(--color-bg-main);
-      padding: 0;
-      border: 0;
-      font: inherit;
-      background: none;
-      cursor: pointer;
+      transition: color var(--transition);
 
       &:hover {
-        color: var(--color-bg-primary-light);
+        color: var(--color-primary);
       }
 
       @media (width >= 768px) {
-        bottom: var(--space32);
+        bottom: var(--space16);
       }
     }
   }

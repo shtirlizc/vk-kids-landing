@@ -16,6 +16,23 @@ export interface Card {
   action?: { label: string; type: "link"; href: string };
 }
 
+const addNonBreakingSpaces = (text: string) =>
+  text.replace(
+    /(?<![\p{L}\p{N}_-])([ВвКкСсУуОоИиАа]|[Вв]о|[Зз]а|[Ии]з|[Нн]а|[Нн]е|[Нн]и|[Нн]о|[Оо]б|[Оо]т|[Пп]о|[Сс]о|[Дд]о|[Дд]ля|[Пп]ри|[Бб]ез|[Пп]од|[Нн]ад|[Пп]ро) (?=[\p{L}\p{N}«])/gu,
+    "$1\u00A0",
+  );
+
+const typographCard = (card: Card): Card => ({
+  ...card,
+  title: addNonBreakingSpaces(card.title),
+  description: addNonBreakingSpaces(card.description),
+  label: addNonBreakingSpaces(card.label),
+  action: card.action && {
+    ...card.action,
+    label: addNonBreakingSpaces(card.action.label),
+  },
+});
+
 export const categories: Record<CategoryId, string> = {
   [CategoryId.Benefits]: "Льготы",
   [CategoryId.Events]: "Мероприятия",
@@ -661,9 +678,9 @@ const parenting: Card[] = [
 ];
 
 export const services: Record<CategoryId, Card[]> = {
-  [CategoryId.Benefits]: benefits,
-  [CategoryId.Events]: events,
-  [CategoryId.Health]: health,
-  [CategoryId.Pregnancy]: pregnancy,
-  [CategoryId.Parenting]: parenting,
+  [CategoryId.Benefits]: benefits.map(typographCard),
+  [CategoryId.Events]: events.map(typographCard),
+  [CategoryId.Health]: health.map(typographCard),
+  [CategoryId.Pregnancy]: pregnancy.map(typographCard),
+  [CategoryId.Parenting]: parenting.map(typographCard),
 };
