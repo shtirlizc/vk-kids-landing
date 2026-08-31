@@ -21,6 +21,8 @@ interface ImportedImage {
   height: number;
 }
 
+type SlideNumber = number | "37.1";
+
 const imageModules = import.meta.glob<{ default: ImportedImage }>(
   "../assets/images/competition/*.webp",
   { eager: true },
@@ -37,7 +39,7 @@ const getImage = (filename: string) => {
   return image;
 };
 
-const creatorBySlide: Record<number, Creator> = {
+const creatorBySlide: Record<SlideNumber, Creator> = {
   0: {
     contactName: "Валерия Мирошниченко",
     artistFirstName:
@@ -247,6 +249,12 @@ const creatorBySlide: Record<number, Creator> = {
   37: {
     contactName: "Мария Чимидова",
     artistFirstName:
+      "<span>Данила</span><span>Чимидов</span><span>6 лет</span>",
+    contactHref: "https://home.vk.team/users/m.chimidova/",
+  },
+  "37.1": {
+    contactName: "Мария Чимидова",
+    artistFirstName:
       "<span>Ульяна</span><span>Чимидова</span><span>6 лет</span>",
     contactHref: "https://home.vk.team/users/m.chimidova/",
   },
@@ -295,35 +303,42 @@ const creatorBySlide: Record<number, Creator> = {
 const groupedSlideImages: Record<number, string[]> = {
   10: ["10.webp", "10.1.webp"],
   13: ["13.webp", "13.1.webp", "13.2.webp"],
-  37: ["37.webp", "37.1.webp"],
   38: ["38.webp", "38.1.webp", "38.2.webp"],
 };
 
-const slides = Array.from({ length: 45 }, (_, index) => index)
+const slideNumbers: SlideNumber[] = Array.from(
+  { length: 45 },
+  (_, index) => index,
+)
   .filter((slideNumber) => slideNumber !== 11 && slideNumber !== 12)
-  .map((slideNumber) => {
-    const imageNames = groupedSlideImages[slideNumber] ?? [
-      `${slideNumber}.webp`,
-    ];
+  .flatMap((slideNumber) =>
+    slideNumber === 37 ? [slideNumber, "37.1"] : [slideNumber],
+  );
 
-    return {
-      images: imageNames.map((filename, imageIndex) => {
-        const image = getImage(filename);
-        const position =
-          imageNames.length > 1
-            ? `, изображение ${imageIndex + 1} из ${imageNames.length}`
-            : "";
+const slides = slideNumbers.map((slideNumber) => {
+  const imageNames =
+    typeof slideNumber === "number"
+      ? (groupedSlideImages[slideNumber] ?? [`${slideNumber}.webp`])
+      : [`${slideNumber}.webp`];
 
-        return {
-          src: image.src,
-          width: image.width,
-          height: image.height,
-          alt: `Конкурсная работа №${slideNumber}${position}`,
-        };
-      }),
-      creator: creatorBySlide[slideNumber],
-    };
-  });
+  return {
+    images: imageNames.map((filename, imageIndex) => {
+      const image = getImage(filename);
+      const position =
+        imageNames.length > 1
+          ? `, изображение ${imageIndex + 1} из ${imageNames.length}`
+          : "";
+
+      return {
+        src: image.src,
+        width: image.width,
+        height: image.height,
+        alt: `Конкурсная работа №${slideNumber}${position}`,
+      };
+    }),
+    creator: creatorBySlide[slideNumber],
+  };
+});
 ---
 
 <section id="competition" class="competition">

@@ -313,7 +313,7 @@ const hasNestedNavigation = slides.some(({ images }) => images.length > 1);
 <script>
   import PhotoSwipeLightbox from "photoswipe/lightbox";
   import Swiper from "swiper";
-  import { A11y, Navigation } from "swiper/modules";
+  import { A11y, Autoplay, Navigation } from "swiper/modules";
 
   document
     .querySelectorAll<HTMLElement>("[data-competition-swiper]")
@@ -343,7 +343,7 @@ const hasNestedNavigation = slides.some(({ images }) => images.length > 1);
       }
 
       const mainSwiper = new Swiper(mainElement, {
-        modules: [Navigation, A11y],
+        modules: [Navigation, A11y, Autoplay],
         slidesPerView: 1,
         speed: 300,
         breakpoints: {
@@ -352,6 +352,11 @@ const hasNestedNavigation = slides.some(({ images }) => images.length > 1);
           },
         },
         loop: root.dataset.loop === "true",
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+        },
         navigation: {
           prevEl: previousButton,
           nextEl: nextButton,

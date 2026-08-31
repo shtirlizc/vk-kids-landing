@@ -1,10 +1,9 @@
 ---
 import Title from "../../components/title.astro";
 import Container from "../../components/container.astro";
-import FaqLastItem from "./faq-last-item.astro";
 import Grid from "../../components/grid.astro";
 
-const faq: { head: string; body?: string; Body?: typeof FaqLastItem }[] = [
+const faq: { head: string; body?: string }[] = [
   {
     head: "Какие документы нужны при вступлении в\u00A0брак?",
     body: `
@@ -25,7 +24,14 @@ const faq: { head: string; body?: string; Body?: typeof FaqLastItem }[] = [
   },
   {
     head: "Не нашли нужную информацию?",
-    Body: FaqLastItem,
+    body: `
+      <p>
+        Напишите&nbsp;в <a
+          href="https://u.internal.myteam.mail.ru/profile/support_bot"
+          target="_blank">единый чат поддержки</a
+        >&nbsp;с&nbsp;умным помощником Василисой или&nbsp;своему HRBP.
+      </p>
+    `,
   },
 ];
 ---
@@ -37,7 +43,7 @@ const faq: { head: string; body?: string; Body?: typeof FaqLastItem }[] = [
     <Grid cols={[2, 4, 2]} offset={1}>
       <div class="faq_list">
         {
-          faq.map(({ head, body, Body }) => (
+          faq.map(({ head, body }) => (
             <div class="faq__item">
               <div class="faq__head">
                 <h3>{head}</h3>
@@ -45,7 +51,7 @@ const faq: { head: string; body?: string; Body?: typeof FaqLastItem }[] = [
               </div>
               <div class="faq__body">
                 <div class="faq__body-content text-content">
-                  {Body ? <Body /> : <Fragment set:html={body} />}
+                  <Fragment set:html={body} />
                 </div>
               </div>
             </div>
@@ -149,6 +155,11 @@ const faq: { head: string; body?: string; Body?: typeof FaqLastItem }[] = [
 
       .faq__body-content {
         padding: 0 var(--space24) var(--space24);
+
+        /* desktop */
+        @media (width >= 960px) {
+          padding: 0 var(--space40) var(--space24);
+        }
       }
     }
   }
