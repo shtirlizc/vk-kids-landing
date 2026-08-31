@@ -6,6 +6,7 @@ interface SlideImage {
 }
 
 interface NewsSlide {
+  href: string;
   category: string;
   title: string;
   image: SlideImage;
@@ -30,7 +31,7 @@ const hasNavigation = slides.length > 1;
     <div class="swiper news-slider__swiper" data-news-swiper>
       <div class="swiper-wrapper">
         {
-          slides.map(({ category, title, image, imageAlt }, index) => (
+          slides.map(({ href, category, title, image, imageAlt }, index) => (
             <article class="swiper-slide">
               <div class="news-card">
                 <img
@@ -44,6 +45,9 @@ const hasNavigation = slides.length > 1;
                 />
                 <span class="news-card__category">{category}</span>
                 <p class="news-card__title">{title}</p>
+                <a href={href} target="_blank">
+                  {title}
+                </a>
               </div>
             </article>
           ))
@@ -114,6 +118,12 @@ const hasNavigation = slides.length > 1;
       justify-content: space-between;
       align-items: flex-start;
 
+      &:hover {
+        img {
+          transform: scale(1.05);
+        }
+      }
+
       /* tablet */
       @media (width >= 768px) {
         aspect-ratio: 365 / 350;
@@ -126,12 +136,19 @@ const hasNavigation = slides.length > 1;
         inset: 0;
         background: linear-gradient(
           180deg,
-          rgba(47, 57, 117, 0.06) 12%,
-          rgba(47, 57, 117, 0.22) 47%,
-          rgba(35, 30, 91, 0.94) 100%
+          rgba(47, 57, 117, 0) -6.14%,
+          #2f3975 132.86%
         );
         content: "";
         pointer-events: none;
+        opacity: 0.7;
+      }
+
+      a {
+        position: absolute;
+        inset: 0;
+        font-size: 0;
+        z-index: 1;
       }
     }
 
@@ -141,7 +158,8 @@ const hasNavigation = slides.length > 1;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 65%;
+      object-position: center;
+      transition: transform var(--transition-long) ease-in-out;
     }
 
     & .news-card__category {
